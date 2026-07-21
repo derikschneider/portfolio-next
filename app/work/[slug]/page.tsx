@@ -81,7 +81,7 @@ export default async function CaseStudyPage({
       </div>
 
       {cs.patentRef && (
-        <p className="text-sm text-muted-foreground">
+        <p className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
           {cs.patentRef.url ? (
             <a
               href={cs.patentRef.url}
@@ -93,6 +93,19 @@ export default async function CaseStudyPage({
             </a>
           ) : (
             cs.patentRef.label
+          )}
+          {cs.patentRef.pdfPath && (
+            <>
+              <span aria-hidden>&middot;</span>
+              <a
+                href={cs.patentRef.pdfPath}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4 hover:text-foreground"
+              >
+                View PDF
+              </a>
+            </>
           )}
         </p>
       )}

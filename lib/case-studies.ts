@@ -7,7 +7,7 @@ export type CaseStudy = {
   summary: string;
   stack: string[];
   hasVisuals: boolean;
-  patentRef?: { label: string; url: string };
+  patentRef?: { label: string; url: string; pdfPath?: string };
   body: string[];
 };
 
@@ -104,13 +104,22 @@ export const caseStudies: CaseStudy[] = [
     hasVisuals: false,
     patentRef: {
       label: "US Patent 10,002,393",
-      // TODO (Derik): drop in the verified public link (e.g. Google Patents
-      // or USPTO) once confirmed — not guessing a URL here.
-      url: "",
+      // Verified via Google Patents (2026-07-21): matches patent number,
+      // State Farm Mutual Automobile Insurance Company as assignee, 2018
+      // grant date, inventor "Derek Schneider" (note: Google's record
+      // spells it "Derek" — TODO Derik, confirm that's just your legal
+      // name vs. how you go by professionally).
+      url: "https://patents.google.com/patent/US10002393B1/en",
+      // Original PDF from USPTO's Patent Public Search, downloaded and
+      // self-hosted since the USPTO link Derik supplied was a
+      // session-scoped API URL with an expiring request token, not a
+      // stable permanent link.
+      pdfPath: "/patents/us-10002393-b1.pdf",
     },
     body: [
       "Contracted through TEKsystems and placed at State Farm, I designed and drove development of a CX insights tool granted US Patent 10,002,393 — coordinating systems architecture, database integration, server management, and security requirements across teams.",
       "I trained a cohort of designers in HTML, CSS, and JavaScript so the team could build its own testable prototypes, shortening the loop between design and user feedback. I built the process for hosting prototypes on internal servers and piping them into UX research tools to analyze customer journeys across State Farm's insurance lines. Named TEKsystems Employee of the Month, July 2014.",
+      "TODO (Derik): the patent's official title per the public record is \"Systems and methods for supporting a testing environment for a website,\" which reads as testing infrastructure rather than a customer-experience insights tool. Worth a line reconciling the two, or confirming they're the same thing described at different altitudes (the testing environment that powered the CX research work), so this doesn't look inconsistent to someone who clicks through to the patent itself.",
     ],
   },
 ];

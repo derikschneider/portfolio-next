@@ -20,10 +20,16 @@ What I'm looking for: roles where the design-to-code gap is the real problem to 
 
 ---
 
-## Open questions this raised (not yet resolved)
+## Open questions this raised — resolved by content/source/linkedin-experience.md
 
-- **Aurora (Novant Health) and Bonsai (Nutrien Ag Solutions) are two separate companies/case studies**, not one combined "Novant/Nutrien" entry as originally scaffolded. Split accordingly.
-- **Is "Agrible" the same employment stint as "Nutrien Ag Solutions" (Bonsai)?** Agrible was acquired by Nutrien Ag Solutions in real life, so this could be one continuous stint (Agrible product work pre/post-acquisition, then Bonsai as part of the platform team) rather than two separate jobs. This paste doesn't mention Agrible by name at all. Needs Derik's confirmation before merging or keeping separate.
-- **No employment dates given anywhere in this paste.** Still needed for the Resume timeline and each case study's `period` field.
-- **No exact formal job titles given** for the Novant Health or Nutrien Ag Solutions stints (just functional descriptions — "architected," "part of the core platform team"). Case study `role` fields below use Derik's own functional phrasing rather than inventing a title.
-- Mortal Kombat (2011) and Injustice: Gods Among Us are NetherRealm Studios titles; Saints Row 2 and Red Faction: Armageddon are Volition titles — kept attributed correctly per-title in the case study body rather than lumped together.
+All of the below were answered once Derik pasted the full LinkedIn Experience
+section (2026-07-21, see `linkedin-experience.md`):
+
+- **Aurora (Novant Health) and Bonsai (Nutrien Ag Solutions) are two separate companies/case studies** — confirmed, kept split.
+- **Agrible vs. Nutrien Ag Solutions**: confirmed as one continuous arc through an acquisition, not two unrelated jobs — Agrible, Inc. (Mar 2015–Aug 2018) was acquired by Nutrien, and Derik continued at Nutrien Ag Solutions first as Front End Developer (Aug 2018–Apr 2019, same product line) then UX Designer (Apr 2019–Jun 2022, Bonsai work).
+- **Employment dates**: now known for every role — see `lib/experience.ts`.
+- **Formal job titles**: now known — e.g. "UX/UI Lead" at Novant Health, "UX Designer" at Nutrien Ag Solutions.
+- **Mortal Kombat (2011) / Injustice: Gods Among Us** are NetherRealm Studios titles; **Saints Row 2 / Red Faction: Armageddon** are Volition titles — correctly attributed per-studio with real employment date ranges for each.
+- **Bonus find**: this About paragraph's "Most recently at Capital One..." actually spans two separate employers — Discover (Jan 2024–Apr 2025) and Capital One (May 2025–present), bridged by Capital One's 2025 acquisition of Discover. The case study slug was renamed from `capital-one-action-platform` to `action-platform-discover-capital-one` to reflect this.
+
+Still open: exact patent URL (not guessing one), and which game-UI screenshots/titles to feature.

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { caseStudies } from "@/lib/case-studies";
+import { experience } from "@/lib/experience";
 
 export const metadata: Metadata = {
   title: "Resume — Derik Schneider",
@@ -31,32 +31,49 @@ export default function ResumePage() {
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-semibold tracking-tight">Resume</h1>
         <p className="text-muted-foreground">
-          Work history, distilled. Full detail on each stop lives in{" "}
+          25 years, one throughline: the seam between design and
+          development. Flagship stops link to a full{" "}
           <Link href="/work" className="underline underline-offset-4">
-            case studies
+            case study
           </Link>
           .
         </p>
         <p className="rounded-md border border-dashed border-border bg-muted/50 p-3 text-sm text-muted-foreground">
-          TODO (Derik): a downloadable PDF resume probably belongs here too,
-          and the order below is provisional — no employment dates have
-          been confirmed yet, so this isn&apos;t strictly chronological.
+          TODO (Derik): a downloadable PDF resume probably belongs here too —
+          not wired up yet.
         </p>
       </div>
 
       <section className="flex flex-col gap-6">
         <h2 className="text-xl font-semibold tracking-tight">Experience</h2>
         <ol className="flex flex-col gap-6">
-          {caseStudies.map((cs, i) => (
-            <li key={cs.slug} className="flex flex-col gap-1">
+          {experience.map((role, i) => (
+            <li key={`${role.company}-${role.period}`} className="flex flex-col gap-1">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <span className="font-medium">{cs.company}</span>
-                <span className="text-sm text-muted-foreground">
-                  {cs.period}
+                <span className="font-medium">
+                  {role.caseStudySlug ? (
+                    <Link
+                      href={`/work/${role.caseStudySlug}`}
+                      className="underline-offset-4 hover:underline"
+                    >
+                      {role.company}
+                    </Link>
+                  ) : (
+                    role.company
+                  )}
                 </span>
+                <span className="text-sm text-muted-foreground">{role.period}</span>
               </div>
-              <span className="text-sm text-muted-foreground">{cs.role}</span>
-              {i < caseStudies.length - 1 && <Separator className="mt-4" />}
+              <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                <span>{role.title}</span>
+                <Badge variant="outline" className="text-[0.7rem]">
+                  {role.type}
+                </Badge>
+                <span>&middot;</span>
+                <span>{role.location}</span>
+              </div>
+              {role.blurb && <p className="text-sm text-muted-foreground">{role.blurb}</p>}
+              {i < experience.length - 1 && <Separator className="mt-4" />}
             </li>
           ))}
         </ol>

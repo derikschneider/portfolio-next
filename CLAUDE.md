@@ -8,9 +8,9 @@ This is **not** the derikschneider.com creative-brand site (that's the sibling r
 
 **Done:** Repo scaffolded and pushed to `github.com/derikschneider/portfolio-next` (public). Next.js 15.5.20 + TypeScript + Tailwind v4 + shadcn/ui (Radix primitives, Nova preset) all in place. `.github/workflows/ci.yml` (lint/typecheck/build) is green on `main`.
 
-**Blocked:** AWS account signup — billing/card verification is failing on Derik's new personal AWS account (tried twice). Nothing to do here except retry later, try a different card, or open an AWS Support case if it keeps failing. Everything past this point (Amplify app, IAM OIDC role, `deploy.yml`) needs a working AWS account first.
+**Also done — AWS account unblocked, deploy pipeline wired up:** AWS CLI configured (account `213348783077`, region `us-east-1`). Created: GitHub Actions OIDC provider (`token.actions.githubusercontent.com`) in IAM; IAM role `portfolio-next-github-deploy` trusted only for `repo:derikschneider/portfolio-next:ref:refs/heads/main`, scoped to `amplify:StartJob`/`GetJob`/`ListJobs`/`StopJob` on this app's ARN only; Amplify Hosting app `d1dk5gzxu5499k` (platform `WEB_COMPUTE` for Next.js SSR), `main` branch connected with `enableAutoBuild: false` (Amplify's own git-triggered builds are off — GitHub Actions is the sole trigger, per the design decision below); `.github/workflows/deploy.yml` added (OIDC-authenticates, calls `aws amplify start-job --job-type RELEASE`, polls until it succeeds/fails). Repo variables `AWS_ROLE_ARN` / `AMPLIFY_APP_ID` set via `gh variable set`. Default Amplify domain: `d1dk5gzxu5499k.amplifyapp.com` — custom domain (`work.derikschneider.com`) not yet attached.
 
-**Not blocked, can proceed anytime without AWS:** Phase 1 — static page shell (layout, nav, Home/About/Resume pages) and distilling Derik's career history (see Content section below) into actual case-study copy. Pick this up next if AWS is still stuck.
+**Not yet done:** attach the `work.derikschneider.com` custom domain in Amplify (needs a DNS record in whatever registrar/DNS host derikschneider.com uses). Phase 1 — static page shell (layout, nav, Home/About/Resume pages) and distilling Derik's career history (see Content section below) into actual case-study copy — still not started, no AWS dependency, can proceed anytime.
 
 ## Key decisions (why, not just what)
 

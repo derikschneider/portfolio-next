@@ -18,7 +18,9 @@ Neither touches the apex `derikschneider.com` A records (those still serve the s
 
 **Gotcha worth knowing if this role/provider is ever recreated:** GitHub's OIDC `sub` claim on this account uses the newer immutable-ID format — `repo:derikschneider@239501139/portfolio-next@1307245039:ref:refs/heads/main`, not the plain `repo:derikschneider/portfolio-next:ref:refs/heads/main` most examples show. The IAM role's trust-policy condition (in AWS, not tracked in this repo) must match the ID-qualified form or `AssumeRoleWithWebIdentity` fails with a generic "Not authorized" error. If in doubt, add a debug step that decodes the actual token (`curl` the `$ACTIONS_ID_TOKEN_REQUEST_URL`, base64-decode the JWT payload) rather than assuming the claim shape.
 
-**Not yet done:** attach the `work.derikschneider.com` custom domain in Amplify (needs a DNS record in whatever registrar/DNS host derikschneider.com uses). Phase 1 — static page shell (layout, nav, Home/About/Resume pages) and distilling Derik's career history (see Content section below) into actual case-study copy — still not started, no AWS dependency, can proceed anytime.
+**Phase 1 done:** page shell built — `SiteNav`/`SiteFooter` in `app/layout.tsx`, Home (`app/page.tsx`), Work index + `/work/[slug]` case-study detail pages (data-driven from `lib/case-studies.ts`), Resume (timeline + skills, both derived from the same data), About (real copy, see Content section). Deployed and live at each step.
+
+**Not yet done:** Contentful wiring (case-study content is still a local TS file, not CMS-driven — see Key decisions below for why that's deliberate for now), visuals/screenshots for the game UI case study, contact form / SES route handler.
 
 ## Key decisions (why, not just what)
 
@@ -31,6 +33,8 @@ Neither touches the apex `derikschneider.com` A records (those still serve the s
 
 ## Content
 
-Five case studies drawn from Derik's career history: Capital One Action Platform (automated testing + production data integrity), Novant/Nutrien design systems (Aurora + Bonsai), Agrible/Nutrien production React/Redux, Volition/NetherRealm shipped game UI, and the State Farm CX patent tool. Most source work is under NDA — **only the game UI case study has real screenshots**; the rest are description-only or reference public artifacts (e.g. US Patent 10,002,393). Don't add visuals to the other entries without checking first.
+Six case studies in `lib/case-studies.ts`, drawn from Derik's real LinkedIn About section (raw paste + open questions preserved in `content/source/linkedin-about.md`): Capital One Action Platform (design lead → Principal Product Owner, automated testing + production data integrity), Novant Health's Aurora design system, Nutrien Ag Solutions' Bonsai design system (previously scaffolded as one combined "Novant/Nutrien" entry — split once the source material showed they're different companies), Agrible/Nutrien production React/Redux, Volition/NetherRealm shipped game UI (Mortal Kombat (2011) + Injustice: Gods Among Us at NetherRealm, Saints Row 2 + Red Faction: Armageddon at Volition), and the State Farm CX patent tool (US Patent 10,002,393). Most source work is under NDA — **only the game UI case study has real screenshots**; the rest are description-only or reference public artifacts. Don't add visuals to the other entries without checking first.
+
+**Known open gaps** (flagged as TODOs inline in the data, rendered as visible dashed callouts on each case-study page): no employment dates anywhere yet; no confirmed formal job titles for the Novant Health / Nutrien Ag Solutions stints; unclear whether the Agrible case study is the same employment stint as Nutrien Ag Solutions/Bonsai or a separate job; patent citation has no verified public URL yet (intentionally not guessed).
 
 @AGENTS.md

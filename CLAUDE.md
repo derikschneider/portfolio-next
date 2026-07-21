@@ -4,6 +4,14 @@ Job-application work-sample site for Derik Schneider, built specifically to demo
 
 This is **not** the derikschneider.com creative-brand site (that's the sibling repo `derikschneider/vite-lit-1` — Lit/vanilla JS/Vite, deliberately React/Tailwind-free per Derik's creative-brand preference). This repo is intentionally React/Next/Tailwind because demonstrating that exact stack is the whole point.
 
+## Status (as of 2026-07-21)
+
+**Done:** Repo scaffolded and pushed to `github.com/derikschneider/portfolio-next` (public). Next.js 15.5.20 + TypeScript + Tailwind v4 + shadcn/ui (Radix primitives, Nova preset) all in place. `.github/workflows/ci.yml` (lint/typecheck/build) is green on `main`.
+
+**Blocked:** AWS account signup — billing/card verification is failing on Derik's new personal AWS account (tried twice). Nothing to do here except retry later, try a different card, or open an AWS Support case if it keeps failing. Everything past this point (Amplify app, IAM OIDC role, `deploy.yml`) needs a working AWS account first.
+
+**Not blocked, can proceed anytime without AWS:** Phase 1 — static page shell (layout, nav, Home/About/Resume pages) and distilling Derik's career history (see Content section below) into actual case-study copy. Pick this up next if AWS is still stuck.
+
 ## Key decisions (why, not just what)
 
 - **Pinned to Next.js 15.5.x, not 16.** AWS Amplify Hosting's official Next.js support currently tops out at v15 — v16 adapter support was still in progress as of mid-2026 (tracked in `aws-amplify/amplify-js` issues #14600 / #14614). Re-verify Amplify's supported version before ever bumping past 15.x.

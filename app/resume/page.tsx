@@ -11,15 +11,18 @@ export const metadata: Metadata = {
 
 const skills = [
   "React",
-  "TypeScript",
-  "Next.js",
   "Redux",
+  "JavaScript",
+  "HTML/CSS",
+  "Lua",
+  "REST APIs",
+  "MySQL",
+  "Figma",
+  "Sketch",
+  "After Effects",
   "Design systems",
-  "Tailwind",
-  "AWS",
-  "CI/CD",
-  "Product ownership",
-  "Game UI/UX",
+  "Accessibility",
+  "Automated testing",
 ];
 
 export default function ResumePage() {
@@ -35,8 +38,9 @@ export default function ResumePage() {
           .
         </p>
         <p className="rounded-md border border-dashed border-border bg-muted/50 p-3 text-sm text-muted-foreground">
-          TODO (Derik): a downloadable PDF resume probably belongs here too —
-          not wired up yet.
+          TODO (Derik): a downloadable PDF resume probably belongs here too,
+          and the order below is provisional — no employment dates have
+          been confirmed yet, so this isn&apos;t strictly chronological.
         </p>
       </div>
 

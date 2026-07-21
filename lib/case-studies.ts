@@ -11,41 +11,57 @@ export type CaseStudy = {
   body: string[];
 };
 
-// DRAFT: distilled from career history notes, not yet reviewed by Derik.
-// Dates/periods are placeholders (TODO) pending confirmation. Only the
-// Volition/NetherRealm entry currently has real screenshots to add — the
-// rest are description-only or reference public artifacts, per NDA
-// constraints on the underlying work.
+// Content sourced from Derik's LinkedIn About section (2026-07-21), see
+// content/source/linkedin-about.md for the raw paste and open questions.
+// Dates/periods are still TODO — none were given in that source. Formal
+// job titles for the Novant Health / Nutrien Ag Solutions stints are also
+// unconfirmed; `role` uses Derik's own functional phrasing rather than a
+// guessed title.
 export const caseStudies: CaseStudy[] = [
   {
     slug: "capital-one-action-platform",
     company: "Capital One",
-    role: "Principal Product Owner, Action Platform UI",
+    role: "Design lead, Action agent servicing platform → Principal Product Owner, Action Platform UI",
     period: "TODO: start date – present",
-    title: "Action Platform: automated testing & production data integrity",
+    title: "Action Platform: from design leadership to production data integrity",
     summary:
-      "Owning the UI layer of Capital One's Action Platform, with a focus on automated testing coverage and production data integrity for a system operating at bank scale.",
-    stack: ["React", "TypeScript", "automated testing", "production data pipelines"],
+      "Led design for Capital One's Action agent servicing platform, migrated the team's design system from Sketch to Figma, then moved into a Principal Product Owner role driving automated testing and production data integrity.",
+    stack: ["Figma", "Sketch → Figma migration", "After Effects", "Automated testing", "Data integrity"],
     hasVisuals: false,
     body: [
-      "As Principal Product Owner for Action Platform UI, I own the product direction for the front-end layer of an internal platform used across the bank's automated action/workflow systems.",
-      "A recurring theme of this work is trust: because the platform triggers real actions against production data, the team invested heavily in automated test coverage and data-integrity safeguards so that UI-driven actions are provably correct before they ship.",
-      "TODO (Derik): fill in specifics — team size, scope of the automated testing initiative, concrete before/after outcomes, any metrics that are safe to share outside NDA.",
+      "I led design for Capital One's Action agent servicing platform and migrated the team's design system from Sketch to Figma. Part of that work was narrative: producing presentations on our agent servicing and IVR/messaging systems, editing call-recording audio, hand-animating sequences in After Effects, and building the layouts in Figma — working directly with senior product managers and directors to shape how they told their stories.",
+      "I then moved into a Principal Product Owner role, where I built a 101-case automated testing suite, validated production migration events, and coordinated data integrity work across engineering teams.",
+      "TODO (Derik): exact dates for both phases, and how much of the IVR/messaging system detail is safe to describe outside NDA.",
     ],
   },
   {
-    slug: "novant-nutrien-design-systems",
-    company: "Novant Health / Nutrien",
-    role: "TODO: confirm title",
+    slug: "novant-health-aurora",
+    company: "Novant Health",
+    role: "Architected the Aurora design system",
     period: "TODO: start–end dates",
-    title: "Aurora & Bonsai: design systems for two very different enterprises",
+    title: "Aurora: a design system built from scratch",
     summary:
-      "Built and drove adoption of two component-based design systems — Aurora and Bonsai — bringing consistency to product UI across large, multi-team organizations.",
-    stack: ["design systems", "component libraries", "React", "cross-team UI governance"],
+      "Architected the Aurora design system from scratch, coaching the design team on responsive HTML/CSS and accessibility while partnering with engineering on tokens, grids, and components.",
+    stack: ["Design systems", "HTML/CSS", "Accessibility", "Design tokens", "Component libraries"],
     hasVisuals: false,
     body: [
-      "Design systems succeed or fail on adoption, not on the component library itself. Both Aurora (Novant Health) and Bonsai (Nutrien) were built with that as the starting premise — documentation, contribution paths, and cross-team buy-in mattered as much as the components.",
-      "TODO (Derik): which system came first, what the actual scope/component count was, how many product teams adopted it, and any specific design decisions worth highlighting (theming, accessibility work, Figma-to-code pipeline, etc.).",
+      "I architected the Aurora design system from scratch at Novant Health, coaching the design team on responsive HTML/CSS and accessibility while partnering with engineering on tokens, grids, and components.",
+      "TODO (Derik): team size, how many product teams adopted Aurora, specific accessibility standard targeted (WCAG level, etc.), and anything about the tokens/grid architecture worth naming directly.",
+    ],
+  },
+  {
+    slug: "nutrien-bonsai",
+    company: "Nutrien Ag Solutions",
+    role: "Core platform team — Bonsai design system",
+    period: "TODO: start–end dates",
+    title: "Bonsai: documentation and adoption from the platform team",
+    summary:
+      "As part of the core platform team building Bonsai, authored the system's initial documentation, contributed to component development, and championed its adoption across other design teams.",
+    stack: ["Design systems", "Documentation", "Component development", "Cross-team adoption"],
+    hasVisuals: false,
+    body: [
+      "Earlier, as part of the core platform team building Bonsai at Nutrien Ag Solutions, I authored the system's initial documentation, contributed to component development, and championed its adoption across other design teams.",
+      "TODO (Derik): is this the same employment stint as the Agrible case study below (Agrible was acquired by Nutrien Ag Solutions), or a separate role? Worth clarifying so these don't read as two unrelated jobs if they're actually one continuous stint.",
     ],
   },
   {
@@ -60,33 +76,34 @@ export const caseStudies: CaseStudy[] = [
     hasVisuals: false,
     body: [
       "Agrible's platform gave growers and agronomists field-level data to inform real decisions — the UI work here was less about visual polish and more about making dense agricultural data legible and fast under real field conditions.",
-      "TODO (Derik): what the app actually did day-to-day, team size/role, anything notable about the acquisition transition into Nutrien, technical challenges worth naming.",
+      "TODO (Derik): confirm whether this is a separate stint from the Bonsai/Nutrien Ag Solutions case study above or part of the same continuous role, what the app actually did day-to-day, team size, and anything notable about the acquisition transition.",
     ],
   },
   {
     slug: "volition-netherrealm-game-ui",
     company: "Volition / NetherRealm Studios",
-    role: "TODO: confirm title",
+    role: "Game UI/UX",
     period: "TODO: start–end dates",
-    title: "Shipped game UI, from concept to cert",
+    title: "Shipped UI across four titles, two studios",
     summary:
-      "UI/UX work on shipped titles at Volition (Saints Row) and NetherRealm Studios (Mortal Kombat) — the one case study here with real screenshots to show.",
-    stack: ["game UI/UX", "console cert requirements", "shipped AAA titles"],
+      "Shipped UI for Mortal Kombat (2011) and Injustice: Gods Among Us at NetherRealm Studios, and Saints Row 2 and Red Faction: Armageddon at Volition.",
+    stack: ["Game UI/UX", "Lua", "Asset pipelines", "Console cert requirements"],
     hasVisuals: true,
     body: [
-      "Game UI has constraints most web work never sees: strict platform cert requirements, controller-first input, and no second chance to patch a broken menu flow on disc. This is the one entry in this set with real, shippable screenshots instead of NDA-safe description only.",
-      "TODO (Derik): which specific titles/features you want screenshotted, what to say about your actual contribution (menus? HUD? cutscene UI?), and whether NDA covers anything from either studio that needs to stay out of this.",
+      "I shipped UI for Mortal Kombat (2011) and Injustice: Gods Among Us at NetherRealm Studios, and Saints Row 2 and Red Faction: Armageddon at Volition.",
+      "Beyond the UI itself, this era is where the systems-thinking side of my toolkit shows up most directly: I designed asset pipelines that other studios' teams went on to adopt.",
+      "TODO (Derik): which specific titles/features you want screenshotted, your specific contribution per title (menus? HUD? cutscene UI?), more on the asset-pipeline work, and whether anything here needs to stay out due to NDA.",
     ],
   },
   {
     slug: "state-farm-cx-patent-tool",
     company: "State Farm",
-    role: "TODO: confirm title",
+    role: "Designed and helped engineer a customer experience insights tool",
     period: "TODO: start–end dates",
     title: "A patented approach to customer experience tooling",
     summary:
-      "Contributed to a customer-experience tool at State Farm that resulted in an issued US patent.",
-    stack: ["CX tooling", "patented approach"],
+      "Designed and helped engineer a customer experience insights tool at State Farm, resulting in an issued US patent.",
+    stack: ["CX tooling", "Patented approach"],
     hasVisuals: false,
     patentRef: {
       label: "US Patent 10,002,393",
@@ -95,8 +112,8 @@ export const caseStudies: CaseStudy[] = [
       url: "",
     },
     body: [
-      "One of the more unusual outcomes of this work: the approach we built was novel enough to result in an issued US patent (10,002,393), which is a public record and safe to link directly rather than describe secondhand.",
-      "TODO (Derik): confirm the patent number/link is correct, your specific role on the inventing team, and how much of the underlying tool itself I can describe versus just pointing at the patent text.",
+      "I hold US Patent 10,002,393 for a customer experience insights tool I designed and helped engineer at State Farm — a public record, safe to cite directly rather than describe secondhand.",
+      "TODO (Derik): the verified patent link, and how much of the underlying tool I can describe versus just pointing at the patent text.",
     ],
   },
 ];

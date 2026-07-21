@@ -106,9 +106,9 @@ export const caseStudies: CaseStudy[] = [
       label: "US Patent 10,002,393",
       // Verified via Google Patents (2026-07-21): matches patent number,
       // State Farm Mutual Automobile Insurance Company as assignee, 2018
-      // grant date, inventor "Derek Schneider" (note: Google's record
-      // spells it "Derek" — TODO Derik, confirm that's just your legal
-      // name vs. how you go by professionally).
+      // grant date. Google's record spells the inventor "Derek Schneider"
+      // (vs. "Derik") - confirmed by Derik as a typo made at registration,
+      // not a different person or an error on this site's part.
       url: "https://patents.google.com/patent/US10002393B1/en",
       // Original PDF from USPTO's Patent Public Search, downloaded and
       // self-hosted since the USPTO link Derik supplied was a

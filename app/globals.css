@@ -49,61 +49,142 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* Dark-only by design — no light variant. Palette/type sourced from a
-   Figma Make concept Derik approved (2026-07-21): near-black bg, mint
-   accent, hairline borders, sharp near-square radius. */
+/* Light default + .dark override. Structure/type sourced from a Figma
+   Make concept Derik approved (2026-07-21): hairline borders, sharp
+   near-square radius, gold/amber accent. Palette tunable live via the
+   dev-only Color Lab panel (components/dev/color-lab.tsx).
+
+   The accent color's real source of truth is the three --primary-h/
+   -s/-b numbers below (plain HSB — Hue 0-360, Saturation/Brightness
+   0-100, no units). Everything else (--primary, --accent, --ring,
+   --sidebar-primary/-ring) just references --primary via var(), so
+   changing those three numbers is the only hand-edit needed. --primary
+   itself is derived with hwb() — CSS has no native hsb()/hsv(), but
+   hwb()'s whiteness/blackness convert cleanly from HSB:
+     whiteness = (100 - S) * B / 100   (as a %)
+     blackness = 100 - B               (as a %)
+   Keep --primary-h identical between :root and .dark so both themes
+   stay the same hue; vary -s/-b per theme freely. */
 :root {
-  --background: #0b0b0e;
-  --foreground: #eeedf4;
-  --card: #111118;
-  --card-foreground: #eeedf4;
-  --popover: #111118;
-  --popover-foreground: #eeedf4;
-  --primary: #a8e6d8;
-  --primary-foreground: #0b0b0e;
-  --secondary: #1a1a24;
-  --secondary-foreground: #eeedf4;
-  --muted: #16161e;
-  --muted-foreground: #7a7990;
-  --accent: #a8e6d8;
-  --accent-foreground: #0b0b0e;
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: rgba(255, 255, 255, 0.07);
-  --input: rgba(255, 255, 255, 0.12);
-  --ring: #a8e6d8;
-  --chart-1: #a8e6d8;
-  --chart-2: #7a7990;
-  --chart-3: #eeedf4;
-  --chart-4: #1a1a24;
-  --chart-5: #16161e;
+  --background: #f7f7f5;
+  --foreground: #16161a;
+  --card: #ffffff;
+  --card-foreground: #16161a;
+  --popover: #ffffff;
+  --popover-foreground: #16161a;
+
+  --primary-h: 45;
+  --primary-s: 95;
+  --primary-b: 73;
+  --primary: hwb(
+    var(--primary-h)
+    calc((100 - var(--primary-s)) * var(--primary-b) / 100 * 1%)
+    calc((100 - var(--primary-b)) * 1%)
+  );
+  --primary-foreground: #f7f7f5;
+
+  --secondary: #eeeeec;
+  --secondary-foreground: #16161a;
+  --muted: #eeeeec;
+  --muted-foreground: #6b6b76;
+  --accent: var(--primary);
+  --accent-foreground: var(--primary-foreground);
+  --destructive: oklch(0.577 0.191 22.216);
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.12);
+  --ring: var(--primary);
+  --chart-1: var(--primary);
+  --chart-2: #6b6b76;
+  --chart-3: #16161a;
+  --chart-4: #eeeeec;
+  --chart-5: #f7f7f5;
   --radius: 3px;
-  --sidebar: #0d0d11;
-  --sidebar-foreground: #eeedf4;
-  --sidebar-primary: #a8e6d8;
-  --sidebar-primary-foreground: #0b0b0e;
-  --sidebar-accent: #1a1a24;
-  --sidebar-accent-foreground: #eeedf4;
-  --sidebar-border: rgba(255, 255, 255, 0.07);
-  --sidebar-ring: #a8e6d8;
+  --sidebar: #f0f0ee;
+  --sidebar-foreground: #16161a;
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: #eeeeec;
+  --sidebar-accent-foreground: #16161a;
+  --sidebar-border: rgba(0, 0, 0, 0.08);
+  --sidebar-ring: var(--primary);
 
   --font-display: var(--font-space-grotesk), system-ui, sans-serif;
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), "Courier New", monospace;
 }
 
+.dark {
+  --background: #0b0b0e;
+  --foreground: #eeedf4;
+  --card: #111118;
+  --card-foreground: #eeedf4;
+  --popover: #111118;
+  --popover-foreground: #eeedf4;
+
+  --primary-h: 45;
+  --primary-s: 81;
+  --primary-b: 76;
+  --primary: hwb(
+    var(--primary-h)
+    calc((100 - var(--primary-s)) * var(--primary-b) / 100 * 1%)
+    calc((100 - var(--primary-b)) * 1%)
+  );
+  --primary-foreground: #0b0b0e;
+
+  --secondary: #1a1a24;
+  --secondary-foreground: #eeedf4;
+  --muted: #16161e;
+  --muted-foreground: #7a7990;
+  --accent: var(--primary);
+  --accent-foreground: var(--primary-foreground);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: rgba(255, 255, 255, 0.07);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: var(--primary);
+  --chart-1: var(--primary);
+  --chart-2: #7a7990;
+  --chart-3: #eeedf4;
+  --chart-4: #1a1a24;
+  --chart-5: #16161e;
+  --sidebar: #0d0d11;
+  --sidebar-foreground: #eeedf4;
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: #1a1a24;
+  --sidebar-accent-foreground: #eeedf4;
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-ring: var(--primary);
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    color 0.4s ease;
 }
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 ::selection {
-  background-color: rgba(168, 230, 216, 0.2);
-  color: #eeedf4;
+  background-color: color-mix(in srgb, var(--primary) 20%, transparent);
+  color: var(--foreground);
 }
 
 @layer base {

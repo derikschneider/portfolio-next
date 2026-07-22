@@ -17,7 +17,7 @@ export default function AboutPage() {
           Who I am
         </h1>
       </div>
-      <div className="flex flex-col gap-5 text-lg leading-relaxed font-light text-foreground/60">
+      <div className="flex flex-col gap-5 text-lg leading-relaxed font-light text-foreground/80">
         <p>
           I&apos;m a designer who writes production code and an engineer who
           paints his own assets. For 25 years I&apos;ve worked the seam

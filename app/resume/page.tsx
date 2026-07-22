@@ -26,7 +26,7 @@ const skills = [
 
 export default function ResumePage() {
   return (
-    <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col gap-14 px-6 py-20 md:px-14">
+    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-14 px-6 py-20 md:px-0">
       <div className="flex flex-col gap-3 border-b border-border pb-8">
         <span className="font-mono text-sm tracking-widest text-primary uppercase">
           Experience
@@ -34,7 +34,7 @@ export default function ResumePage() {
         <h1 className="font-display text-4xl font-light tracking-tight text-foreground sm:text-5xl">
           Resume
         </h1>
-        <p className="max-w-[60ch] text-muted-foreground">
+        <p className="max-w-[60ch] text-foreground/80">
           25 years, one throughline: the seam between design and
           development. Flagship stops link to a full{" "}
           <Link href="/work" className="text-primary underline underline-offset-4">
@@ -73,18 +73,18 @@ export default function ResumePage() {
                     role.company
                   )}
                 </span>
-                <span className="font-mono text-sm whitespace-nowrap text-foreground/35">
+                <span className="font-mono text-sm whitespace-nowrap text-foreground/50">
                   {role.period}
                 </span>
               </div>
-              <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-2 text-sm text-foreground/80">
                 <span>{role.title}</span>
                 <Badge variant="outline">{role.type}</Badge>
-                <span className="text-foreground/25">&middot;</span>
+                <span className="text-foreground/50">&middot;</span>
                 <span>{role.location}</span>
               </div>
               {role.blurb && (
-                <p className="max-w-[70ch] text-sm leading-relaxed text-muted-foreground">
+                <p className="max-w-[70ch] text-sm leading-relaxed text-foreground/80">
                   {role.blurb}
                 </p>
               )}

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const links = [
   { href: "/work", label: "Work" },
@@ -22,26 +23,29 @@ export function SiteNav() {
         >
           DS
         </Link>
-        <ul className="flex items-center gap-8">
-          {links.map((link) => {
-            const active = pathname.startsWith(link.href);
-            return (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={cn(
-                    "border-b pb-1 font-mono text-sm tracking-widest uppercase transition-colors hover:text-foreground",
-                    active
-                      ? "border-primary text-primary"
-                      : "border-transparent text-foreground/50"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="flex items-center gap-8">
+          <ul className="flex items-center gap-8">
+            {links.map((link) => {
+              const active = pathname.startsWith(link.href);
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={cn(
+                      "border-b pb-1 font-mono text-sm tracking-widest uppercase transition-colors hover:text-foreground",
+                      active
+                        ? "border-primary text-primary"
+                        : "border-transparent text-foreground/50"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+          <ThemeToggle />
+        </div>
       </nav>
     </header>
   );

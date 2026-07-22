@@ -4,6 +4,14 @@ Job-application work-sample site for Derik Schneider, built specifically to demo
 
 This is **not** the derikschneider.com creative-brand site (that's the sibling repo `derikschneider/vite-lit-1` — Lit/vanilla JS/Vite, deliberately React/Tailwind-free per Derik's creative-brand preference). This repo is intentionally React/Next/Tailwind because demonstrating that exact stack is the whole point.
 
+## Status (as of 2026-07-22)
+
+**Design pass done this session, on top of the 2026-07-21 dark theme:** the site now has a real light theme, not just the dark one — `app/globals.css` restructured so the accent color's only source of truth is three plain-number HSB custom properties (`--primary-h/-s/-b`) per theme, rendered via native CSS `hwb()` + `calc()` (no build step, no hex duplication — every other accent-tied token just references `var(--primary)`). Both themes are locked to the same hue (45°) by design. A `next-themes`-backed Light/Dark/System toggle lives in the nav, with a 0.4s cross-fade on every surface when it switches. A dev-only Color Lab panel (`components/dev/color-lab.tsx`, stripped from production via `process.env.NODE_ENV === "development"` — verified absent from the built JS) gives HSB wheels + numeric sliders to retune both theme's primary color live, hue-locked between them.
+
+Also added: scroll-triggered staggered reveal on case-study rows and a page-transition fade on navigation — both plain CSS (`IntersectionObserver` + Tailwind transitions, `@keyframes` + route-keyed remount), **not** a JS animation library. First pass used `motion` (the Framer Motion successor) but it had a genuine mount-animation timing bug in this Next 15.5/React 19 combo — entrance animations collapsed instantly to their end state even when mounted purely client-side with no SSR involved (verified with Playwright, matches a known class of React 19 timing regressions in that library). Pulled it out entirely rather than work around it; bundle got lighter as a result.
+
+Plus a round of consistency/contrast polish: content column width unified to `max-w-3xl` (matching About's) across Home/Work/Resume; the old `muted-foreground` purple-grey swapped for `foreground`-based opacity everywhere; several rounds of bumping low-opacity text upward for readability (current floor is ~50% opacity for tertiary/accent text, ~80% for body copy) — if adding new text, match those floors rather than reintroducing anything lower. Fixed a couple of hardcoded dark-only hex colors (hero panel, footer) that had been bypassing the theme system entirely.
+
 ## Status (as of 2026-07-21)
 
 **Done:** Repo scaffolded and pushed to `github.com/derikschneider/portfolio-next` (public). Next.js 15.5.20 + TypeScript + Tailwind v4 + shadcn/ui (Radix primitives, Nova preset) all in place. `.github/workflows/ci.yml` (lint/typecheck/build) is green on `main`.

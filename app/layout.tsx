@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { DM_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
+import { PageTransition } from "@/components/page-transition";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ColorLab } from "@/components/dev/color-lab";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -36,12 +39,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${dmSans.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <SiteNav />
-        <main className="flex flex-1 flex-col pt-[60px]">{children}</main>
-        <SiteFooter />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <SiteNav />
+          <main className="flex flex-1 flex-col pt-[60px]">
+            <PageTransition>{children}</PageTransition>
+          </main>
+          <SiteFooter />
+          {process.env.NODE_ENV === "development" && <ColorLab />}
+        </ThemeProvider>
       </body>
     </html>
   );

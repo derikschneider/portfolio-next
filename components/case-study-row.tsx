@@ -14,11 +14,11 @@ export function CaseStudyRow({
   return (
     <Link
       href={`/work/${cs.slug}`}
-      className={`group grid grid-cols-[3rem_1fr_auto] items-start gap-4 py-8 transition-colors hover:bg-muted/30 sm:gap-8 ${
+      className={`group grid grid-cols-[3rem_1fr_auto] items-start gap-4 py-8 transition-all hover:translate-x-2.5 hover:bg-muted/30 sm:gap-8 ${
         isLast ? "" : "border-b border-border"
       }`}
     >
-      <span className="pt-1 font-mono text-sm tracking-widest text-foreground/20 transition-colors group-hover:text-primary">
+      <span className="pt-1 font-mono text-sm tracking-widest text-foreground/50 transition-colors group-hover:text-primary">
         {String(index).padStart(2, "0")}
       </span>
 
@@ -31,7 +31,7 @@ export function CaseStudyRow({
             {cs.company}
           </span>
         </div>
-        <p className="max-w-[60ch] text-sm leading-relaxed text-muted-foreground">
+        <p className="max-w-[60ch] text-sm leading-relaxed text-foreground/80">
           {cs.summary}
         </p>
         <div className="flex flex-wrap gap-2 pt-1">
@@ -44,10 +44,10 @@ export function CaseStudyRow({
       </div>
 
       <div className="flex flex-col items-end gap-4 pt-1">
-        <span className="font-mono text-sm whitespace-nowrap text-foreground/25">
+        <span className="font-mono text-sm whitespace-nowrap text-foreground/50">
           {cs.years}
         </span>
-        <span className="inline-block text-foreground/20 transition-all group-hover:translate-x-1 group-hover:text-primary">
+        <span className="inline-block text-foreground/50 transition-all group-hover:translate-x-1 group-hover:text-primary">
           →
         </span>
       </div>

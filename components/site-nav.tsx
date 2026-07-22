@@ -35,7 +35,7 @@ export function SiteNav() {
                       "border-b pb-1 font-mono text-sm tracking-widest uppercase transition-colors hover:text-foreground",
                       active
                         ? "border-primary text-primary"
-                        : "border-transparent text-foreground/50"
+                        : "border-transparent text-fg-50"
                     )}
                   >
                     {link.label}

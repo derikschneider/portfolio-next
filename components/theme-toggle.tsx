@@ -27,7 +27,7 @@ export function ThemeToggle() {
           className={`flex size-6 items-center justify-center rounded-sm transition-colors ${
             mounted && theme === value
               ? "bg-primary text-primary-foreground"
-              : "text-foreground/50 hover:text-foreground"
+              : "text-fg-50 hover:text-foreground"
           }`}
         >
           <Icon className="size-3.5" />

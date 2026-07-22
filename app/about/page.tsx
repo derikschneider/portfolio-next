@@ -17,7 +17,7 @@ export default function AboutPage() {
           Who I am
         </h1>
       </div>
-      <div className="flex flex-col gap-5 text-lg leading-relaxed font-light text-foreground/80">
+      <div className="flex flex-col gap-5 text-lg leading-relaxed font-light text-fg-80">
         <p>
           I&apos;m a designer who writes production code and an engineer who
           paints his own assets. For 25 years I&apos;ve worked the seam
@@ -58,7 +58,7 @@ export default function AboutPage() {
           thinking to have designed asset pipelines that other studios&apos;
           teams adopted.
         </p>
-        <p className="border-t border-border pt-6 text-2xl text-foreground/75 italic">
+        <p className="border-t border-border pt-6 text-2xl text-fg-75 italic">
           What I&apos;m looking for: roles where the design-to-code gap is
           the real problem to solve. Design systems, UX engineering,
           technical product design, game UI. If that sounds like your team,

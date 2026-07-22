@@ -18,7 +18,7 @@ export default function WorkPage() {
           <h1 className="font-display text-4xl font-light tracking-tight text-foreground sm:text-5xl">
             Work
           </h1>
-          <p className="max-w-[60ch] text-foreground/80">
+          <p className="max-w-[60ch] text-fg-80">
             Six case studies spanning platform engineering, design systems,
             and shipped game UI. Most underlying work is under NDA — these
             are description-only unless noted.

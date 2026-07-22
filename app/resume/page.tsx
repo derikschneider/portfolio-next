@@ -34,7 +34,7 @@ export default function ResumePage() {
         <h1 className="font-display text-4xl font-light tracking-tight text-foreground sm:text-5xl">
           Resume
         </h1>
-        <p className="max-w-[60ch] text-foreground/80">
+        <p className="max-w-[60ch] text-fg-80">
           25 years, one throughline: the seam between design and
           development. Flagship stops link to a full{" "}
           <Link href="/work" className="text-primary underline underline-offset-4">
@@ -65,7 +65,7 @@ export default function ResumePage() {
                   {role.caseStudySlug ? (
                     <Link
                       href={`/work/${role.caseStudySlug}`}
-                      className="underline-offset-4 hover:text-primary hover:underline"
+                      className="text-foreground underline-offset-4 hover:text-primary hover:underline"
                     >
                       {role.company}
                     </Link>
@@ -73,18 +73,18 @@ export default function ResumePage() {
                     role.company
                   )}
                 </span>
-                <span className="font-mono text-sm whitespace-nowrap text-foreground/50">
+                <span className="font-mono text-sm whitespace-nowrap text-fg-50">
                   {role.period}
                 </span>
               </div>
-              <div className="flex flex-wrap items-center gap-2 text-sm text-foreground/80">
-                <span>{role.title}</span>
+              <div className="flex flex-wrap items-center gap-2 text-sm text-fg-80">
+                <span className="text-fg-80">{role.title}</span>
                 <Badge variant="outline">{role.type}</Badge>
-                <span className="text-foreground/50">&middot;</span>
-                <span>{role.location}</span>
+                <span className="text-fg-50">&middot;</span>
+                <span className="text-fg-80">{role.location}</span>
               </div>
               {role.blurb && (
-                <p className="max-w-[70ch] text-sm leading-relaxed text-foreground/80">
+                <p className="max-w-[70ch] text-sm leading-relaxed text-fg-80">
                   {role.blurb}
                 </p>
               )}

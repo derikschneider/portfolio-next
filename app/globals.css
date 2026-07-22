@@ -156,14 +156,54 @@
   --sidebar-ring: var(--primary);
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  transition:
-    background-color 0.4s ease,
-    border-color 0.4s ease,
-    color 0.4s ease;
+/* Deliberately placed in Tailwind's own `base` layer (not left
+   unlayered) so component-level transition utilities — transition-all,
+   transition-colors, custom duration-*/ease-[...] classes like the
+   case-study row's hover:translate-x or the scroll-reveal's
+   duration-500 — correctly take priority on any element that declares
+   one, covering whatever properties (translate, scale, opacity, ...)
+   they actually need. An earlier unlayered version of this rule won
+   the cascade unconditionally for the single `transition-property`
+   declaration on EVERY element, which doesn't merge with other
+   sources — it silently replaced those components' own transition
+   lists wholesale, killing the hover slide and the scroll-reveal
+   fade/scale entirely (both still reached their end state, just
+   instantly, with no animation).
+   Elements with no transition utility of their own (most plain text)
+   fall through to this as their default, keeping the theme-switch
+   color fade in sync across the page. */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    transition-property: background-color, border-color, color;
+    transition-duration: 0.4s;
+    transition-timing-function: ease;
+  }
+}
+
+/* Solid, pre-blended dimmed-text colors — used instead of Tailwind's
+   built-in text-foreground/NN (which mixes toward *transparent*, i.e.
+   real alpha). A transparent-mixed color visually blends with whatever
+   is behind it, so during a theme transition it's compositing two
+   simultaneously-animating layers (its own color-mix and the
+   background showing through) and visibly drifts out of sync with
+   fully-opaque text. Mixing toward var(--background) instead produces
+   a single solid, opaque color that transitions cleanly on its own. */
+@layer utilities {
+  .text-fg-50 {
+    color: color-mix(in oklab, var(--foreground) 50%, var(--background));
+  }
+  .text-fg-60 {
+    color: color-mix(in oklab, var(--foreground) 60%, var(--background));
+  }
+  .text-fg-75 {
+    color: color-mix(in oklab, var(--foreground) 75%, var(--background));
+  }
+  .text-fg-80 {
+    color: color-mix(in oklab, var(--foreground) 80%, var(--background));
+  }
 }
 
 html {

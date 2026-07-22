@@ -37,7 +37,7 @@ export default async function CaseStudyPage({
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16 md:px-0">
       <Link
         href="/work"
-        className="flex items-center gap-1.5 font-mono text-sm tracking-wide text-foreground/50 uppercase hover:text-primary"
+        className="flex items-center gap-1.5 font-mono text-sm tracking-wide text-fg-50 uppercase hover:text-primary"
       >
         <ArrowLeft className="size-4" />
         All work
@@ -45,14 +45,14 @@ export default async function CaseStudyPage({
 
       <div className="flex flex-col gap-3">
         <div className="flex flex-wrap items-center gap-2 font-mono text-sm tracking-wide text-primary">
-          <span>{cs.company}</span>
-          <span className="text-foreground/50">&middot;</span>
-          <span className="text-foreground/50">{cs.role}</span>
+          <span className="text-primary">{cs.company}</span>
+          <span className="text-fg-50">&middot;</span>
+          <span className="text-fg-50">{cs.role}</span>
         </div>
         <h1 className="font-display text-3xl font-light tracking-tight text-foreground sm:text-4xl">
           {cs.title}
         </h1>
-        <p className="font-mono text-sm text-foreground/50">{cs.period}</p>
+        <p className="font-mono text-sm text-fg-50">{cs.period}</p>
         <div className="flex flex-wrap gap-2 pt-1">
           {cs.stack.map((s) => (
             <Badge key={s} variant="outline">
@@ -73,7 +73,7 @@ export default async function CaseStudyPage({
               className={
                 isTodo
                   ? "rounded-md border border-dashed border-border bg-muted/50 p-3 font-mono text-sm text-muted-foreground"
-                  : "leading-relaxed font-light text-foreground/80"
+                  : "leading-relaxed font-light text-fg-80"
               }
             >
               {paragraph}
@@ -83,7 +83,7 @@ export default async function CaseStudyPage({
       </div>
 
       {cs.patentRef && (
-        <p className="flex flex-wrap items-center gap-3 font-mono text-sm text-foreground/60">
+        <p className="flex flex-wrap items-center gap-3 font-mono text-sm text-fg-60">
           {cs.patentRef.url ? (
             <a
               href={cs.patentRef.url}

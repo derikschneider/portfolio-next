@@ -28,10 +28,10 @@ export default function Home() {
           <h1 className="font-display text-6xl leading-none font-light tracking-tight text-foreground sm:text-7xl lg:text-8xl">
             Derik
             <br />
-            <span>Schneider</span>
+            <span className="text-foreground">Schneider</span>
           </h1>
 
-          <p className="max-w-[38ch] text-lg leading-relaxed font-light text-foreground/80">
+          <p className="max-w-[38ch] text-lg leading-relaxed font-light text-fg-80">
             Principal Product Owner, Action Platform UI at Capital One. This
             site is a work sample built specifically for the Lead Full Stack
             Engineer posting — every piece of the stack below is real,
@@ -48,7 +48,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col gap-3 border-t border-border pt-8">
-            <span className="font-mono text-sm tracking-widest text-foreground/50 uppercase">
+            <span className="font-mono text-sm tracking-widest text-fg-50 uppercase">
               Stack
             </span>
             <div className="flex flex-wrap gap-2">
@@ -84,7 +84,7 @@ export default function Home() {
                 <div className="font-display text-4xl leading-none font-light text-foreground">
                   {value}
                 </div>
-                <div className="mt-2 font-mono text-sm tracking-wide text-foreground/50 uppercase">
+                <div className="mt-2 font-mono text-sm tracking-wide text-fg-50 uppercase">
                   {label}
                 </div>
               </div>
@@ -101,7 +101,7 @@ export default function Home() {
             </h2>
             <Link
               href="/work"
-              className="font-mono text-sm tracking-widest text-foreground/50 uppercase hover:text-primary"
+              className="font-mono text-sm tracking-widest text-fg-50 uppercase hover:text-primary"
             >
               Selected work
             </Link>

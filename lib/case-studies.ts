@@ -3,6 +3,8 @@ export type CaseStudy = {
   company: string;
   role: string;
   period: string;
+  /** Short year range for compact display (index rows) — full detail in `period`. */
+  years: string;
   title: string;
   summary: string;
   stack: string[];
@@ -21,6 +23,7 @@ export const caseStudies: CaseStudy[] = [
     company: "Discover → Capital One",
     role: "Lead UX Designer, Action Design Team → Principal Product Owner, Action Platform UI",
     period: "Jan 2024 – Present (Discover Jan 2024–Apr 2025; Capital One acquired Discover, continuing May 2025–present)",
+    years: "2024–Present",
     title: "Action Platform: from design system migration to production data integrity",
     summary:
       "Rebuilt the Action platform's design infrastructure at Discover, then carried that platform through Capital One's acquisition of Discover into a Principal Product Owner role driving automated testing and production data integrity.",
@@ -36,6 +39,7 @@ export const caseStudies: CaseStudy[] = [
     company: "Novant Health",
     role: "UX/UI Lead (Contract)",
     period: "Jun 2022 – Jul 2023",
+    years: "2022–2023",
     title: "Aurora: a design system built from scratch",
     summary:
       "Led integration of the Aurora Design System across web products, owning tokens, grids, SVG standards, responsive behavior, and animation, with accessibility built into components rather than patched on afterward.",
@@ -51,6 +55,7 @@ export const caseStudies: CaseStudy[] = [
     company: "Nutrien Ag Solutions",
     role: "UX Designer",
     period: "Apr 2019 – Jun 2022",
+    years: "2019–2022",
     title: "Bonsai: documentation and adoption from the platform team",
     summary:
       "As part of the core platform team building Bonsai, authored the system's initial documentation, contributed to component development, and championed adoption across other design teams.",
@@ -66,6 +71,7 @@ export const caseStudies: CaseStudy[] = [
     company: "Agrible → Nutrien Ag Solutions",
     role: "Front-end Developer",
     period: "Mar 2015 – Apr 2019 (Agrible Mar 2015–Aug 2018; continued at Nutrien Ag Solutions after acquisition, Aug 2018–Apr 2019)",
+    years: "2015–2019",
     title: "Production React/Redux at agricultural scale",
     summary:
       "Wrote production React and Redux for Agrible's core sustainability and field data tools through the company's growth and acquisition by Nutrien.",
@@ -81,7 +87,8 @@ export const caseStudies: CaseStudy[] = [
     company: "Volition / NetherRealm Studios",
     role: "User Interface Artist",
     period: "Jul 2007 – Jul 2010 (Volition); Oct 2010 – Mar 2012 (NetherRealm Studios)",
-    title: "Shipped UI across four titles, two studios",
+    years: "2007–2012",
+    title: "Shipped UI across five titles, two studios",
     summary:
       "Designed, built, and integrated UI for Saints Row 2 and Red Faction: Armageddon at Volition, then Mortal Kombat (2011), Mortal Kombat VITA, and Injustice: Gods Among Us at NetherRealm Studios.",
     stack: ["Game UI/UX", "Lua", "Perforce", "Asset pipelines", "Console cert requirements"],
@@ -97,6 +104,7 @@ export const caseStudies: CaseStudy[] = [
     company: "State Farm (contract via TEKsystems)",
     role: "Lead UX Designer/Developer",
     period: "Dec 2012 – Mar 2015",
+    years: "2012–2015",
     title: "A patented approach to customer experience tooling",
     summary:
       "Designed and drove development of a CX insights tool granted US Patent 10,002,393, coordinating systems architecture, database integration, server management, and security requirements across teams.",

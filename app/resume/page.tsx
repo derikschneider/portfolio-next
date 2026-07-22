@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { experience } from "@/lib/experience";
 
 export const metadata: Metadata = {
@@ -27,34 +26,46 @@ const skills = [
 
 export default function ResumePage() {
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-6 py-16">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold tracking-tight">Resume</h1>
-        <p className="text-muted-foreground">
+    <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col gap-14 px-6 py-20 md:px-14">
+      <div className="flex flex-col gap-3 border-b border-border pb-8">
+        <span className="font-mono text-sm tracking-widest text-primary uppercase">
+          Experience
+        </span>
+        <h1 className="font-display text-4xl font-light tracking-tight text-foreground sm:text-5xl">
+          Resume
+        </h1>
+        <p className="max-w-[60ch] text-muted-foreground">
           25 years, one throughline: the seam between design and
           development. Flagship stops link to a full{" "}
-          <Link href="/work" className="underline underline-offset-4">
+          <Link href="/work" className="text-primary underline underline-offset-4">
             case study
           </Link>
           .
         </p>
-        <p className="rounded-md border border-dashed border-border bg-muted/50 p-3 text-sm text-muted-foreground">
+        <p className="mt-2 rounded-md border border-dashed border-border bg-muted/50 p-3 font-mono text-sm text-muted-foreground">
           TODO (Derik): a downloadable PDF resume probably belongs here too —
           not wired up yet.
         </p>
       </div>
 
       <section className="flex flex-col gap-6">
-        <h2 className="text-xl font-semibold tracking-tight">Experience</h2>
-        <ol className="flex flex-col gap-6">
+        <h2 className="font-display text-2xl font-light tracking-tight text-foreground">
+          Work history
+        </h2>
+        <ol className="flex flex-col">
           {experience.map((role, i) => (
-            <li key={`${role.company}-${role.period}`} className="flex flex-col gap-1">
+            <li
+              key={`${role.company}-${role.period}`}
+              className={`flex flex-col gap-1.5 py-6 ${
+                i < experience.length - 1 ? "border-b border-border" : ""
+              }`}
+            >
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <span className="font-medium">
+                <span className="font-medium text-foreground">
                   {role.caseStudySlug ? (
                     <Link
                       href={`/work/${role.caseStudySlug}`}
-                      className="underline-offset-4 hover:underline"
+                      className="underline-offset-4 hover:text-primary hover:underline"
                     >
                       {role.company}
                     </Link>
@@ -62,26 +73,31 @@ export default function ResumePage() {
                     role.company
                   )}
                 </span>
-                <span className="text-sm text-muted-foreground">{role.period}</span>
+                <span className="font-mono text-sm whitespace-nowrap text-foreground/35">
+                  {role.period}
+                </span>
               </div>
               <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                 <span>{role.title}</span>
-                <Badge variant="outline" className="text-[0.7rem]">
-                  {role.type}
-                </Badge>
-                <span>&middot;</span>
+                <Badge variant="outline">{role.type}</Badge>
+                <span className="text-foreground/25">&middot;</span>
                 <span>{role.location}</span>
               </div>
-              {role.blurb && <p className="text-sm text-muted-foreground">{role.blurb}</p>}
-              {i < experience.length - 1 && <Separator className="mt-4" />}
+              {role.blurb && (
+                <p className="max-w-[70ch] text-sm leading-relaxed text-muted-foreground">
+                  {role.blurb}
+                </p>
+              )}
             </li>
           ))}
         </ol>
       </section>
 
-      <section className="flex flex-col gap-4">
-        <h2 className="text-xl font-semibold tracking-tight">Skills</h2>
-        <div className="flex flex-wrap gap-1.5">
+      <section className="flex flex-col gap-4 border-t border-border pt-10">
+        <h2 className="font-display text-2xl font-light tracking-tight text-foreground">
+          Skill set
+        </h2>
+        <div className="flex flex-wrap gap-2">
           {skills.map((skill) => (
             <Badge key={skill} variant="outline">
               {skill}

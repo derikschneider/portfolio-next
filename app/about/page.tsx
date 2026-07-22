@@ -8,9 +8,16 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-6 py-16">
-      <h1 className="text-3xl font-semibold tracking-tight">About</h1>
-      <div className="flex flex-col gap-4 text-muted-foreground">
+    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-20 md:px-0">
+      <div className="flex flex-col gap-3 border-b border-border pb-8">
+        <span className="font-mono text-sm tracking-widest text-primary uppercase">
+          About
+        </span>
+        <h1 className="font-display text-4xl font-light tracking-tight text-foreground sm:text-5xl">
+          Who I am
+        </h1>
+      </div>
+      <div className="flex flex-col gap-5 text-lg leading-relaxed font-light text-foreground/60">
         <p>
           I&apos;m a designer who writes production code and an engineer who
           paints his own assets. For 25 years I&apos;ve worked the seam
@@ -27,8 +34,10 @@ export default function AboutPage() {
           Nutrien Ag Solutions, I authored the system&apos;s initial
           documentation, contributed to component development, and
           championed its adoption across other design teams. I hold{" "}
-          <span className="text-foreground">US Patent 10,002,393</span> for
-          a customer experience insights tool I designed and helped
+          <span className="font-mono text-base text-primary">
+            US Patent 10,002,393
+          </span>{" "}
+          for a customer experience insights tool I designed and helped
           engineer at State Farm.
         </p>
         <p>
@@ -49,7 +58,7 @@ export default function AboutPage() {
           thinking to have designed asset pipelines that other studios&apos;
           teams adopted.
         </p>
-        <p className="text-foreground">
+        <p className="border-t border-border pt-6 text-2xl text-foreground/75 italic">
           What I&apos;m looking for: roles where the design-to-code gap is
           the real problem to solve. Design systems, UX engineering,
           technical product design, game UI. If that sounds like your team,

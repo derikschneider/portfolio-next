@@ -34,24 +34,26 @@ export default async function CaseStudyPage({
   if (!cs) notFound();
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16">
+    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16 md:px-0">
       <Link
         href="/work"
-        className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+        className="flex items-center gap-1.5 font-mono text-sm tracking-wide text-foreground/40 uppercase hover:text-primary"
       >
         <ArrowLeft className="size-4" />
         All work
       </Link>
 
       <div className="flex flex-col gap-3">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-2 font-mono text-sm tracking-wide text-primary">
           <span>{cs.company}</span>
-          <span>&middot;</span>
-          <span>{cs.role}</span>
+          <span className="text-foreground/25">&middot;</span>
+          <span className="text-foreground/50">{cs.role}</span>
         </div>
-        <h1 className="text-3xl font-semibold tracking-tight">{cs.title}</h1>
-        <p className="text-sm text-muted-foreground">{cs.period}</p>
-        <div className="flex flex-wrap gap-1.5 pt-1">
+        <h1 className="font-display text-3xl font-light tracking-tight text-foreground sm:text-4xl">
+          {cs.title}
+        </h1>
+        <p className="font-mono text-sm text-foreground/35">{cs.period}</p>
+        <div className="flex flex-wrap gap-2 pt-1">
           {cs.stack.map((s) => (
             <Badge key={s} variant="outline">
               {s}
@@ -70,8 +72,8 @@ export default async function CaseStudyPage({
               key={i}
               className={
                 isTodo
-                  ? "rounded-md border border-dashed border-border bg-muted/50 p-3 text-sm text-muted-foreground"
-                  : "leading-relaxed"
+                  ? "rounded-md border border-dashed border-border bg-muted/50 p-3 font-mono text-sm text-muted-foreground"
+                  : "leading-relaxed font-light text-foreground/70"
               }
             >
               {paragraph}
@@ -81,13 +83,13 @@ export default async function CaseStudyPage({
       </div>
 
       {cs.patentRef && (
-        <p className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+        <p className="flex flex-wrap items-center gap-3 font-mono text-sm text-muted-foreground">
           {cs.patentRef.url ? (
             <a
               href={cs.patentRef.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline underline-offset-4 hover:text-foreground"
+              className="text-primary underline underline-offset-4 hover:text-foreground"
             >
               {cs.patentRef.label}
             </a>
@@ -101,7 +103,7 @@ export default async function CaseStudyPage({
                 href={cs.patentRef.pdfPath}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline underline-offset-4 hover:text-foreground"
+                className="text-primary underline underline-offset-4 hover:text-foreground"
               >
                 View PDF
               </a>
@@ -111,7 +113,7 @@ export default async function CaseStudyPage({
       )}
 
       {cs.hasVisuals && (
-        <div className="rounded-lg border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
+        <div className="rounded-md border border-dashed border-border p-8 text-center font-mono text-sm text-muted-foreground">
           Screenshots pending — placeholder for shipped game UI captures.
         </div>
       )}

@@ -158,7 +158,7 @@
 
 /* Deliberately placed in Tailwind's own `base` layer (not left
    unlayered) so component-level transition utilities — transition-all,
-   transition-colors, custom duration-*/ease-[...] classes like the
+   transition-colors, custom duration-* / ease-[...] classes like the
    case-study row's hover:translate-x or the scroll-reveal's
    duration-500 — correctly take priority on any element that declares
    one, covering whatever properties (translate, scale, opacity, ...)

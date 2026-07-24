@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { GameUIGalleries } from "@/components/game-ui-galleries";
 import { caseStudies, getCaseStudy } from "@/lib/case-studies";
 
 export function generateStaticParams() {
@@ -64,6 +65,16 @@ export default async function CaseStudyPage({
 
       <Separator />
 
+      {cs.galleries && cs.galleries.length > 0 ? (
+        <GameUIGalleries galleries={cs.galleries} />
+      ) : (
+        cs.hasVisuals && (
+          <div className="rounded-md border border-dashed border-border p-8 text-center font-mono text-sm text-muted-foreground">
+            Screenshots pending — placeholder for shipped game UI captures.
+          </div>
+        )
+      )}
+
       <div className="flex flex-col gap-4">
         {cs.body.map((paragraph, i) => {
           const isTodo = paragraph.startsWith("TODO");
@@ -110,12 +121,6 @@ export default async function CaseStudyPage({
             </>
           )}
         </p>
-      )}
-
-      {cs.hasVisuals && (
-        <div className="rounded-md border border-dashed border-border p-8 text-center font-mono text-sm text-muted-foreground">
-          Screenshots pending — placeholder for shipped game UI captures.
-        </div>
       )}
     </div>
   );

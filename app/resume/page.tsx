@@ -53,43 +53,57 @@ export default function ResumePage() {
           Work history
         </h2>
         <ol className="flex flex-col">
-          {experience.map((role, i) => (
-            <li
-              key={`${role.company}-${role.period}`}
-              className={`flex flex-col gap-1.5 py-6 ${
-                i < experience.length - 1 ? "border-b border-border" : ""
-              }`}
-            >
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <span className="font-medium text-foreground">
-                  {role.caseStudySlug ? (
-                    <Link
-                      href={`/work/${role.caseStudySlug}`}
-                      className="text-foreground underline-offset-4 hover:text-primary hover:underline"
-                    >
-                      {role.company}
-                    </Link>
-                  ) : (
-                    role.company
-                  )}
-                </span>
-                <span className="font-mono text-sm whitespace-nowrap text-fg-50">
-                  {role.period}
-                </span>
-              </div>
-              <div className="flex flex-wrap items-center gap-2 text-sm text-fg-80">
-                <span className="text-fg-80">{role.title}</span>
-                <Badge variant="outline">{role.type}</Badge>
-                <span className="text-fg-50">&middot;</span>
-                <span className="text-fg-80">{role.location}</span>
-              </div>
-              {role.blurb && (
-                <p className="max-w-[70ch] text-sm leading-relaxed text-fg-80">
-                  {role.blurb}
-                </p>
-              )}
-            </li>
-          ))}
+          {experience.map((role, i) => {
+            const rowContent = (
+              <>
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1 font-medium text-foreground">
+                    {role.company}
+                    {role.caseStudySlug && (
+                      <span className="inline-flex items-center gap-1.5 font-mono text-xs tracking-wide text-fg-50 transition-all group-hover:translate-x-1 group-hover:text-primary">
+                        View case study
+                        <span aria-hidden="true">→</span>
+                      </span>
+                    )}
+                  </span>
+                  <span className="font-mono text-sm whitespace-nowrap text-fg-50">
+                    {role.period}
+                  </span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 text-sm text-fg-80">
+                  <span className="text-fg-80">{role.title}</span>
+                  <Badge variant="outline">{role.type}</Badge>
+                  <span className="text-fg-50">&middot;</span>
+                  <span className="text-fg-80">{role.location}</span>
+                </div>
+                {role.blurb && (
+                  <p className="max-w-[70ch] text-sm leading-relaxed text-fg-80">
+                    {role.blurb}
+                  </p>
+                )}
+              </>
+            );
+
+            return (
+              <li
+                key={`${role.company}-${role.period}`}
+                className={
+                  i < experience.length - 1 ? "border-b border-border" : ""
+                }
+              >
+                {role.caseStudySlug ? (
+                  <Link
+                    href={`/work/${role.caseStudySlug}`}
+                    className="group -mx-3 flex flex-col gap-1.5 rounded-md px-3 py-6 transition-all hover:translate-x-2.5 hover:bg-muted/30"
+                  >
+                    {rowContent}
+                  </Link>
+                ) : (
+                  <div className="flex flex-col gap-1.5 py-6">{rowContent}</div>
+                )}
+              </li>
+            );
+          })}
         </ol>
       </section>
 

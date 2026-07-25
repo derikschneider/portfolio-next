@@ -101,7 +101,6 @@ export const caseStudies: CaseStudy[] = [
     body: [
       "At Volition, I designed, built, and integrated front-end UI for Saints Row 2 and Red Faction: Armageddon. I took UI from flows and mockups through final art, then integrated it myself using Volition's proprietary UI tool, Perforce, and custom Lua scripts driving interactions, animation, and live game data. I built the vehicle paint color rendering system for Saints Row 2 — a modular approach later carried into further Saints Row titles — and streamlined the UI asset output pipeline, training cross-discipline teams on it and speeding up UI production studio-wide.",
       "At NetherRealm Studios, I designed and produced UI for Mortal Kombat (2011), Mortal Kombat VITA, and Injustice: Gods Among Us — creating flows, concepts, mockups, and final production art for menus, HUD, and game screens, and hand-painting and 3D-rendering icons, character portraits, and backgrounds. I concepted the 2D parallax-driven Krypt navigation for Mortal Kombat VITA that shaped the shipped version.",
-      "TODO (Derik): which specific titles/features you want screenshotted, and whether anything here needs to stay out due to NDA.",
     ],
   },
   {

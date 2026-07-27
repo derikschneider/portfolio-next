@@ -2,9 +2,39 @@ import { NextResponse } from "next/server";
 import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_NAME_LENGTH = 200;
+const MAX_EMAIL_LENGTH = 254; // RFC 5321 practical max
 const MAX_MESSAGE_LENGTH = 5000;
 
+// C0 control chars minus \t\n\r, plus DEL — never legitimate in this form's
+// input and stripped defensively before the values reach SES/email headers.
+const CONTROL_CHARS_RE = /[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g;
+
+// Best-effort in-memory rate limit, scoped to whatever Lambda container is
+// currently warm — resets on cold start and isn't shared across concurrent
+// instances, so this is a speed bump against casual bot floods, not a hard
+// guarantee. Acceptable here because the blast radius is already small: SES
+// stays in sandbox mode on purpose, so the only possible recipient is
+// Derik's own verified inbox — there's no way to abuse this to spam anyone
+// else, only to annoy him, which this limit is enough to blunt.
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX = 5;
+const requestLog = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (requestLog.get(ip) ?? []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+  recent.push(now);
+  requestLog.set(ip, recent);
+  return recent.length > RATE_LIMIT_MAX;
+}
+
 export async function POST(request: Request) {
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ error: "Too many requests — please try again later." }, { status: 429 });
+  }
+
   const body = await request.json().catch(() => null);
   if (!body || typeof body !== "object") {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
@@ -18,10 +48,21 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  if (typeof name !== "string" || name.trim().length < 1 || name.length > 200) {
+  if (typeof name !== "string" || name.trim().length < 1 || name.length > MAX_NAME_LENGTH) {
     return NextResponse.json({ error: "Name is required." }, { status: 400 });
   }
-  if (typeof email !== "string" || !EMAIL_RE.test(email)) {
+  // Name feeds straight into the email Subject header — reject anything
+  // containing a line break or other control character rather than
+  // stripping it, since a legitimate name never needs one and SES's exact
+  // handling of raw CR/LF in a header value isn't something to rely on.
+  if (CONTROL_CHARS_RE.test(name) || /[\r\n]/.test(name)) {
+    return NextResponse.json({ error: "Name contains invalid characters." }, { status: 400 });
+  }
+  if (
+    typeof email !== "string" ||
+    email.length > MAX_EMAIL_LENGTH ||
+    !EMAIL_RE.test(email)
+  ) {
     return NextResponse.json({ error: "A valid email is required." }, { status: 400 });
   }
   if (typeof message !== "string" || message.trim().length < 1) {
@@ -30,6 +71,9 @@ export async function POST(request: Request) {
   if (message.length > MAX_MESSAGE_LENGTH) {
     return NextResponse.json({ error: "Message is too long." }, { status: 400 });
   }
+  // Message is free text and legitimately multi-line, so \n/\r survive —
+  // only strip other control characters (e.g. an embedded NUL byte).
+  const cleanMessage = message.replace(CONTROL_CHARS_RE, "");
 
   const fromEmail = process.env.SES_FROM_EMAIL;
   const toEmail = process.env.SES_TO_EMAIL;
@@ -56,8 +100,16 @@ export async function POST(request: Request) {
         ReplyToAddresses: [email],
         Content: {
           Simple: {
-            Subject: { Data: `Portfolio contact form: ${name}` },
-            Body: { Text: { Data: `From: ${name} <${email}>\n\n${message}` } },
+            // Charset is technically optional (SES defaults to UTF-8), but
+            // that default didn't hold up in practice — an em dash in a
+            // test name rendered as "�" until this was made explicit.
+            Subject: { Data: `Portfolio contact form: ${name}`, Charset: "UTF-8" },
+            Body: {
+              Text: {
+                Data: `From: ${name} <${email}>\n\n${cleanMessage}`,
+                Charset: "UTF-8",
+              },
+            },
           },
         },
       })

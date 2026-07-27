@@ -39,7 +39,17 @@ export async function POST(request: Request) {
   // a message was sent when there's nowhere for it to go.
   if (!fromEmail || !toEmail) {
     return NextResponse.json(
-      { error: "The contact form isn't connected to email delivery yet — please check back soon." },
+      {
+        error: "The contact form isn't connected to email delivery yet — please check back soon.",
+        _debug: {
+          hasSesFrom: Boolean(process.env.SES_FROM_EMAIL),
+          hasSesTo: Boolean(process.env.SES_TO_EMAIL),
+          hasContentfulSpace: Boolean(process.env.CONTENTFUL_SPACE_ID),
+          hasContentfulToken: Boolean(process.env.CONTENTFUL_ACCESS_TOKEN),
+          nodeEnv: process.env.NODE_ENV,
+          keyCount: Object.keys(process.env).length,
+        },
+      },
       { status: 503 }
     );
   }

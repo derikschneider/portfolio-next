@@ -95,7 +95,12 @@ export async function POST(request: Request) {
   try {
     await ses.send(
       new SendEmailCommand({
-        FromEmailAddress: fromEmail,
+        // A bare address (no display name) reads more like an automated
+        // system than a person, which nudges Gmail's classifier toward
+        // Promotions — this is one of the few signals actually controllable
+        // from email content/headers alone. RFC 5322 "Display Name" <addr>
+        // format is standard for SES's FromEmailAddress.
+        FromEmailAddress: `"Derik Schneider" <${fromEmail}>`,
         Destination: { ToAddresses: [toEmail] },
         ReplyToAddresses: [email],
         Content: {
@@ -103,10 +108,17 @@ export async function POST(request: Request) {
             // Charset is technically optional (SES defaults to UTF-8), but
             // that default didn't hold up in practice — an em dash in a
             // test name rendered as "�" until this was made explicit.
-            Subject: { Data: `Portfolio contact form: ${name}`, Charset: "UTF-8" },
+            //
+            // Subject/body phrasing is also deliberate: "Portfolio contact
+            // form: X" and a leading "From: X <Y>" line both read like an
+            // auto-generated form dump, another Promotions-tab signal.
+            // Neither guarantees Primary-tab placement — that's mostly
+            // sender-history reputation, which only builds over time — but
+            // both are real, controllable levers.
+            Subject: { Data: `New message from ${name}`, Charset: "UTF-8" },
             Body: {
               Text: {
-                Data: `From: ${name} <${email}>\n\n${cleanMessage}`,
+                Data: `${cleanMessage}\n\n—\n${name} (${email})`,
                 Charset: "UTF-8",
               },
             },

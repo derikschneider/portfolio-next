@@ -34,22 +34,14 @@ export async function POST(request: Request) {
   const fromEmail = process.env.SES_FROM_EMAIL;
   const toEmail = process.env.SES_TO_EMAIL;
 
-  // SES identity verification hasn't happened yet (as of 2026-07-27) — see
-  // portfolio-next/CLAUDE.md. Fail loudly and honestly rather than claiming
-  // a message was sent when there's nowhere for it to go.
+  // If these are missing, either SES setup isn't done or amplify.yml isn't
+  // forwarding them into .env.production for the runtime — see that file's
+  // comment for why app/branch env vars alone aren't enough on Amplify's
+  // WEB_COMPUTE platform. Fail loudly and honestly either way rather than
+  // claiming a message was sent when there's nowhere for it to go.
   if (!fromEmail || !toEmail) {
     return NextResponse.json(
-      {
-        error: "The contact form isn't connected to email delivery yet — please check back soon.",
-        _debug: {
-          hasSesFrom: Boolean(process.env.SES_FROM_EMAIL),
-          hasSesTo: Boolean(process.env.SES_TO_EMAIL),
-          hasContentfulSpace: Boolean(process.env.CONTENTFUL_SPACE_ID),
-          hasContentfulToken: Boolean(process.env.CONTENTFUL_ACCESS_TOKEN),
-          nodeEnv: process.env.NODE_ENV,
-          keyCount: Object.keys(process.env).length,
-        },
-      },
+      { error: "The contact form isn't connected to email delivery yet — please check back soon." },
       { status: 503 }
     );
   }

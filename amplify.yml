@@ -1,0 +1,23 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci --cache .npm --prefer-offline
+    build:
+      commands:
+        # Amplify only injects app/branch environment variables into this
+        # build shell — the deployed Next.js runtime (Route Handlers, ISR
+        # revalidation after the cache window) never sees them unless they're
+        # written into .env.production here. See:
+        # https://docs.aws.amazon.com/amplify/latest/userguide/ssr-environment-variables.html
+        - env | grep -e CONTENTFUL_SPACE_ID -e CONTENTFUL_ACCESS_TOKEN -e SES_FROM_EMAIL -e SES_TO_EMAIL >> .env.production
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*

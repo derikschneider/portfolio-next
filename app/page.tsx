@@ -2,7 +2,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CaseStudyList } from "@/components/case-study-list";
-import { caseStudies } from "@/lib/case-studies";
+import { getCaseStudies } from "@/lib/contentful";
+
+export const revalidate = 3600;
 
 const stack = ["Next.js", "TypeScript", "Tailwind", "Contentful", "AWS Amplify", "GitHub Actions"];
 
@@ -15,7 +17,9 @@ const stats = [
   { value: "1", label: "US patent" },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const caseStudies = await getCaseStudies();
+
   return (
     <div className="flex flex-1 flex-col">
       <section className="grid min-h-[calc(100vh-60px)] border-b border-border md:grid-cols-2">

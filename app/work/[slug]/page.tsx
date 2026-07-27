@@ -5,9 +5,12 @@ import { ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { GameUIGalleries } from "@/components/game-ui-galleries";
-import { caseStudies, getCaseStudy } from "@/lib/case-studies";
+import { getCaseStudies, getCaseStudy } from "@/lib/contentful";
 
-export function generateStaticParams() {
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const caseStudies = await getCaseStudies();
   return caseStudies.map((cs) => ({ slug: cs.slug }));
 }
 
@@ -17,7 +20,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const cs = getCaseStudy(slug);
+  const cs = await getCaseStudy(slug);
   if (!cs) return {};
   return {
     title: `${cs.title} — Derik Schneider`,
@@ -31,7 +34,7 @@ export default async function CaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const cs = getCaseStudy(slug);
+  const cs = await getCaseStudy(slug);
   if (!cs) notFound();
 
   return (

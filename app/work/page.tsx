@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import { CaseStudyList } from "@/components/case-study-list";
-import { caseStudies } from "@/lib/case-studies";
+import { getCaseStudies } from "@/lib/contentful";
 
 export const metadata: Metadata = {
   title: "Work — Derik Schneider",
   description: "Case studies from Derik Schneider's career history.",
 };
 
-export default function WorkPage() {
+export const revalidate = 3600;
+
+export default async function WorkPage() {
+  const caseStudies = await getCaseStudies();
+
   return (
     <div className="px-6 py-20 md:px-14">
       <div className="mx-auto max-w-3xl">

@@ -11,8 +11,9 @@ export type StudioGallery = {
   images: GalleryImage[];
 };
 
-// Placeholder set — Derik is still refining which shots make the final cut.
-// Filenames are working labels, not final copy.
+// Full set, including all Injustice: Gods Among Us shots (added 2026-07-24,
+// commit 23b111e) — not a placeholder. Derik may still trim which shots make
+// the final cut (2026-07-27: confirmed no NDA concerns, just curation).
 export const gameUIGalleries: StudioGallery[] = [
   {
     id: "volition",

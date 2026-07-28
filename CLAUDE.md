@@ -4,6 +4,13 @@ Job-application work-sample site for Derik Schneider, built specifically to demo
 
 This is **not** the derikschneider.com creative-brand site (that's the sibling repo `derikschneider/vite-lit-1` — Lit/vanilla JS/Vite, deliberately React/Tailwind-free per Derik's creative-brand preference). This repo is intentionally React/Next/Tailwind because demonstrating that exact stack is the whole point.
 
+## Status (as of 2026-07-27, PC, later same day)
+
+Two content corrections, both confirmed live:
+
+- **Injustice: Gods Among Us gallery gap was already closed** — the 2026-07-24 status entry below says "still has zero images," but that was resolved the same day in a later commit (`23b111e`, "Expand Volition/NetherRealm game UI galleries with 66 new screenshots") that never made it back into this doc. All 39 Injustice images are in `lib/game-ui-galleries.ts` and `public/case-studies/volition-netherrealm/netherrealm/injustice/`, confirmed live. Comment at the top of that file calling it a "placeholder set" was also stale and has been corrected. Lesson: verify against the actual current file before repeating an old "open item" — this is the second time in two sessions a status note outlived what it described.
+- **Patent title TODO resolved.** Derik confirmed directly: the testing environment named in the patent's public title *is* the CX tool he built and led — not a separate, reconciled-after-the-fact thing. Updated the `state-farm-cx-patent-tool` entry's body in Contentful (one-off script: `scripts/contentful-update-patent-body.ts`, not a repeatable migration) to say so directly, replacing the old "worth a line reconciling the two" TODO paragraph. Forced an immediate Amplify redeploy to pick it up rather than waiting out the 1h ISR window — editing Contentful content alone does **not** update the live site until the next revalidation or a fresh build.
+
 ## Status (as of 2026-07-27, PC)
 
 Two pieces of work, both live on `work.derikschneider.com`, commits `f59f49b`, `ee0e29f`, `bb4eb4d`:

@@ -9,6 +9,14 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    # Case-study pages fetch from Contentful at build time (generateStaticParams,
+    # SSG) — without these, `npm run build` fails with "Expected parameter
+    # accessToken" from the Contentful SDK's createClient call. Only the
+    # read-only Content Delivery token, safe to expose (Contentful's own docs:
+    # meant to be usable client-side). The management token stays local-only.
+    env:
+      CONTENTFUL_SPACE_ID: ${{ vars.CONTENTFUL_SPACE_ID }}
+      CONTENTFUL_ACCESS_TOKEN: ${{ vars.CONTENTFUL_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

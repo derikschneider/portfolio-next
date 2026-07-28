@@ -1,7 +1,19 @@
 import { createClient } from "contentful";
 import type { EntryFieldTypes, EntrySkeletonType } from "contentful";
 import { gameUIGalleries } from "@/lib/game-ui-galleries";
+import type { StudioGallery } from "@/lib/game-ui-galleries";
+import { stateFarmGallery, nutrienGallery, novantGallery } from "@/lib/case-study-galleries";
 import type { CaseStudy } from "@/lib/case-studies";
+
+// Screenshots stay static in public/ rather than as Contentful Assets (see
+// conversation 2026-07-27) — reattached here by slug rather than modeled as
+// a Contentful field.
+const CASE_STUDY_GALLERIES: Record<string, StudioGallery[]> = {
+  "volition-netherrealm-game-ui": gameUIGalleries,
+  "state-farm-cx-patent-tool": stateFarmGallery,
+  "nutrien-bonsai": nutrienGallery,
+  "novant-health-aurora": novantGallery,
+};
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID!,
@@ -71,10 +83,7 @@ function toCaseStudy(fields: CaseStudyEntryFields): CaseStudy {
           pdfPath: fields.patentPdfPath,
         }
       : undefined,
-    // Volition/NetherRealm screenshots stay static in public/ rather than
-    // as Contentful Assets (see conversation 2026-07-27) — reattached here
-    // by slug rather than modeled as a Contentful field.
-    galleries: fields.slug === "volition-netherrealm-game-ui" ? gameUIGalleries : undefined,
+    galleries: CASE_STUDY_GALLERIES[fields.slug],
   };
 }
 

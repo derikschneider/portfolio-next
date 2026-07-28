@@ -5,7 +5,7 @@ export type GalleryImage = {
 };
 
 export type StudioGallery = {
-  id: "volition" | "netherrealm";
+  id: "volition" | "netherrealm" | "state-farm" | "nutrien" | "novant-health";
   studio: string;
   description: string;
   images: GalleryImage[];

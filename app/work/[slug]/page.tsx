@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { GameUIGalleries } from "@/components/game-ui-galleries";
@@ -34,8 +34,17 @@ export default async function CaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const cs = await getCaseStudy(slug);
+  const [cs, allCaseStudies] = await Promise.all([getCaseStudy(slug), getCaseStudies()]);
   if (!cs) notFound();
+
+  const currentIndex = allCaseStudies.findIndex((c) => c.slug === slug);
+  const hasSiblings = allCaseStudies.length > 1 && currentIndex !== -1;
+  const prev = hasSiblings
+    ? allCaseStudies[(currentIndex - 1 + allCaseStudies.length) % allCaseStudies.length]
+    : undefined;
+  const next = hasSiblings
+    ? allCaseStudies[(currentIndex + 1) % allCaseStudies.length]
+    : undefined;
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16 md:px-0">
@@ -124,6 +133,34 @@ export default async function CaseStudyPage({
             </>
           )}
         </p>
+      )}
+
+      {prev && next && (
+        <nav
+          aria-label="More case studies"
+          className="flex items-stretch justify-between gap-4 border-t border-border pt-8"
+        >
+          <Link
+            href={`/work/${prev.slug}`}
+            className="group flex flex-1 flex-col items-start gap-1.5 rounded-md py-2 transition-all hover:-translate-x-1"
+          >
+            <span className="flex items-center gap-1.5 font-mono text-xs tracking-wide text-fg-50 uppercase group-hover:text-primary">
+              <ArrowLeft className="size-4" />
+              Previous
+            </span>
+            <span className="text-foreground">{prev.company}</span>
+          </Link>
+          <Link
+            href={`/work/${next.slug}`}
+            className="group flex flex-1 flex-col items-end gap-1.5 rounded-md py-2 text-right transition-all hover:translate-x-1"
+          >
+            <span className="flex items-center gap-1.5 font-mono text-xs tracking-wide text-fg-50 uppercase group-hover:text-primary">
+              Next
+              <ArrowRight className="size-4" />
+            </span>
+            <span className="text-foreground">{next.company}</span>
+          </Link>
+        </nav>
       )}
     </div>
   );

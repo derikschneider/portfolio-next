@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Download } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { experience } from "@/lib/experience";
 
 export const metadata: Metadata = {
@@ -42,10 +44,14 @@ export default function ResumePage() {
           </Link>
           .
         </p>
-        <p className="mt-2 rounded-md border border-dashed border-border bg-muted/50 p-3 font-mono text-sm text-muted-foreground">
-          TODO (Derik): a downloadable PDF resume probably belongs here too —
-          not wired up yet.
-        </p>
+        <div>
+          <Button asChild variant="outline">
+            <a href="/resume/derik-schneider-resume.pdf" download>
+              <Download />
+              Download résumé (PDF)
+            </a>
+          </Button>
+        </div>
       </div>
 
       <section className="flex flex-col gap-6">

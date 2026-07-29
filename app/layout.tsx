@@ -25,10 +25,26 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["300", "400", "500", "700"],
 });
 
+const title = "Derik Schneider — Work Samples";
+const description =
+  "Next.js/TypeScript/Tailwind work-sample site demonstrating full-stack engineering, design systems, and CI/CD to AWS.";
+
 export const metadata: Metadata = {
-  title: "Derik Schneider — Work Samples",
-  description:
-    "Next.js/TypeScript/Tailwind work-sample site demonstrating full-stack engineering, design systems, and CI/CD to AWS.",
+  metadataBase: new URL("https://work.derikschneider.com"),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: "/",
+    siteName: title,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({

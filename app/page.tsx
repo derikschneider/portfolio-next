@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -75,16 +76,23 @@ export default async function Home() {
               backgroundSize: "48px 48px",
             }}
           />
+          <Image
+            src="/profile-pic.png"
+            alt="Derik Schneider"
+            fill
+            priority
+            sizes="(min-width: 768px) 50vw, 100vw"
+            className="object-cover saturate-[0.7]"
+            style={{ transform: "scaleX(-1)" }}
+          />
           <div
-            className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display text-[18rem] leading-none font-light tracking-tighter text-primary/[0.04] select-none"
+            className="pointer-events-none absolute inset-0 bg-primary/25 mix-blend-color"
             aria-hidden
-          >
-            DS
-          </div>
+          />
 
           <div className="relative z-10 grid grid-cols-2 gap-px bg-border">
             {stats.map(({ value, label }) => (
-              <div key={label} className="bg-sidebar p-6">
+              <div key={label} className="bg-sidebar/85 p-6">
                 <div className="font-display text-4xl leading-none font-light text-foreground">
                   {value}
                 </div>

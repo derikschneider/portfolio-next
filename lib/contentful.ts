@@ -2,16 +2,18 @@ import { createClient } from "contentful";
 import type { EntryFieldTypes, EntrySkeletonType } from "contentful";
 import { gameUIGalleries } from "@/lib/game-ui-galleries";
 import type { StudioGallery } from "@/lib/game-ui-galleries";
-import { stateFarmGallery, nutrienGallery, novantGallery } from "@/lib/case-study-galleries";
+import { stateFarmGallery, novantGallery } from "@/lib/case-study-galleries";
 import type { CaseStudy } from "@/lib/case-studies";
 
 // Screenshots stay static in public/ rather than as Contentful Assets (see
 // conversation 2026-07-27) — reattached here by slug rather than modeled as
-// a Contentful field.
+// a Contentful field. nutrien-bonsai deliberately has no entry (images cut
+// 2026-07-29, see lib/case-study-galleries.ts) — the case study's own
+// Contentful `hasVisuals` field also needs flipping to false, or the page
+// will show a "Screenshots pending" placeholder instead of nothing.
 const CASE_STUDY_GALLERIES: Record<string, StudioGallery[]> = {
   "volition-netherrealm-game-ui": gameUIGalleries,
   "state-farm-cx-patent-tool": stateFarmGallery,
-  "nutrien-bonsai": nutrienGallery,
   "novant-health-aurora": novantGallery,
 };
 

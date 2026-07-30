@@ -11,16 +11,34 @@ export function GameUIGalleries({ galleries }: { galleries: StudioGallery[] }) {
   const [index, setIndex] = useState(0);
   const active = galleries.find((gallery) => gallery.id === openId) ?? null;
 
+  const stackGalleries = galleries.filter((gallery) => gallery.layout !== "sideBySide");
+  const sideBySideGalleries = galleries.filter((gallery) => gallery.layout === "sideBySide");
+
   return (
     <>
-      <div className="grid grid-cols-2 gap-3 sm:gap-6">
-        {galleries.map((gallery) => (
-          <GalleryStack
+      <div className="flex flex-col gap-8 sm:gap-10">
+        {stackGalleries.length > 0 && (
+          <div className="grid grid-cols-2 gap-3 sm:gap-6">
+            {stackGalleries.map((gallery) => (
+              <GalleryStack
+                key={gallery.id}
+                gallery={gallery}
+                onOpen={() => {
+                  setOpenId(gallery.id);
+                  setIndex(0);
+                }}
+              />
+            ))}
+          </div>
+        )}
+
+        {sideBySideGalleries.map((gallery) => (
+          <SideBySideGallery
             key={gallery.id}
             gallery={gallery}
-            onOpen={() => {
+            onOpenAt={(imageIndex) => {
               setOpenId(gallery.id);
-              setIndex(0);
+              setIndex(imageIndex);
             }}
           />
         ))}
@@ -35,6 +53,46 @@ export function GameUIGalleries({ galleries }: { galleries: StudioGallery[] }) {
         />
       )}
     </>
+  );
+}
+
+// Images shown directly, side by side — not hidden behind the fanned
+// collection-preview card. Same Lightbox, same prev/next behavior, just a
+// different entry point. Use for small, fully-known image sets.
+function SideBySideGallery({
+  gallery,
+  onOpenAt,
+}: {
+  gallery: StudioGallery;
+  onOpenAt: (index: number) => void;
+}) {
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-1">
+        <h3 className="font-display text-lg font-light tracking-tight text-foreground sm:text-xl">
+          {gallery.studio}
+        </h3>
+        <p className="text-sm leading-relaxed text-fg-75">{gallery.description}</p>
+      </div>
+      <div className="grid grid-cols-2 gap-3 sm:gap-6">
+        {gallery.images.map((image, i) => (
+          <button
+            key={image.src}
+            type="button"
+            onClick={() => onOpenAt(i)}
+            className="group relative aspect-4/3 overflow-hidden rounded-md border border-border transition-transform duration-300 hover:-translate-y-1"
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(min-width: 640px) 45vw, 90vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 

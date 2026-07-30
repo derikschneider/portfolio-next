@@ -24,6 +24,11 @@
 .DS_Store
 *.pem
 
+# curated-out case-study images — Derik's local "not used" folders, never
+# meant to reach a public repo (still web-accessible via direct URL even
+# when unreferenced in code, since anything under public/ is served as-is)
+public/case-studies/**/not used/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

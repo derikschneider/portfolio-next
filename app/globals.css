@@ -204,6 +204,13 @@
   .text-fg-80 {
     color: color-mix(in oklab, var(--foreground) 80%, var(--background));
   }
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 html {

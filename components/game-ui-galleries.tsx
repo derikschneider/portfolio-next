@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Dialog } from "radix-ui";
 import { ChevronLeft, ChevronRight, Images, X } from "lucide-react";
@@ -177,6 +177,25 @@ function Lightbox({
   const total = gallery.images.length;
   const current = gallery.images[index];
 
+  const thumbStripRef = useRef<HTMLDivElement>(null);
+  const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // Keep the active thumbnail centered in the scroll area as the selection
+  // changes, clamped so we never scroll past the first/last thumbnail into
+  // empty space — the boundary padding (matching the inter-thumbnail gap)
+  // is the only "whitespace" that should ever show at either end.
+  useEffect(() => {
+    const container = thumbStripRef.current;
+    const thumb = thumbRefs.current[index];
+    if (!container || !thumb) return;
+    const target = thumb.offsetLeft - container.clientWidth / 2 + thumb.clientWidth / 2;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    container.scrollTo({
+      left: Math.max(0, Math.min(target, maxScroll)),
+      behavior: "smooth",
+    });
+  }, [index]);
+
   const goPrev = useCallback(
     () => onIndexChange((index - 1 + total) % total),
     [index, total, onIndexChange],
@@ -266,10 +285,16 @@ function Lightbox({
           </p>
 
           {total > 1 && (
-            <div className="flex gap-2 overflow-x-auto px-4 pb-6 sm:justify-center sm:px-8">
+            <div
+              ref={thumbStripRef}
+              className="scrollbar-hide flex gap-2 overflow-x-auto px-2 pb-6"
+            >
               {gallery.images.map((image, i) => (
                 <button
                   key={image.src}
+                  ref={(el) => {
+                    thumbRefs.current[i] = el;
+                  }}
                   type="button"
                   onClick={() => onIndexChange(i)}
                   aria-label={image.caption}

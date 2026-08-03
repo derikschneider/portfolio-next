@@ -124,8 +124,8 @@
   --sidebar-border: rgba(11, 13, 41, 0.14);
   --sidebar-ring: var(--primary);
 
-  --font-display: "Helvetica Neue", Helvetica, var(--font-space-grotesk), Arial, sans-serif;
-  --font-sans: "Helvetica Neue", Helvetica, var(--font-space-grotesk), Arial, sans-serif;
+  --font-display: var(--font-space-grotesk), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-sans: var(--font-space-grotesk), "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, "SF Mono", var(--font-jetbrains-mono), Menlo, Consolas, "Courier New", monospace;
 }
 

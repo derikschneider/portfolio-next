@@ -3,8 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { GameUIGalleries } from "@/components/game-ui-galleries";
+import { RevealGroup } from "@/components/reveal/reveal-group";
+import { Triangle, CrosshairOpen, HalfCircle } from "@/components/field/shapes";
 import { getCaseStudies, getCaseStudy } from "@/lib/contentful";
 
 export const revalidate = 3600;
@@ -47,35 +48,53 @@ export default async function CaseStudyPage({
     : undefined;
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-8 px-6 py-16 md:px-0">
-      <Link
-        href="/work"
-        className="flex items-center gap-1.5 font-mono text-sm tracking-wide text-fg-50 uppercase hover:text-primary"
-      >
-        <ArrowLeft className="size-4" />
-        All work
-      </Link>
+    <div className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col gap-10 px-6 py-16">
+      <RevealGroup immediate className="relative flex flex-col gap-8">
+        <Triangle className="top-0 right-0" />
+        <CrosshairOpen className="bottom-[-1px] left-0" />
+        <Link
+          href="/work"
+          className="flex w-fit items-center gap-1.5 font-mono text-sm tracking-wide text-fg-50 uppercase hover:text-primary"
+        >
+          <ArrowLeft className="size-4" />
+          <span data-reveal="text" data-reveal-size="fine">
+            All work
+          </span>
+        </Link>
 
-      <div className="flex flex-col gap-3">
-        <div className="flex flex-wrap items-center gap-2 font-mono text-sm tracking-wide text-primary">
-          <span className="text-primary">{cs.company}</span>
-          <span className="text-fg-50">&middot;</span>
-          <span className="text-fg-50">{cs.role}</span>
+        <div className="flex flex-col gap-3">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] tracking-[0.06em] uppercase">
+            <span data-reveal="text" data-reveal-size="fine" className="text-primary">
+              {cs.company}
+            </span>
+            <span aria-hidden="true" className="text-fg-50">
+              ·
+            </span>
+            <span data-reveal="text" data-reveal-size="fine" className="text-fg-50">
+              {cs.role}
+            </span>
+          </div>
+          <h1
+            data-reveal="text"
+            data-reveal-size="fine"
+            className="font-display text-3xl leading-tight font-black tracking-[-0.02em] text-foreground sm:text-4xl"
+          >
+            {cs.title}
+          </h1>
+          <p data-reveal="text" data-reveal-size="fine" className="font-mono text-[11px] tracking-[0.06em] text-fg-50">
+            {cs.period}
+          </p>
+          <div className="flex flex-wrap gap-2 pt-1">
+            {cs.stack.map((s) => (
+              <Badge key={s} variant="outline" data-reveal="text" data-reveal-size="fine">
+                {s}
+              </Badge>
+            ))}
+          </div>
         </div>
-        <h1 className="font-display text-3xl font-light tracking-tight text-foreground sm:text-4xl">
-          {cs.title}
-        </h1>
-        <p className="font-mono text-sm text-fg-50">{cs.period}</p>
-        <div className="flex flex-wrap gap-2 pt-1">
-          {cs.stack.map((s) => (
-            <Badge key={s} variant="outline">
-              {s}
-            </Badge>
-          ))}
-        </div>
-      </div>
 
-      <Separator />
+        <div className="hairline" data-reveal="line" />
+      </RevealGroup>
 
       {cs.galleries && cs.galleries.length > 0 ? (
         <GameUIGalleries galleries={cs.galleries} />
@@ -87,23 +106,23 @@ export default async function CaseStudyPage({
         )
       )}
 
-      <div className="flex flex-col gap-4">
+      <RevealGroup className="flex flex-col gap-4">
         {cs.body.map((paragraph, i) => {
           const isTodo = paragraph.startsWith("TODO");
-          return (
+          return isTodo ? (
             <p
               key={i}
-              className={
-                isTodo
-                  ? "rounded-md border border-dashed border-border bg-muted/50 p-3 font-mono text-sm text-muted-foreground"
-                  : "leading-relaxed font-light text-fg-80"
-              }
+              className="rounded-md border border-dashed border-border bg-muted/50 p-3 font-mono text-sm text-muted-foreground"
             >
+              {paragraph}
+            </p>
+          ) : (
+            <p key={i} data-reveal="text" className="leading-relaxed text-fg-80">
               {paragraph}
             </p>
           );
         })}
-      </div>
+      </RevealGroup>
 
       {cs.patentRef && (
         <p className="flex flex-wrap items-center gap-3 font-mono text-sm text-fg-60">
@@ -136,31 +155,40 @@ export default async function CaseStudyPage({
       )}
 
       {prev && next && (
-        <nav
-          aria-label="More case studies"
-          className="flex items-stretch justify-between gap-4 border-t border-border pt-8"
-        >
-          <Link
-            href={`/work/${prev.slug}`}
-            className="group flex flex-1 flex-col items-start gap-1.5 rounded-md py-2 transition-all hover:-translate-x-1"
-          >
-            <span className="flex items-center gap-1.5 font-mono text-xs tracking-wide text-fg-50 uppercase group-hover:text-primary">
-              <ArrowLeft className="size-4" />
-              Previous
-            </span>
-            <span className="text-foreground">{prev.company}</span>
-          </Link>
-          <Link
-            href={`/work/${next.slug}`}
-            className="group flex flex-1 flex-col items-end gap-1.5 rounded-md py-2 text-right transition-all hover:translate-x-1"
-          >
-            <span className="flex items-center gap-1.5 font-mono text-xs tracking-wide text-fg-50 uppercase group-hover:text-primary">
-              Next
-              <ArrowRight className="size-4" />
-            </span>
-            <span className="text-foreground">{next.company}</span>
-          </Link>
-        </nav>
+        <RevealGroup className="relative">
+          <HalfCircle className="-top-2 left-1/2 -translate-x-1/2" />
+          <div className="hairline mb-8" data-reveal="line" />
+          <nav aria-label="More case studies" className="flex items-stretch justify-between gap-4">
+            <Link
+              href={`/work/${prev.slug}`}
+              className="group flex flex-1 flex-col items-start gap-1.5 py-2 transition-all hover:-translate-x-1"
+            >
+              <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
+                <ArrowLeft className="size-4" />
+                <span data-reveal="text" data-reveal-size="fine">
+                  Previous
+                </span>
+              </span>
+              <span data-reveal="text" data-reveal-size="fine" className="text-foreground">
+                {prev.company}
+              </span>
+            </Link>
+            <Link
+              href={`/work/${next.slug}`}
+              className="group flex flex-1 flex-col items-end gap-1.5 py-2 text-right transition-all hover:translate-x-1"
+            >
+              <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
+                <span data-reveal="text" data-reveal-size="fine">
+                  Next
+                </span>
+                <ArrowRight className="size-4" />
+              </span>
+              <span data-reveal="text" data-reveal-size="fine" className="text-foreground">
+                {next.company}
+              </span>
+            </Link>
+          </nav>
+        </RevealGroup>
       )}
     </div>
   );

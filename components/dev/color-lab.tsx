@@ -6,9 +6,13 @@ import { ColorWheel } from "@/components/dev/color-wheel";
 import { HSBFields } from "@/components/dev/hsb-fields";
 import { hsbToHex, isLight, type HSB } from "@/lib/color";
 
-const DEFAULT_LIGHT: HSB = { h: 45, s: 95, b: 73 };
-const DEFAULT_DARK: HSB = { h: 45, s: 81, b: 76 };
-const STORAGE_KEY = "color-lab-hsb";
+const DEFAULT_LIGHT: HSB = { h: 41, s: 75, b: 91 };
+const DEFAULT_DARK: HSB = { h: 41, s: 75, b: 91 };
+// Versioned so a stale override saved under an old palette (e.g. before
+// the 2026-08-03 "Field Report" redesign) never silently masks new
+// globals.css defaults again — bump this any time the real defaults
+// change, rather than asking Derik to clear localStorage by hand.
+const STORAGE_KEY = "color-lab-hsb-v2";
 const STYLE_ID = "color-lab-overrides";
 
 function applyOverrides(light: HSB, dark: HSB) {
@@ -18,8 +22,8 @@ function applyOverrides(light: HSB, dark: HSB) {
     styleEl.id = STYLE_ID;
     document.head.appendChild(styleEl);
   }
-  const lightFg = isLight(hsbToHex(light)) ? "#16161a" : "#f7f7f5";
-  const darkFg = isLight(hsbToHex(dark)) ? "#0b0b0e" : "#eeedf4";
+  const lightFg = isLight(hsbToHex(light)) ? "#0b0d29" : "#fcfcfc";
+  const darkFg = isLight(hsbToHex(dark)) ? "#0b0d29" : "#c7cbd3";
   styleEl.textContent = `
     :root {
       --primary-h: ${light.h}; --primary-s: ${light.s}; --primary-b: ${light.b};

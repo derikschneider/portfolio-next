@@ -17,7 +17,7 @@ const destinations = [
 
 export default function NotFound() {
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-6 py-20 md:px-0">
+    <div className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col gap-10 px-6 py-20">
       <div className="flex flex-col gap-3 border-b border-border pb-8">
         <span className="font-mono text-sm tracking-widest text-primary uppercase">
           404

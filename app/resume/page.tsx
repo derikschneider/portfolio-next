@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Download } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { FieldHeader } from "@/components/field/field-header";
+import { LogRow } from "@/components/field/log-row";
+import { LogList } from "@/components/field/log-list";
+import { RevealGroup } from "@/components/reveal/reveal-group";
+import { Parallelogram } from "@/components/field/shapes";
 import { experience } from "@/lib/experience";
 
 export const metadata: Metadata = {
@@ -28,103 +32,49 @@ const skills = [
 
 export default function ResumePage() {
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-14 px-6 py-20 md:px-0">
-      <div className="flex flex-col gap-3 border-b border-border pb-8">
-        <span className="font-mono text-sm tracking-widest text-primary uppercase">
-          Experience
-        </span>
-        <h1 className="font-display text-4xl font-light tracking-tight text-foreground sm:text-5xl">
-          Resume
-        </h1>
-        <p className="max-w-[60ch] text-fg-80">
-          25 years, one throughline: the seam between design and
-          development. Flagship stops link to a full{" "}
-          <Link href="/work" className="text-primary underline underline-offset-4">
-            case study
-          </Link>
-          .
-        </p>
-        <div>
+    <div className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col gap-4 px-6 py-16">
+      <FieldHeader
+        eyebrow="Resume //"
+        title="My Experience"
+        description="25 years, one throughline: the seam between design and development. Flagship stops link to a full case study."
+        actions={
           <Button asChild variant="outline">
             <a href="/resume/derik-schneider-resume.pdf" download>
               <Download />
-              Download résumé (PDF)
+              Download PDF
             </a>
           </Button>
-        </div>
-      </div>
+        }
+      />
 
-      <section className="flex flex-col gap-6">
-        <h2 className="font-display text-2xl font-light tracking-tight text-foreground">
-          Work history
-        </h2>
-        <ol className="flex flex-col">
-          {experience.map((role, i) => {
-            const rowContent = (
-              <>
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1 font-medium text-foreground">
-                    {role.company}
-                    {role.caseStudySlug && (
-                      <span className="inline-flex items-center gap-1.5 font-mono text-xs tracking-wide text-fg-50 transition-all group-hover:translate-x-1 group-hover:text-primary">
-                        View case study
-                        <span aria-hidden="true">→</span>
-                      </span>
-                    )}
-                  </span>
-                  <span className="font-mono text-sm whitespace-nowrap text-fg-50">
-                    {role.period}
-                  </span>
-                </div>
-                <div className="flex flex-wrap items-center gap-2 text-sm text-fg-80">
-                  <span className="text-fg-80">{role.title}</span>
-                  <Badge variant="outline">{role.type}</Badge>
-                  <span className="text-fg-50">&middot;</span>
-                  <span className="text-fg-80">{role.location}</span>
-                </div>
-                {role.blurb && (
-                  <p className="max-w-[70ch] text-sm leading-relaxed text-fg-80">
-                    {role.blurb}
-                  </p>
-                )}
-              </>
-            );
+      <LogList
+        items={experience}
+        keyFn={(role) => `${role.company}-${role.period}`}
+        renderItem={(role) => (
+          <LogRow
+            href={role.caseStudySlug ? `/work/${role.caseStudySlug}` : undefined}
+            meta={role.company}
+            metaTrailing={role.period}
+            title={role.title}
+            description={role.blurb}
+            tags={[role.type, role.location]}
+          />
+        )}
+      />
 
-            return (
-              <li
-                key={`${role.company}-${role.period}`}
-                className={
-                  i < experience.length - 1 ? "border-b border-border" : ""
-                }
-              >
-                {role.caseStudySlug ? (
-                  <Link
-                    href={`/work/${role.caseStudySlug}`}
-                    className="group -mx-3 flex flex-col gap-1.5 rounded-md px-3 py-6 transition-all hover:translate-x-2.5 hover:bg-muted/30"
-                  >
-                    {rowContent}
-                  </Link>
-                ) : (
-                  <div className="flex flex-col gap-1.5 py-6">{rowContent}</div>
-                )}
-              </li>
-            );
-          })}
-        </ol>
-      </section>
-
-      <section className="flex flex-col gap-4 border-t border-border pt-10">
-        <h2 className="font-display text-2xl font-light tracking-tight text-foreground">
-          Skill set
-        </h2>
+      <RevealGroup className="flex flex-col gap-4 pt-10">
+        <p className="flex items-center gap-3 font-mono text-[11px] tracking-[0.14em] text-fg-50 uppercase">
+          <Parallelogram />
+          Skill set //
+        </p>
         <div className="flex flex-wrap gap-2">
           {skills.map((skill) => (
-            <Badge key={skill} variant="outline">
+            <Badge key={skill} variant="outline" data-reveal="text" data-reveal-size="fine">
               {skill}
             </Badge>
           ))}
         </div>
-      </section>
+      </RevealGroup>
     </div>
   );
 }

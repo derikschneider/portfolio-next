@@ -1,16 +1,18 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CaseStudyList } from "@/components/case-study-list";
+import { LogRow } from "@/components/field/log-row";
+import { LogList } from "@/components/field/log-list";
+import { RevealGroup } from "@/components/reveal/reveal-group";
+import { Hoverable } from "@/components/reveal/hoverable";
+import { Triangle, Crosshair, HalfCircle, HalfCircleC, Square, Parallelogram } from "@/components/field/shapes";
 import { getCaseStudies } from "@/lib/contentful";
 
 export const revalidate = 3600;
 
 const stack = ["Next.js", "TypeScript", "Tailwind", "Contentful", "AWS Amplify", "GitHub Actions"];
 
-// Real, verifiable numbers pulled from this site's own data — not the
-// placeholder stats from the Figma Make concept this design was based on.
+// Real, verifiable numbers pulled from this site's own data.
 const stats = [
   { value: "25+", label: "Years building" },
   { value: "2", label: "Design systems shipped" },
@@ -20,105 +22,142 @@ const stats = [
 
 export default async function Home() {
   const caseStudies = await getCaseStudies();
+  const featured = caseStudies.slice(0, 3);
 
   return (
     <div className="flex flex-1 flex-col">
-      <section className="grid min-h-[calc(100vh-60px)] border-b border-border md:grid-cols-2">
-        {/* Left — identity */}
-        <div className="flex flex-col justify-center gap-8 border-b border-border px-6 py-16 md:border-r md:border-b-0 md:px-14 md:py-24">
-          <span className="font-mono text-sm tracking-widest text-primary uppercase">
-            Internal move — Lead Full Stack Engineer
-          </span>
+      <RevealGroup immediate className="relative mx-auto w-full max-w-[1180px] px-6 pt-16 pb-14 md:pt-28 md:pb-20">
+        <Triangle className="top-1 right-0" />
+        <Crosshair className="bottom-2 left-1" />
 
-          <h1 className="font-display text-6xl leading-none font-light tracking-tight text-foreground sm:text-7xl lg:text-8xl">
+        <p data-reveal="text" className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">
+          Internal move — Lead Full Stack Engineer
+        </p>
+
+        <h1 className="mt-6 font-display text-6xl leading-[0.92] font-black tracking-[-0.02em] text-foreground uppercase sm:text-7xl lg:text-8xl">
+          <span data-reveal="text" data-reveal-size="fine">
             Derik
-            <br />
-            <span className="text-foreground">Schneider</span>
-          </h1>
+          </span>
+          <br />
+          <span data-reveal="text" data-reveal-size="fine">
+            Schneider
+          </span>
+          <span className="cursor" aria-hidden="true" />
+        </h1>
 
-          <p className="max-w-[38ch] text-lg leading-relaxed font-light text-fg-80">
-            Principal Product Owner, Action Platform UI at Capital One. This
-            site is a work sample built specifically for the Lead Full Stack
-            Engineer posting — every piece of the stack below is real,
-            running in production on this domain.
-          </p>
+        <p data-reveal="text" className="mt-6 max-w-[46ch] text-lg leading-relaxed text-fg-80">
+          Principal Product Owner, Action Platform UI at Capital One. This
+          site is a work sample built specifically for the Lead Full Stack
+          Engineer posting — every piece of the stack below is real, running
+          in production on this domain.
+        </p>
 
-          <div className="flex flex-wrap gap-3">
+        <div className="mt-8 flex flex-wrap items-center gap-6">
+          <Hoverable>
             <Button asChild size="lg">
-              <Link href="/work">See the work</Link>
+              <Link href="/work">
+                <span data-reveal="text" data-reveal-size="fine">
+                  See the work
+                </span>
+              </Link>
             </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/resume">Resume</Link>
-            </Button>
-          </div>
-
-          <div className="flex flex-col gap-3 border-t border-border pt-8">
-            <span className="font-mono text-sm tracking-widest text-fg-50 uppercase">
-              Stack
-            </span>
-            <div className="flex flex-wrap gap-2">
-              {stack.map((item) => (
-                <Badge key={item} variant="outline">
-                  {item}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right — decorative stat panel */}
-        <div className="relative flex flex-col justify-end overflow-hidden bg-sidebar px-6 py-16 md:px-14 md:py-24">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "linear-gradient(color-mix(in srgb, var(--primary) 4%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--primary) 4%, transparent) 1px, transparent 1px)",
-              backgroundSize: "48px 48px",
-            }}
-          />
-          <Image
-            src="/profile-pic.png"
-            alt="Derik Schneider"
-            fill
-            priority
-            sizes="(min-width: 768px) 50vw, 100vw"
-            className="object-cover saturate-[0.7]"
-            style={{ transform: "scaleX(-1)" }}
-          />
-          <div
-            className="pointer-events-none absolute inset-0 bg-primary/25 mix-blend-color"
-            aria-hidden
-          />
-
-          <div className="relative z-10 grid grid-cols-2 gap-px bg-border">
-            {stats.map(({ value, label }) => (
-              <div key={label} className="bg-sidebar/85 p-6">
-                <div className="font-display text-4xl leading-none font-light text-foreground">
-                  {value}
-                </div>
-                <div className="mt-2 font-mono text-sm tracking-wide text-fg-50 uppercase">
-                  {label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 py-20 md:px-14">
-        <div className="mx-auto max-w-3xl">
-          <div className="mb-10 flex items-baseline justify-between border-b border-border pb-6">
-            <h2 className="font-display text-3xl font-light tracking-tight text-foreground sm:text-4xl">
-              Case studies
-            </h2>
+          </Hoverable>
+          <Hoverable>
             <Link
-              href="/work"
-              className="font-mono text-sm tracking-widest text-fg-50 uppercase hover:text-primary"
+              href="/resume"
+              className="border-b border-transparent pb-0.5 font-mono text-xs tracking-widest text-fg-50 uppercase hover:border-fg-50 hover:text-foreground"
             >
-              Selected work
+              <span data-reveal="text" data-reveal-size="fine">
+                Resume →
+              </span>
             </Link>
-          </div>
-          <CaseStudyList items={caseStudies} />
+          </Hoverable>
+        </div>
+      </RevealGroup>
+
+      <RevealGroup className="relative">
+        <div className="hairline" data-reveal="line" />
+        <HalfCircle className="top-[-1px] left-[28%]" />
+        <div className="mx-auto grid max-w-[1180px] grid-cols-2 md:grid-cols-4">
+          {stats.map(({ value, label }, i) => (
+            <div
+              key={label}
+              className={[
+                "py-7",
+                // Edge cells (mobile: alternating columns; desktop: only the
+                // very first/last of the single row) get pl-6/pr-6 to match
+                // every other section's 24px gutter exactly. Interior column
+                // padding stays px-4 (16px) around the divider borders — a
+                // flat px-4 everywhere would either overshoot the outer edge
+                // (stacked on top of a container-level px-6) or undershoot it
+                // (16px instead of 24px), both of which read as misaligned
+                // against the hero/stack/work sections.
+                i % 2 === 0 ? "pl-6 pr-4" : "pl-4 pr-6",
+                i === 0 ? "md:pl-6 md:pr-4" : i === stats.length - 1 ? "md:pl-4 md:pr-6" : "md:px-4",
+                "md:border-l md:border-border",
+                i === 0 ? "md:border-l-0" : "",
+                i % 2 === 1 ? "border-l border-border" : "",
+                i >= 2 ? "border-t border-border md:border-t-0" : "",
+              ].join(" ")}
+            >
+              <div className="font-display text-3xl leading-none font-extrabold tracking-[-0.01em] tabular-nums text-foreground">
+                <span data-reveal="text" data-reveal-size="fine">
+                  {value}
+                </span>
+              </div>
+              <div className="mt-2 font-mono text-[10.5px] tracking-[0.08em] text-fg-50 uppercase">
+                <span data-reveal="text" data-reveal-size="fine">
+                  {label}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <Square className="right-[4%] bottom-[-1px]" />
+        <div className="hairline" data-reveal="line" />
+      </RevealGroup>
+
+      <RevealGroup className="mx-auto w-full max-w-[1180px] px-6 py-14">
+        <p className="mb-5 flex items-center gap-3 font-mono text-[11px] tracking-[0.14em] text-fg-50 uppercase">
+          <Parallelogram />
+          <span data-reveal="text" data-reveal-size="fine">
+            Stack //
+          </span>
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {stack.map((item) => (
+            <Badge key={item} variant="outline" data-reveal="text" data-reveal-size="fine">
+              {item}
+            </Badge>
+          ))}
+        </div>
+      </RevealGroup>
+
+      <section className="mx-auto w-full max-w-[1180px] px-6 pt-4 pb-20">
+        <RevealGroup>
+          <p className="mb-2 flex items-center gap-3 font-mono text-[11px] tracking-[0.14em] text-fg-50 uppercase">
+            <HalfCircleC />
+            Selected work //
+          </p>
+        </RevealGroup>
+        <LogList
+          items={featured}
+          keyFn={(cs) => cs.slug}
+          renderItem={(cs) => (
+            <LogRow
+              href={`/work/${cs.slug}`}
+              meta={cs.company}
+              metaTrailing={cs.years}
+              title={cs.title}
+              description={cs.summary}
+              tags={cs.stack}
+            />
+          )}
+        />
+        <div className="mt-10">
+          <Button asChild size="lg">
+            <Link href="/work">See all 6 →</Link>
+          </Button>
         </div>
       </section>
     </div>

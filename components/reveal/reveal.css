@@ -1,0 +1,136 @@
+/* Chunk-reveal / hairline / hover-scramble system. See reveal-engine.ts
+   for the DOM logic these classes are driven by. */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.chunk,
+.seg,
+.shape-accent {
+  opacity: 1;
+  pointer-events: none;
+}
+.shape-corner {
+  position: absolute;
+}
+.shape-accent.yellow-line {
+  stroke: var(--primary);
+  fill: none;
+  stroke-width: 1.4;
+}
+.shape-accent.yellow-fill {
+  fill: var(--primary);
+  stroke: none;
+}
+.shape-accent.red-line {
+  stroke: var(--accent-red);
+  fill: none;
+  stroke-width: 1.1;
+}
+.shape-accent.thick {
+  stroke-width: 2.64;
+}
+
+html.reveal-ready .chunk {
+  opacity: 0;
+  filter: blur(3px);
+  transition:
+    opacity 0.1s ease,
+    filter 0.1s ease;
+}
+html.reveal-ready .chunk.revealed {
+  opacity: 1;
+  filter: blur(0);
+}
+
+html.reveal-ready .seg {
+  opacity: 0;
+  transform: scaleX(0.3);
+  transition:
+    opacity 0.12s ease,
+    transform 0.12s ease;
+}
+html.reveal-ready .seg.revealed {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+html.reveal-ready .shape-accent {
+  opacity: 0;
+  transform: scale(0.55);
+  transition:
+    opacity 0.16s ease,
+    transform 0.16s ease;
+}
+html.reveal-ready .shape-accent.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hairline {
+  display: flex;
+  gap: 3px;
+  height: 1px;
+  background: var(--border);
+}
+.hairline.segmented {
+  background: none;
+}
+.hairline .seg {
+  flex: 1 1 0%;
+  height: 1px;
+  background: color-mix(in oklab, var(--foreground) 42%, var(--background));
+  transform-origin: center;
+}
+
+@keyframes reveal-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  16.6%,
+  50%,
+  83.3% {
+    opacity: 0.15;
+  }
+  33.3%,
+  66.6% {
+    opacity: 1;
+  }
+}
+.blink {
+  animation: reveal-blink 0.2s steps(1, end) 1;
+}
+
+@keyframes cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+.cursor {
+  display: inline-block;
+  width: 0.09em;
+  height: 0.72em;
+  background: var(--primary);
+  margin-left: 0.06em;
+  vertical-align: -0.03em;
+  animation: cursor-blink 1s steps(1, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blink {
+    animation: none;
+  }
+  .cursor {
+    animation: none;
+  }
+}

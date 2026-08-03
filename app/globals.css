@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "../components/reveal/reveal.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -36,6 +37,8 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-accent-red: var(--accent-red);
+  --color-on-accent: var(--on-accent);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -49,10 +52,13 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* Light default + .dark override. Structure/type sourced from a Figma
-   Make concept Derik approved (2026-07-21): hairline borders, sharp
-   near-square radius, gold/amber accent. Palette tunable live via the
-   dev-only Color Lab panel (components/dev/color-lab.tsx).
+/* Light default + .dark override. "Field Report" system (2026-08-03):
+   navy-slate + light-grey hairlines in dark, off-white + dark-grey in
+   light, both sharing the same fixed yellow/red accent pair rather than
+   per-theme tuning. Palette still tunable live via the dev-only Color
+   Lab panel (components/dev/color-lab.tsx) for the yellow --primary —
+   red is a separate, deliberately non-tunable token since it's meant to
+   stay rare (crosshair/registration marks only, not a UI color).
 
    The accent color's real source of truth is the three --primary-h/
    -s/-b numbers below (plain HSB — Hue 0-360, Saturation/Brightness
@@ -63,96 +69,108 @@
    hwb()'s whiteness/blackness convert cleanly from HSB:
      whiteness = (100 - S) * B / 100   (as a %)
      blackness = 100 - B               (as a %)
-   Keep --primary-h identical between :root and .dark so both themes
-   stay the same hue; vary -s/-b per theme freely. */
+   Kept identical between :root and .dark on purpose (41/75/91 ≈
+   #e8b23a) per Derik's "same color accents for now" — a deliberate
+   change from the old per-theme saturation tuning. */
 :root {
-  --background: #f7f7f5;
-  --foreground: #16161a;
+  --background: #fcfcfc;
+  /* Text/line-art in light mode deliberately reuses dark mode's --background
+     navy (#0b0d29) as its ink color — not an independent grey — so the two
+     themes read as inverses of the same two colors rather than unrelated
+     palettes. */
+  --foreground: #0b0d29;
   --card: #ffffff;
-  --card-foreground: #16161a;
+  --card-foreground: #0b0d29;
   --popover: #ffffff;
-  --popover-foreground: #16161a;
+  --popover-foreground: #0b0d29;
 
-  --primary-h: 45;
-  --primary-s: 95;
-  --primary-b: 73;
+  --primary-h: 41;
+  --primary-s: 75;
+  --primary-b: 91;
   --primary: hwb(
     var(--primary-h)
     calc((100 - var(--primary-s)) * var(--primary-b) / 100 * 1%)
     calc((100 - var(--primary-b)) * 1%)
   );
-  --primary-foreground: #f7f7f5;
+  --primary-foreground: #0b0d29;
+  --accent-red: #c1493b;
+  /* Fixed dark-navy, same value in both themes — used only for text/icon/
+     border color when a block inverts to a solid yellow hover background,
+     so that inversion reads consistently regardless of theme. */
+  --on-accent: #0b0d29;
 
-  --secondary: #eeeeec;
-  --secondary-foreground: #16161a;
-  --muted: #eeeeec;
-  --muted-foreground: #6b6b76;
+  --secondary: #efefef;
+  --secondary-foreground: #0b0d29;
+  --muted: #efefef;
+  --muted-foreground: #737481;
   --accent: var(--primary);
   --accent-foreground: var(--primary-foreground);
   --destructive: oklch(0.577 0.191 22.216);
-  --border: rgba(0, 0, 0, 0.08);
-  --input: rgba(0, 0, 0, 0.12);
+  --border: rgba(11, 13, 41, 0.14);
+  --input: rgba(11, 13, 41, 0.18);
   --ring: var(--primary);
   --chart-1: var(--primary);
-  --chart-2: #6b6b76;
-  --chart-3: #16161a;
-  --chart-4: #eeeeec;
-  --chart-5: #f7f7f5;
+  --chart-2: #737481;
+  --chart-3: #0b0d29;
+  --chart-4: #efefef;
+  --chart-5: #fcfcfc;
   --radius: 3px;
-  --sidebar: #f0f0ee;
-  --sidebar-foreground: #16161a;
+  --sidebar: #f1f1f1;
+  --sidebar-foreground: #0b0d29;
   --sidebar-primary: var(--primary);
   --sidebar-primary-foreground: var(--primary-foreground);
-  --sidebar-accent: #eeeeec;
-  --sidebar-accent-foreground: #16161a;
-  --sidebar-border: rgba(0, 0, 0, 0.08);
+  --sidebar-accent: #efefef;
+  --sidebar-accent-foreground: #0b0d29;
+  --sidebar-border: rgba(11, 13, 41, 0.14);
   --sidebar-ring: var(--primary);
 
-  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
-  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), "Courier New", monospace;
+  --font-display: "Helvetica Neue", Helvetica, var(--font-space-grotesk), Arial, sans-serif;
+  --font-sans: "Helvetica Neue", Helvetica, var(--font-space-grotesk), Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", var(--font-jetbrains-mono), Menlo, Consolas, "Courier New", monospace;
 }
 
 .dark {
-  --background: #0b0b0e;
-  --foreground: #eeedf4;
-  --card: #111118;
-  --card-foreground: #eeedf4;
-  --popover: #111118;
-  --popover-foreground: #eeedf4;
+  --background: #0b0d29;
+  --foreground: #c7cbd3;
+  --card: #121535;
+  --card-foreground: #c7cbd3;
+  --popover: #121535;
+  --popover-foreground: #c7cbd3;
 
-  --primary-h: 45;
-  --primary-s: 81;
-  --primary-b: 76;
+  --primary-h: 41;
+  --primary-s: 75;
+  --primary-b: 91;
   --primary: hwb(
     var(--primary-h)
     calc((100 - var(--primary-s)) * var(--primary-b) / 100 * 1%)
     calc((100 - var(--primary-b)) * 1%)
   );
-  --primary-foreground: #0b0b0e;
+  --primary-foreground: #0b0d29;
+  --accent-red: #c1493b;
+  --on-accent: #0b0d29;
 
-  --secondary: #1a1a24;
-  --secondary-foreground: #eeedf4;
-  --muted: #16161e;
-  --muted-foreground: #7a7990;
+  --secondary: #121535;
+  --secondary-foreground: #c7cbd3;
+  --muted: #12142f;
+  --muted-foreground: #868b9c;
   --accent: var(--primary);
   --accent-foreground: var(--primary-foreground);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: rgba(255, 255, 255, 0.07);
-  --input: rgba(255, 255, 255, 0.12);
+  --border: rgba(199, 203, 211, 0.16);
+  --input: rgba(199, 203, 211, 0.22);
   --ring: var(--primary);
   --chart-1: var(--primary);
-  --chart-2: #7a7990;
-  --chart-3: #eeedf4;
-  --chart-4: #1a1a24;
-  --chart-5: #16161e;
-  --sidebar: #0d0d11;
-  --sidebar-foreground: #eeedf4;
+  --chart-2: #868b9c;
+  --chart-3: #c7cbd3;
+  --chart-4: #121535;
+  --chart-5: #12142f;
+  --sidebar: #0e1030;
+  --sidebar-foreground: #c7cbd3;
   --sidebar-primary: var(--primary);
   --sidebar-primary-foreground: var(--primary-foreground);
-  --sidebar-accent: #1a1a24;
-  --sidebar-accent-foreground: #eeedf4;
-  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-accent: #121535;
+  --sidebar-accent-foreground: #c7cbd3;
+  --sidebar-border: rgba(199, 203, 211, 0.16);
   --sidebar-ring: var(--primary);
 }
 
@@ -213,20 +231,48 @@
   }
 }
 
+/* LogRow's layout — one grid, reflowed via named areas rather than
+   duplicated markup, so the reveal/hover-fx targets (h3, p) stay
+   singular; duplicating them would risk hover-fx binding to a hidden
+   copy instead of the visible one. Below 540px meta sits above the
+   title with the arrow trailing it, and the title/description/tags
+   block takes the full row width; at 540px+ it reverts to a fixed
+   15ch meta column beside the content column, arrow trailing on the
+   far right. */
+.case-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "meta arrow"
+    "content content";
+  align-items: start;
+  column-gap: 1rem;
+  row-gap: 0.75rem;
+}
+@media (min-width: 540px) {
+  .case-row {
+    grid-template-columns: 15ch 1fr auto;
+    grid-template-areas: "meta content arrow";
+    column-gap: 1.5rem;
+  }
+}
+@media (min-width: 640px) {
+  .case-row {
+    column-gap: 2rem;
+  }
+}
+
+html,
+body {
+  /* Safety net: several absolutely-positioned accent shapes sit at
+     section edges by design, and a future one landing at the wrong
+     offset should never be able to add a horizontal scrollbar. */
+  overflow-x: hidden;
+}
+
 html {
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
-}
-
-@keyframes page-enter {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @keyframes route-loading-pulse {

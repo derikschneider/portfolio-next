@@ -1,16 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useHoverFx } from "@/components/reveal/use-hover-fx";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const submitRef = useRef<HTMLButtonElement>(null);
+  useHoverFx(submitRef);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -56,26 +59,47 @@ export function ContactForm() {
         <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div className="flex flex-col gap-1.5">
+      <div className="grid gap-6 sm:grid-cols-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="name" className="font-mono text-xs tracking-widest text-fg-50 uppercase">
             Name
           </Label>
-          <Input id="name" name="name" required maxLength={200} autoComplete="name" />
+          <Input
+            id="name"
+            name="name"
+            required
+            maxLength={200}
+            autoComplete="name"
+            className="rounded-none border-0 border-b border-input bg-transparent px-0 focus-visible:border-primary focus-visible:ring-0"
+          />
         </div>
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="email" className="font-mono text-xs tracking-widest text-fg-50 uppercase">
             Email
           </Label>
-          <Input id="email" name="email" type="email" required autoComplete="email" />
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            className="rounded-none border-0 border-b border-input bg-transparent px-0 focus-visible:border-primary focus-visible:ring-0"
+          />
         </div>
       </div>
 
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <Label htmlFor="message" className="font-mono text-xs tracking-widest text-fg-50 uppercase">
           Message
         </Label>
-        <Textarea id="message" name="message" required rows={5} maxLength={5000} />
+        <Textarea
+          id="message"
+          name="message"
+          required
+          rows={5}
+          maxLength={5000}
+          className="rounded-none border-0 border-b border-input bg-transparent px-0 focus-visible:border-primary focus-visible:ring-0"
+        />
       </div>
 
       {status === "error" && (
@@ -84,8 +108,15 @@ export function ContactForm() {
         </p>
       )}
 
-      <Button type="submit" disabled={status === "submitting"} className="self-start">
-        {status === "submitting" ? "Sending…" : "Send message"}
+      <Button
+        ref={submitRef}
+        type="submit"
+        disabled={status === "submitting"}
+        className="mt-2 self-start"
+      >
+        <span data-reveal="text" data-reveal-size="fine">
+          {status === "submitting" ? "Sending…" : "Send message"}
+        </span>
       </Button>
     </form>
   );

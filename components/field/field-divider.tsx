@@ -17,16 +17,17 @@ export function FieldDivider({ className = "" }: { className?: string }) {
   return (
     <div className={`relative ${className}`}>
       <div className="hairline" data-reveal="line" />
-      {/* Offset is responsive because the margin the mark hangs in only
-          exists on wide viewports. The content edge sits at
-          `max((viewport - 1180) / 2, 0) + 24px`, so a full -50px only clears
-          the viewport above ~1232px — below that the mark lands off-screen
-          entirely (measured: at 1024px it rendered from x=-26 to x=-8, 0px
-          visible). -22px keeps it inside the 24px gutter at every narrower
-          size without pushing into the content column. */}
+      {/* Flat -50px on purpose, not a responsive offset. The margin the mark
+          hangs in only exists on wide viewports — the content edge sits at
+          `max((viewport - 1180) / 2, 0) + 24px`, so below ~1232px this puts
+          the mark partly or fully off-screen (at 1024px it lands at x=-26).
+          That's accepted: it's decorative accent art, and Derik's call
+          (2026-08-04) is that it's allowed to run off the edge rather than
+          be nudged inward on smaller screens. Don't "fix" this into a
+          responsive offset. It's clipped, not overflowing — no scrollbar. */}
       <CrosshairOpen
         inline
-        className="absolute top-1/2 left-[-22px] -translate-y-1/2 xl:left-[-50px]"
+        className="absolute top-1/2 left-[-50px] -translate-y-1/2"
       />
     </div>
   );

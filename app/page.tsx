@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { LogRow } from "@/components/field/log-row";
+import { CaseStudyRow } from "@/components/case-study-row";
 import { LogList } from "@/components/field/log-list";
 import { RevealGroup } from "@/components/reveal/reveal-group";
 import { Hoverable } from "@/components/reveal/hoverable";
@@ -159,16 +159,7 @@ export default async function Home() {
         <LogList
           items={featured}
           keyFn={(cs) => cs.slug}
-          renderItem={(cs) => (
-            <LogRow
-              href={`/work/${cs.slug}`}
-              meta={cs.company}
-              metaTrailing={cs.years}
-              title={cs.title}
-              description={cs.summary}
-              tags={cs.stack}
-            />
-          )}
+          renderItem={(cs) => <CaseStudyRow cs={cs} />}
         />
         <div className="mt-10">
           <Button asChild size="lg">

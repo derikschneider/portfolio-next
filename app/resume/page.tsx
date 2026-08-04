@@ -62,6 +62,9 @@ export default function ResumePage() {
             title={role.title}
             description={role.blurb}
             tags={[role.type, role.location]}
+            // Only the roles that actually link to a case study count as
+            // case-study blocks — the rest stay `foreground`.
+            accentTitle={!!role.caseStudySlug}
           />
         )}
       />

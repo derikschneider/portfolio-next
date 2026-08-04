@@ -45,10 +45,14 @@ export default function ResumePage() {
             </a>
           </Button>
         }
+        // LogList below opens with its own hairline, so the header's divider
+        // would stack a second line right under the Download PDF button.
+        divider={false}
       />
 
       <LogList
         items={experience}
+        registrationMark
         keyFn={(role) => `${role.company}-${role.period}`}
         renderItem={(role) => (
           <LogRow

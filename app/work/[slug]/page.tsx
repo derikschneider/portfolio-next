@@ -7,7 +7,8 @@ import { GameUIGalleries } from "@/components/game-ui-galleries";
 import { CaseStudyHighlights } from "@/components/case-study-highlights";
 import { CASE_STUDY_HIGHLIGHTS } from "@/lib/case-study-highlights";
 import { RevealGroup } from "@/components/reveal/reveal-group";
-import { Triangle, CrosshairOpen, HalfCircle } from "@/components/field/shapes";
+import { Triangle, HalfCircle } from "@/components/field/shapes";
+import { FieldDivider } from "@/components/field/field-divider";
 import { getCaseStudies, getCaseStudy } from "@/lib/contentful";
 
 export const revalidate = 3600;
@@ -55,7 +56,6 @@ export default async function CaseStudyPage({
     <div className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col gap-10 px-6 py-16">
       <RevealGroup immediate className="relative flex flex-col gap-8">
         <Triangle className="top-0 right-0" />
-        <CrosshairOpen className="bottom-[-1px] left-0" />
         <Link
           href="/work"
           className="flex w-fit items-center gap-1.5 font-mono text-sm tracking-wide text-fg-50 uppercase hover:text-primary"
@@ -97,7 +97,7 @@ export default async function CaseStudyPage({
           </div>
         </div>
 
-        <div className="hairline" data-reveal="line" />
+        <FieldDivider />
       </RevealGroup>
 
       {cs.galleries && cs.galleries.length > 0 ? (

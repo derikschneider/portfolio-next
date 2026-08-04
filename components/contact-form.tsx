@@ -70,7 +70,7 @@ export function ContactForm() {
             required
             maxLength={200}
             autoComplete="name"
-            className="rounded-none border-0 border-b border-input bg-transparent px-0 focus-visible:border-primary focus-visible:ring-0"
+            className="rounded-none border-0 border-b border-input bg-white px-2.5 focus-visible:border-primary focus-visible:ring-0 dark:bg-input/30"
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -83,7 +83,7 @@ export function ContactForm() {
             type="email"
             required
             autoComplete="email"
-            className="rounded-none border-0 border-b border-input bg-transparent px-0 focus-visible:border-primary focus-visible:ring-0"
+            className="rounded-none border-0 border-b border-input bg-white px-2.5 focus-visible:border-primary focus-visible:ring-0 dark:bg-input/30"
           />
         </div>
       </div>
@@ -98,7 +98,7 @@ export function ContactForm() {
           required
           rows={5}
           maxLength={5000}
-          className="rounded-none border-0 border-b border-input bg-transparent px-0 focus-visible:border-primary focus-visible:ring-0"
+          className="rounded-none border-0 border-b border-input bg-white px-2.5 focus-visible:border-primary focus-visible:ring-0 dark:bg-input/30"
         />
       </div>
 

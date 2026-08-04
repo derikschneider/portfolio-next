@@ -21,7 +21,7 @@ export default async function WorkPage() {
         description="Platform engineering, design systems, and shipped game UI, in reverse-chronological order. Most underlying work is under NDA — these are description-only unless noted."
         divider={false}
       />
-      <CaseStudyList items={caseStudies} />
+      <CaseStudyList items={caseStudies} registrationMark />
     </div>
   );
 }

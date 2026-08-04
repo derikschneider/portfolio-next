@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { RevealGroup } from "@/components/reveal/reveal-group";
-import { Triangle, CrosshairOpen } from "@/components/field/shapes";
+import { Triangle } from "@/components/field/shapes";
+import { FieldDivider } from "@/components/field/field-divider";
 
 export function FieldHeader({
   eyebrow,
@@ -14,13 +15,15 @@ export function FieldHeader({
   description?: string;
   actions?: ReactNode;
   /** Set false when the content right below already opens with its own
-      hairline (e.g. LogList) — avoids two dividers stacked back to back. */
+      hairline (e.g. LogList) — avoids two dividers stacked back to back.
+      Note the red registration mark rides on this divider, so whatever
+      renders the replacement line should carry the mark instead (LogList
+      takes a `registrationMark` prop for exactly this). */
   divider?: boolean;
 }) {
   return (
     <RevealGroup immediate className="relative flex flex-col gap-4 pb-10">
       <Triangle className="top-0 right-0" />
-      <CrosshairOpen className="bottom-8 left-0" />
 
       <p
         data-reveal="text"
@@ -41,7 +44,7 @@ export function FieldHeader({
         </p>
       )}
       {actions && <div className="flex flex-wrap gap-3 pt-1">{actions}</div>}
-      {divider && <div className="hairline mt-4" data-reveal="line" />}
+      {divider && <FieldDivider className="mt-4" />}
     </RevealGroup>
   );
 }

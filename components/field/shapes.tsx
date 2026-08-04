@@ -50,10 +50,18 @@ export function Crosshair({ className, ...props }: ShapeProps) {
 // Same registration mark, no center dot — the gap is widened slightly
 // (vs. Crosshair's) since there's no circle to visually anchor the
 // middle anymore.
-export function CrosshairOpen({ className, ...props }: ShapeProps) {
+//
+// `inline` drops `shape-corner` (i.e. `position: absolute`) so the mark can
+// sit in normal flow as a flex child — that's how FieldDivider puts it in the
+// gutter beside a hairline instead of pinning it to a section corner.
+export function CrosshairOpen({
+  className,
+  inline = false,
+  ...props
+}: ShapeProps & { inline?: boolean }) {
   return (
     <svg
-      className={`shape-accent shape-corner red-line ${className ?? ""}`}
+      className={`shape-accent red-line ${inline ? "" : "shape-corner"} ${className ?? ""}`}
       data-reveal="shape"
       viewBox="0 0 24 24"
       width="18"

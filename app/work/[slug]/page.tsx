@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { GameUIGalleries } from "@/components/game-ui-galleries";
+import { CaseStudyHighlights } from "@/components/case-study-highlights";
+import { CASE_STUDY_HIGHLIGHTS } from "@/lib/case-study-highlights";
 import { RevealGroup } from "@/components/reveal/reveal-group";
 import { Triangle, CrosshairOpen, HalfCircle } from "@/components/field/shapes";
 import { getCaseStudies, getCaseStudy } from "@/lib/contentful";
@@ -37,6 +39,8 @@ export default async function CaseStudyPage({
   const { slug } = await params;
   const [cs, allCaseStudies] = await Promise.all([getCaseStudy(slug), getCaseStudies()]);
   if (!cs) notFound();
+
+  const highlights = CASE_STUDY_HIGHLIGHTS[slug];
 
   const currentIndex = allCaseStudies.findIndex((c) => c.slug === slug);
   const hasSiblings = allCaseStudies.length > 1 && currentIndex !== -1;
@@ -104,6 +108,10 @@ export default async function CaseStudyPage({
             Screenshots pending — placeholder for shipped game UI captures.
           </div>
         )
+      )}
+
+      {highlights && highlights.length > 0 && (
+        <CaseStudyHighlights highlights={highlights} />
       )}
 
       <RevealGroup className="flex flex-col gap-4">

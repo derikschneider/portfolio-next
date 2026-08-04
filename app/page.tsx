@@ -13,9 +13,21 @@ export const revalidate = 3600;
 const stack = ["Next.js", "TypeScript", "Tailwind", "Contentful", "AWS Amplify", "GitHub Actions"];
 
 // Real, verifiable numbers pulled from this site's own data.
+//
+// "UI systems shipped" is deliberately broader than "design systems" — the
+// count of 5 covers all three kinds of system Derik has actually shipped,
+// which the narrower label was undercounting at 2:
+//   1. Aurora (Novant Health) — design system built from scratch
+//   2. Bonsai (Nutrien Ag Solutions) — core platform team
+//   3. Action Platform (Discover → Capital One) — legacy Sketch system
+//      rebuilt as a modern Figma component library
+//   4. NetherRealm game UI — Mortal Kombat (2011), Injustice
+//   5. Volition game UI — Saints Row 2, Red Faction: Armageddon
+// Game UI systems count here because they define a title's branding and
+// interface system wholesale, not just individual screens.
 const stats = [
   { value: "25+", label: "Years building" },
-  { value: "2", label: "Design systems shipped" },
+  { value: "5", label: "UI systems shipped" },
   { value: "5", label: "Shipped game titles" },
   { value: "1", label: "US patent" },
 ];

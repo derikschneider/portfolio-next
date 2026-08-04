@@ -105,11 +105,23 @@ function GalleryStack({
 }) {
   const [cover, back1, back2] = gallery.images;
 
+  // gap-10, not gap-3: the fanned back cards below are `absolute inset-0`
+  // inside an `aspect-4/3` box, so their translate + rotate overhangs the
+  // box's bottom edge without the parent ever growing to contain them. The
+  // caption then renders on top of the rear cards — which is exactly what
+  // shipped to production until 2026-08-04.
+  //
+  // Measured overhang (Novant, the widest card since it's the only gallery in
+  // its row): 25px at rest, 29px on hover (translate-y-3 → translate-y-4 plus
+  // the rotation's own vertical spread). gap-10 = 40px leaves ~11px clear.
+  // Note the overhang scales with card width, because the rotation's spread
+  // does — if a future layout makes these cards meaningfully wider than
+  // ~525px, re-measure rather than assuming this still clears.
   return (
     <button
       type="button"
       onClick={onOpen}
-      className="group flex flex-col gap-3 text-left"
+      className="group flex flex-col gap-10 text-left"
     >
       <div className="relative aspect-4/3 w-full">
         {back2 && (

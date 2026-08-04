@@ -124,19 +124,25 @@
   --sidebar-border: rgba(11, 13, 41, 0.14);
   --sidebar-ring: var(--primary);
 
-  /* Helvetica first, Space Grotesk as the fallback — deliberate, 2026-08-04.
-     Derik wants Helvetica to win where it's actually installed (macOS), with
-     Space Grotesk picking up only where it isn't. `var(--font-space-grotesk)`
-     expands to both the web font and next/font's generated metric-matched
-     fallback, so it covers "Space Grotesk + alternate" on its own.
+  /* "Helvetica Neue" first, then Space Grotesk. Deliberate, 2026-08-04.
+     `var(--font-space-grotesk)` expands to the web font plus next/font's
+     generated metric-matched fallback, so it covers both on its own.
 
-     Known trade-off, accepted: Windows substitutes the missing "Helvetica"
-     with Arial at the OS level, so the browser resolves the first entry and
-     never reaches Space Grotesk there. Windows visitors get Arial. This is
-     the same mechanism that made Space Grotesk silently never render before
-     f6aae95 — reversed on purpose this time, not a regression. */
-  --font-display: Helvetica, "Helvetica Neue", var(--font-space-grotesk), sans-serif;
-  --font-sans: Helvetica, "Helvetica Neue", var(--font-space-grotesk), sans-serif;
+     Bare `Helvetica` is deliberately ABSENT and must not be re-added.
+     Windows maps the uninstalled "Helvetica" to Arial via an OS-level
+     substitution table, so listing it makes the browser resolve entry #1 and
+     never reach Space Grotesk — Windows visitors get Arial. "Helvetica Neue"
+     is NOT substituted, so it matches on macOS (where it's installed) and
+     falls through to Space Grotesk on Windows, which is the goal.
+
+     Measured on Windows with real DOM text metrics: `Helvetica, ...` renders
+     701.75px (identical to Arial), while `"Helvetica Neue", ...` renders
+     734.59px (identical to Space Grotesk). An @font-face src: local("Helvetica")
+     workaround was also tested and still resolved to Arial, so there is no
+     stack-only way to get classic Helvetica on macOS AND Space Grotesk on
+     Windows. */
+  --font-display: "Helvetica Neue", var(--font-space-grotesk), sans-serif;
+  --font-sans: "Helvetica Neue", var(--font-space-grotesk), sans-serif;
   --font-mono: ui-monospace, "SF Mono", var(--font-jetbrains-mono), Menlo, Consolas, "Courier New", monospace;
 }
 

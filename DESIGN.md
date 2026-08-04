@@ -30,7 +30,7 @@ Two themes, one shared accent pair (deliberately identical between light/dark, n
 | Foreground/ink | `#0b0d29` (dark navy — light mode's *text* reuses dark mode's *background* color, so the two themes read as literal inverses of each other) | `#c7cbd3` (pale grey-blue) |
 | Card/popover | `#ffffff` | `#121535` |
 | Primary/accent | `hwb(41 22.75% 9%)` ≈ **`#e8b23a`**, a warm gold/amber — same value in both themes | same |
-| Secondary accent | `#c1493b`, a muted brick-red — **reserved exclusively for a small "crosshair/registration mark" icon**, never used as a UI color (buttons, links, backgrounds) | same |
+| Secondary accent | `#ed3c28`, a bright vermilion red — **reserved exclusively for a small "crosshair/registration mark" icon**, never used as a UI color (buttons, links, backgrounds) | same |
 | Muted text | `#737481` | `#868b9c` |
 | Border | `rgba(11,13,41,0.14)` | `rgba(199,203,211,0.16)` |
 

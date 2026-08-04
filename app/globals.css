@@ -93,7 +93,7 @@
     calc((100 - var(--primary-b)) * 1%)
   );
   --primary-foreground: #0b0d29;
-  --accent-red: #c1493b;
+  --accent-red: #ed3c28;
   /* Fixed dark-navy, same value in both themes — used only for text/icon/
      border color when a block inverts to a solid yellow hover background,
      so that inversion reads consistently regardless of theme. */
@@ -146,7 +146,7 @@
     calc((100 - var(--primary-b)) * 1%)
   );
   --primary-foreground: #0b0d29;
-  --accent-red: #c1493b;
+  --accent-red: #ed3c28;
   --on-accent: #0b0d29;
 
   --secondary: #121535;

@@ -10,6 +10,7 @@ export function CaseStudyRow({ cs }: { cs: CaseStudy }) {
       title={cs.title}
       description={cs.summary}
       tags={cs.stack}
+      accentTitle
     />
   );
 }

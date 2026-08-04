@@ -5,7 +5,7 @@ import { LogRow } from "@/components/field/log-row";
 import { LogList } from "@/components/field/log-list";
 import { RevealGroup } from "@/components/reveal/reveal-group";
 import { Hoverable } from "@/components/reveal/hoverable";
-import { Triangle, Crosshair, HalfCircle, HalfCircleC, Square, Parallelogram } from "@/components/field/shapes";
+import { Triangle, CrosshairOpen, HalfCircle, HalfCircleC, Square, Parallelogram } from "@/components/field/shapes";
 import { getCaseStudies } from "@/lib/contentful";
 
 export const revalidate = 3600;
@@ -40,7 +40,7 @@ export default async function Home() {
     <div className="flex flex-1 flex-col">
       <RevealGroup immediate className="relative mx-auto w-full max-w-[1180px] px-6 pt-16 pb-14 md:pt-28 md:pb-20">
         <Triangle className="top-1 right-0" />
-        <Crosshair className="bottom-2 left-1" />
+        <CrosshairOpen className="bottom-2 left-1" />
 
         <p data-reveal="text" className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">
           Internal move — Lead Full Stack Engineer
@@ -125,7 +125,11 @@ export default async function Home() {
             </div>
           ))}
         </div>
-        <Square className="right-[4%] bottom-[-1px]" />
+        {/* bottom-[1px], not bottom-0: the hairline below is itself 1px tall,
+            so a single pixel up still leaves the line cutting through the
+            square's bottom edge. 1px sets the square flush on top of the
+            line — measured 0px overlap. */}
+        <Square className="right-[4%] bottom-[1px]" />
         <div className="hairline" data-reveal="line" />
       </RevealGroup>
 

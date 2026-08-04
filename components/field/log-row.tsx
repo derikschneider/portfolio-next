@@ -13,6 +13,7 @@ export function LogRow({
   title,
   description,
   tags,
+  accentTitle = false,
 }: {
   href?: string;
   meta: string;
@@ -20,6 +21,11 @@ export function LogRow({
   title: string;
   description?: string;
   tags?: string[];
+  /** Dark mode only: render the title in the yellow primary instead of
+      `foreground`. Opt-in per consumer so it stays on case-study rows and
+      doesn't bleed into the Resume experience rows, which share this
+      component. */
+  accentTitle?: boolean;
 }) {
   const ref = useRef<HTMLElement>(null);
   useHoverFx(ref, { scrambleOnceSelector: "h3", blinkSelector: "h3", scrambleSelector: "p", enabled: !!href });
@@ -61,7 +67,15 @@ export function LogRow({
         <h3
           data-reveal="text"
           data-reveal-size="fine"
-          className="font-display text-[1.15rem] leading-[1.3] font-bold text-foreground transition-colors group-hover:text-on-accent"
+          className={cn(
+            "font-display text-[1.15rem] leading-[1.3] font-bold text-foreground transition-colors group-hover:text-on-accent",
+            // `dark:group-hover:` is spelled out rather than relying on the
+            // unprefixed group-hover above: both it and `dark:text-primary`
+            // are two-class utilities, so which wins in dark mode would come
+            // down to stylesheet order. Without it the title can stay yellow
+            // on the yellow hover fill and disappear.
+            accentTitle && "dark:text-primary dark:group-hover:text-on-accent"
+          )}
         >
           {title}
         </h3>

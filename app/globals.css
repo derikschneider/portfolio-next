@@ -124,8 +124,19 @@
   --sidebar-border: rgba(11, 13, 41, 0.14);
   --sidebar-ring: var(--primary);
 
-  --font-display: var(--font-space-grotesk), "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-sans: var(--font-space-grotesk), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Helvetica first, Space Grotesk as the fallback — deliberate, 2026-08-04.
+     Derik wants Helvetica to win where it's actually installed (macOS), with
+     Space Grotesk picking up only where it isn't. `var(--font-space-grotesk)`
+     expands to both the web font and next/font's generated metric-matched
+     fallback, so it covers "Space Grotesk + alternate" on its own.
+
+     Known trade-off, accepted: Windows substitutes the missing "Helvetica"
+     with Arial at the OS level, so the browser resolves the first entry and
+     never reaches Space Grotesk there. Windows visitors get Arial. This is
+     the same mechanism that made Space Grotesk silently never render before
+     f6aae95 — reversed on purpose this time, not a regression. */
+  --font-display: Helvetica, "Helvetica Neue", var(--font-space-grotesk), sans-serif;
+  --font-sans: Helvetica, "Helvetica Neue", var(--font-space-grotesk), sans-serif;
   --font-mono: ui-monospace, "SF Mono", var(--font-jetbrains-mono), Menlo, Consolas, "Courier New", monospace;
 }
 

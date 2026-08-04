@@ -37,7 +37,7 @@ Two themes, one shared accent pair (deliberately identical between light/dark, n
 The gold accent is the only interactive/brand color — links, active nav state, button fills, focus rings, cursor caret, hover-invert backgrounds all key off it. Red is intentionally rare (at most once or twice per page) and purely decorative.
 
 ### Typography
-- **Display/headings:** Space Grotesk (Google Font, weights 300–700, geometric sans with a slightly technical/mono-adjacent character). Hero name and page H1s use it at `font-black`/`font-extrabold` — very heavy weight, tight tracking (`-0.02em`), uppercase on the hero.
+- **Display/headings:** Helvetica where installed, falling back to Space Grotesk (Google Font, weights 300–700, geometric sans with a slightly technical/mono-adjacent character). Stack is `Helvetica, "Helvetica Neue", var(--font-space-grotesk), sans-serif` — so macOS renders Helvetica, Windows renders Arial (OS substitution for Helvetica), and Space Grotesk appears only where neither exists. Hero name and page H1s use it at `font-black`/`font-extrabold` — very heavy weight, tight tracking (`-0.02em`), uppercase on the hero.
 - **Labels/eyebrows/nav/meta/badges:** JetBrains Mono, uppercase, wide letter-spacing (`0.06em`–`0.14em`), small size (10.5–11px) — this is the site's second voice, used everywhere for "system labels" (section eyebrows like `Work //`, nav links, stat labels, case-study meta).
 - **Body copy:** falls back to the same Space Grotesk-first sans stack, relaxed leading, max-width measures (46–90ch) for readability.
 - No serif anywhere.

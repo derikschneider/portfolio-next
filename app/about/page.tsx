@@ -106,7 +106,7 @@ export default function AboutPage() {
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div className="relative aspect-3/4 w-full max-w-[300px] overflow-hidden rounded-md border border-border">
               <Image
-                src="/profile-pic.png"
+                src="/profile-pic.webp"
                 alt="Derik Schneider"
                 fill
                 sizes="(min-width: 1024px) 300px, 100vw"

@@ -171,7 +171,19 @@ export default async function CaseStudyPage({
 
       {prev && next && (
         <RevealGroup className="relative">
-          <HalfCircle className="-top-2 right-[37px]" />
+          {/* Inline style rather than utility classes, per Derik. Note `rotate`
+              here is the standalone CSS property, not `transform: rotate()` —
+              that matters because the reveal engine owns `transform` on this
+              element (scale 0.55 -> 1), so using transform would fight it.
+              Case-study pages only; the homepage half-circle is untouched. */}
+          <HalfCircle
+            style={{
+              position: "absolute",
+              top: "10px",
+              rotate: "90deg",
+              right: "32px",
+            }}
+          />
           <div className="hairline mb-8" data-reveal="line" />
           <nav aria-label="More case studies" className="flex items-stretch justify-between gap-4">
             {/* The direction label blinks and scrambles once; the destination

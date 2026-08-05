@@ -48,6 +48,7 @@ function Wordmark() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const ref = useRef<HTMLAnchorElement>(null);
+  const markRef = useRef<HTMLSpanElement>(null);
   const prevPathnameRef = useRef(pathname);
   useHoverFx(ref, { enabled: !isHome });
 
@@ -56,9 +57,24 @@ function Wordmark() {
     const cameFromHome = prevPathnameRef.current === "/";
     prevPathnameRef.current = pathname;
 
-    if (isHome) return;
+    if (prefersReducedMotion()) return;
+
+    // Coming back to home: the header never remounts on client-side
+    // navigation, so its own immediate RevealGroup doesn't re-run and the
+    // freshly-rendered mark would sit at .shape-accent's opacity: 0 forever.
+    // Reveal it here instead. First run is skipped because a real page load
+    // *does* mount the header, and that RevealGroup already covers it.
+    if (isHome) {
+      if (isFirstRun) return;
+      const el = markRef.current;
+      if (!el) return;
+      document.documentElement.classList.add("reveal-ready");
+      runRevealGroup(collectRevealItems(el));
+      return;
+    }
+
     const el = ref.current;
-    if (!el || prefersReducedMotion()) return;
+    if (!el) return;
 
     if (isFirstRun || cameFromHome) {
       document.documentElement.classList.add("reveal-ready");
@@ -69,8 +85,15 @@ function Wordmark() {
   // On home the hero already carries the name, so the brand slot shows the
   // red registration mark instead of the wordmark. Moving to a child page
   // swaps the mark out for the wordmark (and back again on return).
+  //
+  // Wrapped in a span because collectRevealItems only queries descendants —
+  // handed the <svg> directly it would find nothing to reveal.
   if (isHome) {
-    return <CrosshairOpen inline aria-hidden="true" />;
+    return (
+      <span ref={markRef} className="inline-flex">
+        <CrosshairOpen inline aria-hidden="true" />
+      </span>
+    );
   }
 
   return (

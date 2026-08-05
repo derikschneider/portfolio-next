@@ -136,9 +136,10 @@ export default function AboutPage() {
               patent callout) that a text-reveal wrap would flatten. */}
           <p className="mb-5 text-base leading-[1.75] text-fg-80">
             Earlier, on Nutrien Ag Solutions&apos; core platform team, I
-            co-led the inception and architecture of the Bonsai Design System
-            and designed and built its documentation site myself — the
-            front-end code, the responsive layout, and the navigation. I
+            contributed to the early development of the Bonsai Design System,
+            authoring initial system documentation and assisting on component
+            builds, and designed and built its documentation site myself —
+            the front-end code, the responsive layout, and the navigation. I
             hold{" "}
             <span className="font-mono text-sm text-primary">
               US Patent 10,002,393

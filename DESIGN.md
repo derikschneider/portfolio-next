@@ -22,6 +22,10 @@ Extracted from the live source (not guessed) on 2026-08-03. Written to be pasted
 Internally called **"Field Report"** (per the code's own comments) — dated 2026-08-03 in its current form.
 
 ### Color
+**Dark is the default** (2026-08-05) — the site was designed dark first, so a visitor whose OS is in light mode still lands on the intended look. Light and System both remain selectable in the nav toggle, and a returning visitor's stored choice always wins.
+
+Two things make that work together and shouldn't be separated: `defaultTheme="dark"` on the ThemeProvider (with `enableSystem` still on — without an explicit default, next-themes falls back to `"system"` regardless), and a **server-rendered `dark` class on `<html>`**. The second is not redundant: next-themes injects its class-setting script into `<body>`, not `<head>`, so without it the CSS paints `:root` — the light tokens — before `.dark` ever lands, and the `*` colour transition below then animates the whole page light → dark over 0.4s on every first load. Measured across six loads before and after.
+
 Two themes, one shared accent pair (deliberately identical between light/dark, not separately tuned):
 
 | Token | Light | Dark |

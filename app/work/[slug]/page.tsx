@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { GameUIGalleries } from "@/components/game-ui-galleries";
 import { CaseStudyHighlights } from "@/components/case-study-highlights";
@@ -10,6 +10,7 @@ import { RevealGroup } from "@/components/reveal/reveal-group";
 import { Hoverable } from "@/components/reveal/hoverable";
 import { Triangle, HalfCircle } from "@/components/field/shapes";
 import { FieldDivider } from "@/components/field/field-divider";
+import { CaseStudyNav } from "@/components/case-study-nav";
 import { getCaseStudies, getCaseStudy } from "@/lib/contentful";
 
 export const revalidate = 3600;
@@ -185,62 +186,7 @@ export default async function CaseStudyPage({
             }}
           />
           <div className="hairline mb-8" data-reveal="line" />
-          <nav aria-label="More case studies" className="flex items-stretch justify-between gap-4">
-            {/* The direction label blinks and scrambles once; the destination
-                title scrambles and keeps cycling. Selectors are explicit
-                because a bare <Hoverable> targets only the first
-                [data-reveal="text"], which would leave the title inert. */}
-            <Hoverable
-              blinkSelector='[data-slot="cs-dir"]'
-              scrambleOnceSelector='[data-slot="cs-dir"]'
-              scrambleSelector='[data-slot="cs-name"]'
-            >
-              <Link
-                href={`/work/${prev.slug}`}
-                className="group flex flex-1 flex-col items-start gap-1.5 py-2 transition-colors duration-[133ms] [&_*]:duration-[133ms]"
-              >
-                <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
-                  <ArrowLeft className="size-4" aria-hidden="true" />
-                  <span data-slot="cs-dir" data-reveal="text" data-reveal-size="fine">
-                    Previous
-                  </span>
-                </span>
-                <span
-                  data-slot="cs-name"
-                  data-reveal="text"
-                  data-reveal-size="fine"
-                  className="text-foreground"
-                >
-                  {prev.company}
-                </span>
-              </Link>
-            </Hoverable>
-            <Hoverable
-              blinkSelector='[data-slot="cs-dir"]'
-              scrambleOnceSelector='[data-slot="cs-dir"]'
-              scrambleSelector='[data-slot="cs-name"]'
-            >
-              <Link
-                href={`/work/${next.slug}`}
-                className="group flex flex-1 flex-col items-end gap-1.5 py-2 text-right transition-colors duration-[133ms] [&_*]:duration-[133ms]"
-              >
-                <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
-                  <span data-slot="cs-dir" data-reveal="text" data-reveal-size="fine">
-                    Next
-                  </span>
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </span>
-                <span
-                  data-slot="cs-name"
-                  data-reveal="text"
-                  data-reveal-size="fine"
-                  className="text-foreground"
-                >
-                  {next.company}
-                </span>
-              </Link>
-            </Hoverable>
-          </nav>
+          <CaseStudyNav prev={prev} next={next} />
         </RevealGroup>
       )}
     </div>

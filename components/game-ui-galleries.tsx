@@ -3,8 +3,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Dialog } from "radix-ui";
-import { ChevronLeft, ChevronRight, Images, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Images } from "lucide-react";
 import type { StudioGallery } from "@/lib/game-ui-galleries";
+import { useHoverFx } from "@/components/reveal/use-hover-fx";
+import { CrosshairCloseIcon } from "@/components/field/crosshair-close-icon";
 
 export function GameUIGalleries({ galleries }: { galleries: StudioGallery[] }) {
   const [openId, setOpenId] = useState<StudioGallery["id"] | null>(null);
@@ -80,14 +82,14 @@ function SideBySideGallery({
             key={image.src}
             type="button"
             onClick={() => onOpenAt(i)}
-            className="group relative aspect-4/3 overflow-hidden rounded-md border border-border transition-transform duration-300 hover:-translate-y-1"
+            className="group relative aspect-4/3 cursor-pointer overflow-hidden"
           >
             <Image
               src={image.src}
               alt={image.alt}
               fill
               sizes="(min-width: 640px) 45vw, 90vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover"
             />
           </button>
         ))}
@@ -103,71 +105,52 @@ function GalleryStack({
   gallery: StudioGallery;
   onOpen: () => void;
 }) {
-  const [cover, back1, back2] = gallery.images;
+  const [cover] = gallery.images;
+  const ref = useRef<HTMLButtonElement>(null);
 
-  // gap-10, not gap-3: the fanned back cards below are `absolute inset-0`
-  // inside an `aspect-4/3` box, so their translate + rotate overhangs the
-  // box's bottom edge without the parent ever growing to contain them. The
-  // caption then renders on top of the rear cards — which is exactly what
-  // shipped to production until 2026-08-04.
-  //
-  // Measured overhang (Novant, the widest card since it's the only gallery in
-  // its row): 25px at rest, 29px on hover (translate-y-3 → translate-y-4 plus
-  // the rotation's own vertical spread). gap-10 = 40px leaves ~11px clear.
-  // Note the overhang scales with card width, because the rotation's spread
-  // does — if a future layout makes these cards meaningfully wider than
-  // ~525px, re-measure rather than assuming this still clears.
+  // Same hover grammar as the case-study rows: the title blinks and scrambles
+  // once per hover-in, the description scrambles immediately and then keeps
+  // cycling on its own random interval while the pointer stays.
+  useHoverFx(ref, {
+    scrambleOnceSelector: "h3",
+    blinkSelector: "h3",
+    scrambleSelector: "p",
+  });
+
   return (
     <button
+      ref={ref}
       type="button"
       onClick={onOpen}
-      className="group flex flex-col gap-10 text-left"
+      className="group flex cursor-pointer flex-col gap-4 text-left"
     >
-      <div className="relative aspect-4/3 w-full">
-        {back2 && (
-          <div className="absolute inset-0 translate-x-2 translate-y-3 -rotate-3 overflow-hidden rounded-md border border-border opacity-50 transition-transform duration-300 group-hover:translate-x-3 group-hover:translate-y-4">
-            <Image
-              src={back2.src}
-              alt=""
-              fill
-              sizes="(min-width: 640px) 22vw, 45vw"
-              className="object-cover"
-            />
-          </div>
-        )}
-        {back1 && (
-          <div className="absolute inset-0 -translate-x-1.5 translate-y-1.5 rotate-2 overflow-hidden rounded-md border border-border opacity-70 transition-transform duration-300 group-hover:-translate-x-2 group-hover:translate-y-2">
-            <Image
-              src={back1.src}
-              alt=""
-              fill
-              sizes="(min-width: 640px) 22vw, 45vw"
-              className="object-cover"
-            />
-          </div>
-        )}
-        <div className="absolute inset-0 overflow-hidden rounded-md border border-border shadow-sm transition-transform duration-300 group-hover:-translate-y-1">
-          <Image
-            src={cover.src}
-            alt={cover.alt}
-            fill
-            sizes="(min-width: 640px) 22vw, 45vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            priority
-          />
-          <div className="absolute inset-0 bg-linear-to-t from-background/80 via-transparent to-transparent" />
-          <span className="absolute bottom-2.5 left-2.5 inline-flex items-center gap-1.5 rounded-full border border-border bg-background/80 px-2.5 py-1 font-mono text-xs text-fg-75 backdrop-blur-sm">
-            <Images className="size-3.5" aria-hidden="true" />
-            {gallery.images.length}
-          </span>
-        </div>
+      {/* One image, level and unadorned — no fanned rear cards, no border, no
+          bottom scrim, and no scale/lift on hover. The hover affordance is
+          carried entirely by the text flicker below (Derik, 2026-08-05). */}
+      <div className="relative aspect-4/3 w-full overflow-hidden">
+        <Image
+          src={cover.src}
+          alt={cover.alt}
+          fill
+          sizes="(min-width: 640px) 22vw, 45vw"
+          className="object-cover"
+          priority
+        />
+        <span className="absolute bottom-2.5 left-2.5 inline-flex items-center gap-1.5 rounded-full border border-border bg-background/80 px-2.5 py-1 font-mono text-xs text-fg-75 backdrop-blur-sm">
+          <Images className="size-3.5" aria-hidden="true" />
+          {gallery.images.length}
+        </span>
       </div>
 
       <div className="flex flex-col gap-1">
-        <h3 className="font-display text-lg font-light tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-xl">
+        <h3
+          data-reveal="text"
+          data-reveal-size="fine"
+          className="font-display text-lg font-light tracking-tight text-foreground transition-colors group-hover:text-primary sm:text-xl"
+        >
           {gallery.studio}
         </h3>
-        <p className="text-sm leading-relaxed text-fg-75">
+        <p data-reveal="text" className="text-sm leading-relaxed text-fg-75">
           {gallery.description}
         </p>
       </div>
@@ -250,8 +233,11 @@ function Lightbox({
                 — {index + 1} / {total}
               </span>
             </span>
-            <Dialog.Close className="rounded-md p-2 text-fg-60 transition-colors hover:bg-foreground/10 hover:text-foreground">
-              <X className="size-5" aria-hidden="true" />
+            {/* Same border/hover treatment as the prev/next arrows below, but
+                the crosshair itself stays red — only the outline goes yellow
+                on hover. Square corners to match them too. */}
+            <Dialog.Close className="cursor-pointer rounded-none border border-border p-2 text-accent-red transition-colors hover:border-primary">
+              <CrosshairCloseIcon />
               <span className="sr-only">Close</span>
             </Dialog.Close>
           </div>
@@ -262,9 +248,9 @@ function Lightbox({
                 type="button"
                 onClick={goPrev}
                 aria-label="Previous image"
-                className="absolute left-2 z-10 rounded-full border border-border bg-background/70 p-2 text-fg-60 backdrop-blur-sm transition-colors hover:border-primary hover:text-primary sm:left-4"
+                className="absolute left-2 z-10 cursor-pointer rounded-none border border-border bg-background/70 p-2 text-fg-60 backdrop-blur-sm transition-colors hover:border-primary hover:text-primary sm:left-4"
               >
-                <ChevronLeft className="size-5 sm:size-6" aria-hidden="true" />
+                <ArrowLeft className="size-5 sm:size-6" aria-hidden="true" />
               </button>
             )}
 
@@ -285,9 +271,9 @@ function Lightbox({
                 type="button"
                 onClick={goNext}
                 aria-label="Next image"
-                className="absolute right-2 z-10 rounded-full border border-border bg-background/70 p-2 text-fg-60 backdrop-blur-sm transition-colors hover:border-primary hover:text-primary sm:right-4"
+                className="absolute right-2 z-10 cursor-pointer rounded-none border border-border bg-background/70 p-2 text-fg-60 backdrop-blur-sm transition-colors hover:border-primary hover:text-primary sm:right-4"
               >
-                <ChevronRight className="size-5 sm:size-6" aria-hidden="true" />
+                <ArrowRight className="size-5 sm:size-6" aria-hidden="true" />
               </button>
             )}
           </div>
@@ -311,7 +297,7 @@ function Lightbox({
                   onClick={() => onIndexChange(i)}
                   aria-label={image.caption}
                   aria-current={i === index ? "true" : undefined}
-                  className={`relative h-14 w-20 shrink-0 overflow-hidden rounded-sm border transition-all ${
+                  className={`relative h-14 w-20 shrink-0 cursor-pointer overflow-hidden rounded-sm border transition-all ${
                     i === index
                       ? "border-primary"
                       : "border-border opacity-60 hover:opacity-100"

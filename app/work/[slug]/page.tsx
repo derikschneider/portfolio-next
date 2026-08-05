@@ -7,6 +7,7 @@ import { GameUIGalleries } from "@/components/game-ui-galleries";
 import { CaseStudyHighlights } from "@/components/case-study-highlights";
 import { CASE_STUDY_HIGHLIGHTS } from "@/lib/case-study-highlights";
 import { RevealGroup } from "@/components/reveal/reveal-group";
+import { Hoverable } from "@/components/reveal/hoverable";
 import { Triangle, HalfCircle } from "@/components/field/shapes";
 import { FieldDivider } from "@/components/field/field-divider";
 import { getCaseStudies, getCaseStudy } from "@/lib/contentful";
@@ -167,34 +168,48 @@ export default async function CaseStudyPage({
           <HalfCircle className="-top-2 left-1/2 -translate-x-1/2" />
           <div className="hairline mb-8" data-reveal="line" />
           <nav aria-label="More case studies" className="flex items-stretch justify-between gap-4">
-            <Link
-              href={`/work/${prev.slug}`}
-              className="group flex flex-1 flex-col items-start gap-1.5 py-2 transition-all hover:-translate-x-1"
-            >
-              <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
-                <ArrowLeft className="size-4" />
-                <span data-reveal="text" data-reveal-size="fine">
-                  Previous
+            <Hoverable>
+              <Link
+                href={`/work/${prev.slug}`}
+                className="group flex flex-1 flex-col items-start gap-1.5 py-2 transition-colors"
+              >
+                <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
+                  <ArrowLeft className="size-4" />
+                  <span data-reveal="text" data-reveal-size="fine">
+                    Previous
+                  </span>
                 </span>
-              </span>
-              <span data-reveal="text" data-reveal-size="fine" className="text-foreground">
-                {prev.company}
-              </span>
-            </Link>
-            <Link
-              href={`/work/${next.slug}`}
-              className="group flex flex-1 flex-col items-end gap-1.5 py-2 text-right transition-all hover:translate-x-1"
-            >
-              <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
-                <span data-reveal="text" data-reveal-size="fine">
-                  Next
+                <span
+                  data-slot="cs-name"
+                  data-reveal="text"
+                  data-reveal-size="fine"
+                  className="text-foreground"
+                >
+                  {prev.company}
                 </span>
-                <ArrowRight className="size-4" />
-              </span>
-              <span data-reveal="text" data-reveal-size="fine" className="text-foreground">
-                {next.company}
-              </span>
-            </Link>
+              </Link>
+            </Hoverable>
+            <Hoverable>
+              <Link
+                href={`/work/${next.slug}`}
+                className="group flex flex-1 flex-col items-end gap-1.5 py-2 text-right transition-colors"
+              >
+                <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
+                  <span data-reveal="text" data-reveal-size="fine">
+                    Next
+                  </span>
+                  <ArrowRight className="size-4" />
+                </span>
+                <span
+                  data-slot="cs-name"
+                  data-reveal="text"
+                  data-reveal-size="fine"
+                  className="text-foreground"
+                >
+                  {next.company}
+                </span>
+              </Link>
+            </Hoverable>
           </nav>
         </RevealGroup>
       )}

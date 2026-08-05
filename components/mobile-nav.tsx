@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Dialog } from "radix-ui";
 import { cn } from "@/lib/utils";
+import { CrosshairCloseIcon } from "@/components/field/crosshair-close-icon";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 function HamburgerIcon() {
@@ -14,20 +15,6 @@ function HamburgerIcon() {
       <span className="h-px bg-foreground" />
       <span className="h-px bg-foreground" />
     </span>
-  );
-}
-
-// Same registration-mark language as the field/shapes crosshairs, but a
-// plain interactive icon (no reveal wiring) — rotated 45deg so the
-// crosshair reads as a close "X" rather than a "+".
-function CrosshairCloseIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" className="rotate-45">
-      <line x1="12" y1="1" x2="12" y2="9" stroke="currentColor" strokeWidth="1.8" />
-      <line x1="12" y1="15" x2="12" y2="23" stroke="currentColor" strokeWidth="1.8" />
-      <line x1="1" y1="12" x2="9" y2="12" stroke="currentColor" strokeWidth="1.8" />
-      <line x1="15" y1="12" x2="23" y2="12" stroke="currentColor" strokeWidth="1.8" />
-    </svg>
   );
 }
 

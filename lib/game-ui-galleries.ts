@@ -5,7 +5,16 @@ export type GalleryImage = {
 };
 
 export type StudioGallery = {
-  id: "volition" | "netherrealm" | "state-farm" | "novant-health";
+  // Closed union on purpose — the id is the open/close key for the Lightbox,
+  // so a typo'd or duplicated id fails the build instead of silently opening
+  // the wrong gallery. Add a member here when adding a gallery.
+  id:
+    | "volition"
+    | "netherrealm"
+    | "state-farm"
+    | "novant-health"
+    | "bonsai-design-system"
+    | "field-workability";
   studio: string;
   description: string;
   // "stack" (default, omit the field) — the fanned collection-preview card.

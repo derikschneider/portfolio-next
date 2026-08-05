@@ -1,10 +1,12 @@
-// One-off asset conversion, run 2026-08-04. Kept for reference in case more
-// imagery is added later — see next.config.ts's `images.unoptimized` comment
-// for why files must be pre-compressed rather than optimized at request time.
+// Bulk asset conversion. First run 2026-08-04 against the whole library;
+// re-run after dropping any new PNG/JPG into public/case-studies — see
+// next.config.ts's `images.unoptimized` comment for why files must be
+// pre-compressed rather than optimized at request time. Converted sources
+// are deleted, so a raw PNG should never end up committed.
 //
 // Usage: node scripts/to-webp.mjs
 import sharp from "sharp";
-import { readdirSync, statSync, unlinkSync } from "fs";
+import { existsSync, readdirSync, statSync, unlinkSync } from "fs";
 import path from "path";
 
 const MAX = 1920; // lightbox is full-screen; nothing needs more than this
@@ -23,8 +25,12 @@ function walk(dir, out = []) {
   return out;
 }
 
+// Re-runnable, not one-shot: it's the required step for every new image
+// added to public/case-studies (next/image optimization is off — see
+// next.config.ts). The portrait was converted in the original 2026-08-04
+// run and no longer exists as a PNG, so it's only included if present.
 const files = walk("public/case-studies");
-files.push("public/profile-pic.png");
+if (existsSync("public/profile-pic.png")) files.push("public/profile-pic.png");
 
 let before = 0;
 let after = 0;

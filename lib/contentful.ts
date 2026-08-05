@@ -2,19 +2,24 @@ import { createClient } from "contentful";
 import type { EntryFieldTypes, EntrySkeletonType } from "contentful";
 import { gameUIGalleries } from "@/lib/game-ui-galleries";
 import type { StudioGallery } from "@/lib/game-ui-galleries";
-import { stateFarmGallery, novantGallery } from "@/lib/case-study-galleries";
+import {
+  stateFarmGallery,
+  novantGallery,
+  nutrienBonsaiGalleries,
+} from "@/lib/case-study-galleries";
 import type { CaseStudy } from "@/lib/case-studies";
 
 // Screenshots stay static in public/ rather than as Contentful Assets (see
 // conversation 2026-07-27) — reattached here by slug rather than modeled as
-// a Contentful field. nutrien-bonsai deliberately has no entry (images cut
-// 2026-07-29, see lib/case-study-galleries.ts) — the case study's own
-// Contentful `hasVisuals` field also needs flipping to false, or the page
-// will show a "Screenshots pending" placeholder instead of nothing.
+// a Contentful field. A slug with no entry here falls back to the
+// "Screenshots pending" placeholder if its Contentful `hasVisuals` is true,
+// so the two have to agree: action-platform is the only case study with
+// neither, and that's deliberate and permanent (NDA).
 const CASE_STUDY_GALLERIES: Record<string, StudioGallery[]> = {
   "volition-netherrealm-game-ui": gameUIGalleries,
   "state-farm-cx-patent-tool": stateFarmGallery,
   "novant-health-aurora": novantGallery,
+  "nutrien-bonsai": nutrienBonsaiGalleries,
 };
 
 const client = createClient({

@@ -20,15 +20,16 @@
   pointer-events: none;
 }
 
-/* scrambleOnce() (reveal-engine.ts) replaces .chunk-wrap's children via
-   `textContent =` every 45ms while a hover-scramble is active, destroying
-   and recreating the text node under the pointer on each tick. With no
-   cursor declared here, a link/button's inherited pointer cursor briefly
-   drops out on every tick as the browser re-resolves hit-testing against
-   the freshly-inserted node, reading as a hand/arrow flicker that the
-   default arrow wins on balance. Pinning cursor: inherit directly on the
-   wrapper (not just the .chunk children pointer-events skips past) keeps
-   the value stable regardless of how often its contents get replaced. */
+/* Belt-and-suspenders: makes the computed cursor explicit rather than
+   relying on implicit inheritance through .chunk (pointer-events: none
+   skips past it for hit-testing anyway). The actual hand-cursor-flicker
+   fix lives in reveal-engine.ts's setTextInPlace() — browsers only
+   re-resolve the rendered cursor icon on a real mousemove, not on DOM
+   mutation, so scrambleOnce() reassigning .chunk-wrap's textContent every
+   45ms (which destroys and recreates the text node per the DOM spec) was
+   desyncing the rendered cursor from this value under a stationary pointer,
+   regardless of what it's set to here. Fixed by mutating an existing text
+   node's `.data` in place instead of replacing it. */
 .chunk-wrap {
   cursor: inherit;
 }

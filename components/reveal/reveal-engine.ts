@@ -135,6 +135,24 @@ function pickRanges(len: number): ScrambleRange[] {
 
 type ScrambleEl = HTMLElement & { _tickTimer?: ReturnType<typeof setInterval> | null; _cycleTimer?: ReturnType<typeof setTimeout> | null };
 
+// `el.textContent = ...` always destroys and recreates the child Text node
+// per the DOM spec, even when there's already exactly one. Browsers only
+// re-run cursor hit-testing on a real `mousemove`, not on DOM mutation, so
+// replacing the node under a *stationary* pointer every tick desyncs the
+// rendered cursor icon from the (still correctly computed) `cursor: pointer`
+// value — it settles back to the OS default until the mouse physically
+// moves again. Mutating an existing Text node's `.data` keeps the node
+// identity stable across ticks and avoids that churn entirely.
+function setTextInPlace(el: HTMLElement, value: string): Text {
+  const node = el.firstChild;
+  if (node instanceof Text && el.childNodes.length === 1) {
+    node.data = value;
+    return node;
+  }
+  el.textContent = value;
+  return el.firstChild as Text;
+}
+
 export function scrambleOnce(el: ScrambleEl | null): void {
   if (!el) return;
   let original = el.dataset.original;
@@ -157,11 +175,11 @@ export function scrambleOnce(el: ScrambleEl | null): void {
         for (let k = 0; k < r.len; k++) chars[r.start + k] = original![r.start + k];
       }
     });
-    el.textContent = chars.join("");
+    setTextInPlace(el, chars.join(""));
     if (!alive) {
       clearInterval(el._tickTimer!);
       el._tickTimer = null;
-      el.textContent = original!;
+      setTextInPlace(el, original!);
     }
   }, 45);
 }
@@ -186,7 +204,7 @@ export function stopScramble(el: ScrambleEl | null): void {
     clearInterval(el._tickTimer);
     el._tickTimer = null;
   }
-  if (el.dataset.original !== undefined) el.textContent = el.dataset.original;
+  if (el.dataset.original !== undefined) setTextInPlace(el, el.dataset.original);
 }
 
 export function blinkOnce(el: Element | null): void {

@@ -32,7 +32,7 @@ export function MobileNav({ links }: { links: { href: string; label: string }[] 
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger
         aria-label="Open menu"
-        className="flex size-9 items-center justify-center min-[540px]:hidden"
+        className="flex size-9 cursor-pointer items-center justify-center min-[540px]:hidden"
       >
         <HamburgerIcon />
       </Dialog.Trigger>
@@ -45,7 +45,7 @@ export function MobileNav({ links }: { links: { href: string; label: string }[] 
           <div className="flex justify-end pb-2">
             <Dialog.Close
               aria-label="Close menu"
-              className="group flex size-10 items-center justify-center text-accent-red transition-colors hover:text-primary"
+              className="group flex size-10 cursor-pointer items-center justify-center text-accent-red transition-colors hover:text-primary"
             >
               <CrosshairCloseIcon />
             </Dialog.Close>
@@ -56,7 +56,7 @@ export function MobileNav({ links }: { links: { href: string; label: string }[] 
                 <Link
                   href={link.href}
                   className={cn(
-                    "block w-full py-4 text-center font-mono text-sm tracking-[0.14em] uppercase transition-colors",
+                    "block w-full cursor-pointer py-4 text-center font-mono text-sm tracking-[0.14em] uppercase transition-colors",
                     pathname.startsWith(link.href) ? "text-primary" : "text-fg-50 hover:text-foreground"
                   )}
                 >

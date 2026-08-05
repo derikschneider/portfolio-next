@@ -19,6 +19,19 @@
   opacity: 1;
   pointer-events: none;
 }
+
+/* scrambleOnce() (reveal-engine.ts) replaces .chunk-wrap's children via
+   `textContent =` every 45ms while a hover-scramble is active, destroying
+   and recreating the text node under the pointer on each tick. With no
+   cursor declared here, a link/button's inherited pointer cursor briefly
+   drops out on every tick as the browser re-resolves hit-testing against
+   the freshly-inserted node, reading as a hand/arrow flicker that the
+   default arrow wins on balance. Pinning cursor: inherit directly on the
+   wrapper (not just the .chunk children pointer-events skips past) keeps
+   the value stable regardless of how often its contents get replaced. */
+.chunk-wrap {
+  cursor: inherit;
+}
 .shape-corner {
   position: absolute;
 }

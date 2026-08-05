@@ -38,7 +38,7 @@ export function LogRow({
   //
   // "case-row" (globals.css) reflows meta/content/arrow via named grid
   // areas per breakpoint instead of duplicating markup — see its comment.
-  const className = cn("case-row px-4 py-8 transition-colors", href && "group hover:bg-primary");
+  const className = cn("case-row px-4 py-8 transition-colors", href && "group cursor-pointer hover:bg-primary");
 
   const content = (
     <>

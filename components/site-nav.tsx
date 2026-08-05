@@ -27,7 +27,7 @@ function NavLink({ href, label, active }: { href: string; label: string; active:
       ref={ref}
       href={href}
       className={cn(
-        "border-b pb-1 font-mono text-[11px] tracking-[0.14em] uppercase transition-colors hover:text-foreground",
+        "cursor-pointer border-b pb-1 font-mono text-[11px] tracking-[0.14em] uppercase transition-colors hover:text-foreground",
         active ? "border-primary text-primary" : "border-transparent text-fg-50"
       )}
     >
@@ -100,7 +100,7 @@ function Wordmark() {
     <Link
       ref={ref}
       href="/"
-      className="inline-block font-display text-[13px] font-bold tracking-[0.12em] text-foreground transition-colors hover:text-primary"
+      className="inline-block cursor-pointer font-display text-[13px] font-bold tracking-[0.12em] text-foreground transition-colors hover:text-primary"
     >
       {/* Desktop variant first in DOM: the hover scramble/blink defaults
           to the first [data-reveal="text"] match, and hover only really

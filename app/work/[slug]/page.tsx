@@ -68,7 +68,7 @@ export default async function CaseStudyPage({
             // spans carry no transition utility of their own, so they fall
             // through to the 0.4s base-layer rule and that — not the link's
             // own duration — is the fade you actually see. 133ms = 0.4s / 3.
-            className="flex w-fit items-center gap-1.5 font-mono text-sm tracking-wide text-fg-50 uppercase transition-colors duration-[133ms] hover:text-primary [&_*]:duration-[133ms]"
+            className="flex w-fit cursor-pointer items-center gap-1.5 font-mono text-sm tracking-wide text-fg-50 uppercase transition-colors duration-[133ms] hover:text-primary [&_*]:duration-[133ms]"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
             <span data-reveal="text" data-reveal-size="fine">

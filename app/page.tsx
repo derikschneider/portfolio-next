@@ -82,7 +82,7 @@ export default async function Home() {
           <Hoverable>
             <Link
               href="/resume"
-              className="border-b border-transparent pb-0.5 font-mono text-xs tracking-widest text-fg-50 uppercase hover:border-fg-50 hover:text-foreground"
+              className="cursor-pointer border-b border-transparent pb-0.5 font-mono text-xs tracking-widest text-fg-50 uppercase hover:border-fg-50 hover:text-foreground"
             >
               <span data-reveal="text" data-reveal-size="fine">
                 Resume →

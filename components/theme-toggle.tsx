@@ -24,7 +24,7 @@ export function ThemeToggle() {
           aria-label={label}
           aria-pressed={mounted && theme === value}
           onClick={() => setTheme(value)}
-          className={`flex size-6 items-center justify-center rounded-sm transition-colors ${
+          className={`flex size-6 cursor-pointer items-center justify-center rounded-sm transition-colors ${
             mounted && theme === value
               ? "bg-primary text-primary-foreground"
               : "text-fg-50 hover:text-foreground"

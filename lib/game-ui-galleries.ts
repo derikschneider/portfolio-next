@@ -176,6 +176,11 @@ export const gameUIGalleries: StudioGallery[] = [
       "Mortal Kombat (2011), Mortal Kombat VITA, Injustice: Gods Among Us, and unreleased Batman: Arkham Lockdown icon work.",
     images: [
       {
+        src: "/case-studies/volition-netherrealm/netherrealm/title-mk.webp",
+        alt: "Mortal Kombat (2011) title art",
+        caption: "Mortal Kombat (2011) — title art",
+      },
+      {
         src: "/case-studies/volition-netherrealm/netherrealm/mortal-kombat/mk-challenge-tower-slot-machine-icons.webp",
         alt: "Mortal Kombat Challenge Tower slot machine icon set",
         caption: "Mortal Kombat — Challenge Tower slot machine icons",

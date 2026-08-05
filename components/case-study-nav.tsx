@@ -53,7 +53,7 @@ function NavLink({
       // carry no transition utility of their own, so they fall through to the
       // 0.4s base-layer rule and that — not the link's own duration — is the
       // fade you actually see. 133ms = 0.4s / 3.
-      className={`group flex flex-1 flex-col gap-1.5 py-2 transition-colors duration-[133ms] [&_*]:duration-[133ms] ${
+      className={`group flex flex-1 cursor-pointer flex-col gap-1.5 py-2 transition-colors duration-[133ms] [&_*]:duration-[133ms] ${
         isPrev ? "items-start" : "items-end text-right"
       }`}
     >

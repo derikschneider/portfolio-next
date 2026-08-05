@@ -6,6 +6,7 @@ import { RevealGroup } from "@/components/reveal/reveal-group";
 import { Hoverable } from "@/components/reveal/hoverable";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Parallelogram } from "@/components/field/shapes";
 
 export const metadata: Metadata = {
   title: "About — Derik Schneider",
@@ -19,6 +20,19 @@ export const metadata: Metadata = {
 const SHOW_PORTRAIT = true;
 
 const TAGS = ["Design systems", "UX engineering", "Game UI"];
+
+// Sourced from the resume (content/source/resume-audit-2026-08-05.md flagged
+// these as the one thing the resume carried that the site didn't). Kept as a
+// standalone block rather than folded into the toolkit sentence: those are
+// tools, these are credentials, and a run-on list ending "...MySQL, Figma,
+// and also I'm certified" reads as an afterthought.
+const CERTIFICATIONS = [
+  {
+    name: "UX Certification, Specialty in Interaction Design",
+    issuer: "Nielsen Norman Group · 2020",
+  },
+  { name: "Product Marketing Certificate", issuer: "eCornell" },
+];
 
 /**
  * Layout is option 1b from the "About Body Layouts" Claude Design study
@@ -152,6 +166,37 @@ export default function AboutPage() {
             MySQL, Figma, and enough systems thinking to have designed asset
             pipelines that other studios&apos; teams adopted.
           </p>
+        </div>
+
+        {/* Same eyebrow vocabulary as the Resume page's "Skill set //" block.
+            Sits between the body and the CTA so the last thing before the ask
+            is credentials, not a toolkit list. */}
+        <div className="flex flex-col gap-5">
+          <p className="flex items-center gap-3 font-mono text-[11px] tracking-[0.14em] text-fg-50 uppercase">
+            <Parallelogram />
+            <span data-reveal="text" data-reveal-size="fine">
+              Certifications //
+            </span>
+          </p>
+          <ul className="flex flex-col gap-3">
+            {CERTIFICATIONS.map(({ name, issuer }) => (
+              <li
+                key={name}
+                className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-3"
+              >
+                <span data-reveal="text" className="text-sm text-foreground">
+                  {name}
+                </span>
+                <span
+                  data-reveal="text"
+                  data-reveal-size="fine"
+                  className="font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase"
+                >
+                  {issuer}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="flex flex-col gap-8 border-t border-border pt-10 md:flex-row md:items-center md:justify-between md:gap-12">

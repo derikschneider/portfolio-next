@@ -261,7 +261,16 @@ title embellishment on a document where every other title is exact.
 - "Django backends" and "MySQL" — extra detail beyond the site, not conflicting.
 - Novant bullets — already corrected, match the site.
 
-**One parity gap in the other direction:** the resume carries a Nielsen Norman
-UX Certification and an eCornell Product Marketing Certificate that appear
-nowhere on the site. The site's `/resume` page has a Skills block but no
-Education/Certifications section. Worth adding.
+**One parity gap in the other direction — CLOSED 2026-08-05.** The resume
+carries a Nielsen Norman UX Certification and an eCornell Product Marketing
+Certificate that appeared nowhere on the site. Both are now on `/about`, in a
+"Certifications //" block between the body columns and the CTA — same eyebrow
+vocabulary as the Resume page's "Skill set //" block.
+
+Placed there rather than folded into the toolkit sentence on purpose: those
+are tools, these are credentials, and a run-on ending "…MySQL, Figma, and also
+I'm certified" reads as an afterthought. It also puts credentials as the last
+thing before the ask.
+
+`/resume` itself still has no Education/Certifications section — worth adding
+there too if the page is ever revisited.

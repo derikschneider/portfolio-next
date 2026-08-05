@@ -5,7 +5,7 @@ import { CaseStudyRow } from "@/components/case-study-row";
 import { LogList } from "@/components/field/log-list";
 import { RevealGroup } from "@/components/reveal/reveal-group";
 import { Hoverable } from "@/components/reveal/hoverable";
-import { Triangle, CrosshairOpen, HalfCircle, HalfCircleC, Square, Parallelogram } from "@/components/field/shapes";
+import { Triangle, HalfCircle, HalfCircleC, Square, Parallelogram } from "@/components/field/shapes";
 import { getCaseStudies } from "@/lib/contentful";
 
 export const revalidate = 3600;
@@ -40,7 +40,6 @@ export default async function Home() {
     <div className="flex flex-1 flex-col">
       <RevealGroup immediate className="relative mx-auto w-full max-w-[1180px] px-6 pt-16 pb-14 md:pt-28 md:pb-20">
         <Triangle className="top-1 right-0" />
-        <CrosshairOpen className="bottom-2 left-1" />
 
         <p data-reveal="text" className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">
           Internal move — Lead Full Stack Engineer
@@ -89,8 +88,14 @@ export default async function Home() {
 
       <RevealGroup className="relative">
         <div className="hairline" data-reveal="line" />
-        <HalfCircle className="top-[-1px] left-[28%]" />
-        <div className="mx-auto grid max-w-[1180px] grid-cols-2 md:grid-cols-4">
+        <div className="relative mx-auto grid max-w-[1180px] grid-cols-2 md:grid-cols-4">
+          {/* Inside the stats grid (which is the positioning context) rather
+              than a sibling of it, so the mark tracks the grid's own edges.
+              Positioned by inline style only — no utility classes. `top` is
+              deliberately unset: with it auto, the absolutely positioned mark
+              falls at the grid's content-box top, i.e. right on the hairline
+              above. */}
+          <HalfCircle style={{ left: "66%" }} />
           {stats.map(({ value, label }, i) => (
             <div
               key={label}

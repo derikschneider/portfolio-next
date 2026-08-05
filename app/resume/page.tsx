@@ -41,7 +41,14 @@ export default function ResumePage() {
         actions={
           <Hoverable>
             <Button asChild size="lg">
-              <a href="/resume/derik-schneider-resume.pdf" download>
+              {/* Filename follows whatever Derik drops into public/resume.
+                  Changing the path is also the cache story: this URL has
+                  never been served, so no CDN edge can hold a stale copy of
+                  it. If a future resume replaces this file IN PLACE, under
+                  the same name, CloudFront may keep serving the old bytes —
+                  ship it under a new filename (and add a redirect from the
+                  old one, as next.config.ts does) rather than overwriting. */}
+              <a href="/resume/derik_schneider_resume.pdf" download>
                 <Download />
                 <span data-reveal="text" data-reveal-size="fine">
                   Download PDF

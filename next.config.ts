@@ -23,6 +23,21 @@ const nextConfig: NextConfig = {
     // reason — nothing downstream will shrink it now.
     unoptimized: true,
   },
+  async redirects() {
+    return [
+      {
+        // The resume PDF was published at this path from 2026-07-29 until
+        // 2026-08-05, when Derik replaced the file under a new name. The old
+        // path was linked from the live /resume page for that week, so
+        // anything saved or shared in that window points here. Redirect
+        // rather than 404 — and it means an old link now serves the CURRENT
+        // resume, which is the whole point.
+        source: "/resume/derik-schneider-resume.pdf",
+        destination: "/resume/derik_schneider_resume.pdf",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

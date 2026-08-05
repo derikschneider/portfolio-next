@@ -20,16 +20,15 @@
   pointer-events: none;
 }
 
-/* Belt-and-suspenders: makes the computed cursor explicit rather than
-   relying on implicit inheritance through .chunk (pointer-events: none
-   skips past it for hit-testing anyway). The actual hand-cursor-flicker
-   fix lives in reveal-engine.ts's setTextInPlace() — browsers only
-   re-resolve the rendered cursor icon on a real mousemove, not on DOM
-   mutation, so scrambleOnce() reassigning .chunk-wrap's textContent every
-   45ms (which destroys and recreates the text node per the DOM spec) was
-   desyncing the rendered cursor from this value under a stationary pointer,
-   regardless of what it's set to here. Fixed by mutating an existing text
-   node's `.data` in place instead of replacing it. */
+/* Makes the computed cursor explicit rather than relying on implicit
+   inheritance through .chunk (pointer-events: none skips past it for
+   hit-testing anyway).
+   NOT a fix for the hand-cursor-flicker bug Derik reported 2026-08-05 —
+   two attempts here (this rule, then reveal-engine.ts's setTextInPlace(),
+   which stopped the text node from being destroyed/recreated on every
+   scramble tick) both left the flicker unresolved per his direct
+   confirmation. Whatever's actually causing it is still open — don't
+   trust either of those changes as a diagnosis of the real cause. */
 .chunk-wrap {
   cursor: inherit;
 }

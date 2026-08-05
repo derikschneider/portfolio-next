@@ -94,13 +94,10 @@ export const nutrienBonsaiGalleries: StudioGallery[] = [
 // here — iconography plus the physician-finder flow — so the page doesn't
 // set up an expectation the images can't meet.
 //
-// TODO (Derik): replacing image 1 with a new cover card. The frame is
-// aspect-4/3 with object-cover, so the current 1920x1049 slide gets ~260px
-// cropped off each side (the N:|Aurora lockup is off-screen in the preview).
-// Author the replacement at 4:3 — 1600x1200 is plenty — export it as
-// 1-novant-health-aurora-iconography-cover.png into that folder, then run
-// `node scripts/to-webp.mjs`, which overwrites the .webp and deletes the
-// .png. Never commit a raw PNG here (next/image optimization is off).
+// Cover replaced 2026-08-05: image 1 was cropping the N:|Aurora lockup out
+// of the aspect-4/3 preview frame (the old 1920x1049 slide lost ~260px per
+// side to object-cover). Derik authored a proper 1600x1200 cover in its
+// place, same filename, so no src changes were needed here.
 export const novantGallery: StudioGallery[] = [
   {
     id: "novant-health",

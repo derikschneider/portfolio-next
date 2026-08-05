@@ -60,7 +60,11 @@ export default async function CaseStudyPage({
         <Hoverable>
           <Link
             href="/work"
-            className="flex w-fit items-center gap-1.5 font-mono text-sm tracking-wide text-fg-50 uppercase hover:text-primary"
+            // duration on descendants too, not just the link: the inner text
+            // spans carry no transition utility of their own, so they fall
+            // through to the 0.4s base-layer rule and that — not the link's
+            // own duration — is the fade you actually see. 133ms = 0.4s / 3.
+            className="flex w-fit items-center gap-1.5 font-mono text-sm tracking-wide text-fg-50 uppercase transition-colors duration-[133ms] hover:text-primary [&_*]:duration-[133ms]"
           >
             <ArrowLeft className="size-4" />
             <span data-reveal="text" data-reveal-size="fine">
@@ -181,7 +185,7 @@ export default async function CaseStudyPage({
             >
               <Link
                 href={`/work/${prev.slug}`}
-                className="group flex flex-1 flex-col items-start gap-1.5 py-2 transition-colors"
+                className="group flex flex-1 flex-col items-start gap-1.5 py-2 transition-colors duration-[133ms] [&_*]:duration-[133ms]"
               >
                 <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
                   <ArrowLeft className="size-4" />
@@ -206,7 +210,7 @@ export default async function CaseStudyPage({
             >
               <Link
                 href={`/work/${next.slug}`}
-                className="group flex flex-1 flex-col items-end gap-1.5 py-2 text-right transition-colors"
+                className="group flex flex-1 flex-col items-end gap-1.5 py-2 text-right transition-colors duration-[133ms] [&_*]:duration-[133ms]"
               >
                 <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
                   <span data-slot="cs-dir" data-reveal="text" data-reveal-size="fine">

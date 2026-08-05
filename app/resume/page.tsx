@@ -6,6 +6,7 @@ import { FieldHeader } from "@/components/field/field-header";
 import { LogRow } from "@/components/field/log-row";
 import { LogList } from "@/components/field/log-list";
 import { RevealGroup } from "@/components/reveal/reveal-group";
+import { Hoverable } from "@/components/reveal/hoverable";
 import { Parallelogram } from "@/components/field/shapes";
 import { experience } from "@/lib/experience";
 
@@ -35,15 +36,19 @@ export default function ResumePage() {
     <div className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col gap-4 px-6 py-16">
       <FieldHeader
         eyebrow="Resume //"
-        title="My Experience"
+        title="My experience"
         description="25 years, one throughline: the seam between design and development. Flagship stops link to a full case study."
         actions={
-          <Button asChild variant="outline">
-            <a href="/resume/derik-schneider-resume.pdf" download>
-              <Download />
-              Download PDF
-            </a>
-          </Button>
+          <Hoverable>
+            <Button asChild variant="outline">
+              <a href="/resume/derik-schneider-resume.pdf" download>
+                <Download />
+                <span data-reveal="text" data-reveal-size="fine">
+                  Download PDF
+                </span>
+              </a>
+            </Button>
+          </Hoverable>
         }
         // LogList below opens with its own hairline, so the header's divider
         // would stack a second line right under the Download PDF button.

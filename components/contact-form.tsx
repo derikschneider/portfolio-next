@@ -111,6 +111,7 @@ export function ContactForm() {
       <Button
         ref={submitRef}
         type="submit"
+        size="lg"
         disabled={status === "submitting"}
         className="mt-2 self-start"
       >

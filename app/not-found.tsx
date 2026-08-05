@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FieldDivider } from "@/components/field/field-divider";
 import { RevealGroup } from "@/components/reveal/reveal-group";
+import { Hoverable } from "@/components/reveal/hoverable";
 import { ContactForm } from "@/components/contact-form";
 
 export const metadata: Metadata = {
@@ -43,9 +44,15 @@ export default function NotFound() {
 
         <div className="flex flex-wrap gap-3">
           {destinations.map((d) => (
-            <Button key={d.href} asChild variant={d.href === "/" ? "default" : "outline"}>
-              <Link href={d.href}>{d.label}</Link>
-            </Button>
+            <Hoverable key={d.href}>
+              <Button asChild variant={d.href === "/" ? "default" : "outline"}>
+                <Link href={d.href}>
+                  <span data-reveal="text" data-reveal-size="fine">
+                    {d.label}
+                  </span>
+                </Link>
+              </Button>
+            </Hoverable>
           ))}
         </div>
 

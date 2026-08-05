@@ -162,9 +162,16 @@ export default async function Home() {
           renderItem={(cs) => <CaseStudyRow cs={cs} />}
         />
         <div className="mt-10">
-          <Button asChild size="lg">
-            <Link href="/work">See all 6 →</Link>
-          </Button>
+          <Hoverable>
+            <Button asChild size="lg">
+              <Link href="/work">
+                <span data-reveal="text" data-reveal-size="fine">
+                  See all 6
+                </span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            </Button>
+          </Hoverable>
         </div>
       </section>
     </div>

@@ -17,10 +17,15 @@ const stack = ["Next.js", "TypeScript", "Tailwind", "Contentful", "AWS Amplify",
 // "UI systems shipped" is deliberately broader than "design systems" — the
 // count of 5 covers all three kinds of system Derik has actually shipped,
 // which the narrower label was undercounting at 2:
-//   1. Aurora (Novant Health) — design system built from scratch
+//   1. Aurora (Novant Health) — an inherited first-pass system rebuilt as
+//      true Figma components on re-architected foundations
 //   2. Bonsai (Nutrien Ag Solutions) — core platform team
 //   3. Action Platform (Discover → Capital One) — legacy Sketch system
 //      rebuilt as a modern Figma component library
+// 1 and 3 are genuinely separate rebuilds, two employers apart, and the
+// copy on each keeps them distinct: Aurora's efficiency claim is a
+// design-side win (assembling a page in Figma), Action Platform's is a
+// dev-pipeline one (wiring the system into the build).
 //   4. NetherRealm game UI — Mortal Kombat (2011), Injustice
 //   5. Volition game UI — Saints Row 2, Red Faction: Armageddon
 // Game UI systems count here because they define a title's branding and

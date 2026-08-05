@@ -33,3 +33,26 @@ section (2026-07-21, see `linkedin-experience.md`):
 - **Bonus find**: this About paragraph's "Most recently at Capital One..." actually spans two separate employers — Discover (Jan 2024–Apr 2025) and Capital One (May 2025–present), bridged by Capital One's 2025 acquisition of Discover. The case study slug was renamed from `capital-one-action-platform` to `action-platform-discover-capital-one` to reflect this.
 
 Still open: exact patent URL (not guessing one), and which game-UI screenshots/titles to feature.
+
+## Where the site now deliberately diverges from the text above
+
+Two claims in this paste are wrong or misleading, corrected on the site
+2026-08-05 but left standing here — this file is the record of what Derik
+actually wrote, not a copy to keep in sync.
+
+- **"I architected the Aurora design system from scratch"** — he didn't.
+  A previous design had been ported over as a poor first attempt at a
+  design system; he rebuilt it into true Figma components and
+  re-architected the foundations underneath. Derik called the original
+  phrasing a mischaracterization directly. The site now says so on
+  `/about` and on the Novant case study.
+- **"Most recently at Capital One, I led design for the Action agent
+  servicing platform, migrated the team's design system from Sketch to
+  Figma…"** — that work was at **Discover**, before the acquisition. This
+  was already flagged in the Open questions above and in
+  `linkedin-experience.md`, and the case study and resume have always split
+  the two employers correctly; only `/about` still carried the collapsed
+  version, and no longer does.
+
+**Both are still live on Derik's actual LinkedIn profile** — worth fixing
+there too, since a recruiter reading both will see the mismatch.

@@ -10,6 +10,13 @@ import type { CaseStudy } from "../lib/case-studies";
 // script is the only place this data still lives in code — after a
 // successful run, Contentful is the source of truth and this array is
 // only useful for re-running/repairing the migration.
+//
+// It is a historical snapshot, NOT current copy. Several entries have been
+// edited in Contentful since (see the sibling contentful-update-*.ts
+// one-offs — patent body, Aurora title/body), and those edits were never
+// backported here. Re-running this would revert live copy to the 07-27
+// state. Read the entry from Contentful before assuming anything below is
+// what the site actually says.
 const caseStudies: CaseStudy[] = [
   {
     slug: "action-platform-discover-capital-one",

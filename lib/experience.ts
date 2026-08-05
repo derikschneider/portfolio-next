@@ -40,8 +40,12 @@ export const experience: Experience[] = [
     type: "Contract",
     period: "Jun 2022 – Jul 2023",
     location: "Remote",
+    // Reworded 2026-08-05: "Led integration of the Aurora Design System"
+    // (the LinkedIn headline for this role) undersells what happened —
+    // Derik rebuilt an inherited first-pass system rather than integrating
+    // a finished one. Kept in sync with the case study's own framing.
     blurb:
-      "Led integration of the Aurora Design System across web products, working directly with front-end engineers on the technical layer of the system.",
+      "Rebuilt an inherited first-pass design system into true Figma components with re-architected foundations, then led Aurora's integration across web products.",
     caseStudySlug: "novant-health-aurora",
   },
   {

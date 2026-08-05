@@ -77,6 +77,38 @@ opposite direction, so it can't be resolved by guessing. **Which is right?**
 
 ---
 
+## Derik's rulings, 2026-08-05 — how the two acquisitions get told
+
+He confirmed all four open items below. The through-line: **his history
+contains two acquisitions, and both are now told the same way — name both
+employers, name the transition date, don't collapse either one.** Applying
+that rule consistently is what stops a reader wondering which parts are being
+smoothed over.
+
+| | Discover → Capital One | Agrible → Nutrien |
+|---|---|---|
+| Boundary | **Legal Day 1, May 2025** | Acquisition closed Aug 2018 |
+| Site | Discover Jan 2024–Apr 2025, Capital One May 2025–present | Agrible Mar 2015–Aug 2018, Nutrien Aug 2018–Apr 2019 |
+| Resume needs | Split the two employers | Name both on one line |
+
+**On the Agrible side Derik's note was "I did join Nutrien in 2018, but I was
+still doing Agrible things — there wasn't a clean break, it could swing either
+way, we just need to be consistent."** The call: keep the split. It matches
+employment records (after Aug 2018 the employer legally was Nutrien), it's
+what the site already does, and it's the same shape as the Capital One
+transition — which is the consistency that matters most. The "no clean break"
+part is already carried in the case study body, which says he carried on with
+the same product team after the acquisition.
+
+**On the site there is no Capital One gap** — `lib/experience.ts` runs
+Discover Jan 2024–Apr 2025 straight into Capital One May 2025–Present. The gap
+is in this resume only, created by finding #3 below. What the site gained
+today is the *reason* the boundary sits in May: Legal Day 1 is now named in
+the case study body and period, so the resume and LinkedIn have one fixed date
+to agree with instead of each rounding it differently.
+
+---
+
 ## High — factual, and checkable against Capital One's own HR records
 
 ### 2. The Discover role is labelled Capital One
@@ -96,7 +128,11 @@ unexplained one-month gap between them.
 
 **Replace the header line with:**
 
-> Lead UX Designer, Action Design Team - Discover (acquired by Capital One, 2025) Jan 2024 - Apr 2025
+> Lead UX Designer, Action Design Team - Discover (acquired by Capital One, Legal Day 1 May 2025) Jan 2024 - Apr 2025
+
+Confirmed by Derik 2026-08-05: he started at Discover, Capital One bought
+them, and Legal Day 1 was in May — so May is the correct cut-off, and both
+roles keep their own employer name.
 
 ### 3. Both dates on that transition are a month off
 
@@ -153,15 +189,29 @@ Figma/tokens kind. Two clean fixes:
 
 **Mortal Kombat VITA** is missing. The site's case study is titled "Shipped UI
 across five titles, two studios," the homepage stat says 5, and the About page
-was corrected to five this same day. This was the exact same omission.
+was corrected to five this same day.
 
-### 7. The 14-day tool: "prototype" here, "tool" on the site
+Derik, 2026-08-05: "It is 5 game titles. I don't always throw in MK VITA
+because it was a stupid small project — but it does factually count, people
+just don't care about that release." So: **include it, but list it last.**
+The About page now orders the list that way, since leading with VITA spends
+the reader's attention on the weakest item. Same treatment here:
 
-Resume: "a working **prototype** for a 14-day weather and field
-**trafficability** tool." Site: "a 14-day weather and field **workability**
-tool." The resume is the more conservative claim, which is fine — but pick one
-and use it in both places. Trafficability/workability is cosmetic; prototype
-vs. shipped tool is not.
+> Shipped: Mortal Kombat (2011), Injustice: Gods Among Us, Saints Row 2, Red Faction: Armageddon, Mortal Kombat VITA
+
+### 7. The 14-day tool: "prototype" here, "tool" on the site — RESOLVED
+
+Both were half-right. Derik: he built the prototype, and it was turned into a
+tool that shipped. The site now states both halves, so neither document has to
+choose:
+
+> …a working prototype for a 14-day weather and field workability tool — trafficability status for every field in an operation, two weeks out. It reached 87.5% task success in user studies and went on to ship as a product.
+
+The resume's current bullet is accurate as far as it goes but stops at the
+prototype, which undersells it. Worth adding "and shipped as a product."
+("Trafficability" vs "workability" is cosmetic — the site uses workability for
+the tool and trafficability for what it displays, which is how the product's
+own screens word it.)
 
 ---
 

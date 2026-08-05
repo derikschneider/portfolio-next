@@ -106,9 +106,13 @@ export default function AboutPage() {
             data-reveal="text"
             className="mb-5 text-base leading-[1.75] text-fg-80"
           >
-            I&apos;ve shipped UI for Mortal Kombat (2011), Mortal Kombat VITA,
-            Injustice: Gods Among Us, Saints Row 2, and Red Faction:
-            Armageddon. At Novant Health I inherited Aurora as a first-pass
+            {/* VITA is last on purpose. It factually counts toward the five
+                titles the rest of the site claims, but it was a small
+                release nobody remembers — leading with it spends the
+                reader's attention on the weakest item in the list. */}
+            I&apos;ve shipped UI for Mortal Kombat (2011), Injustice: Gods
+            Among Us, Saints Row 2, Red Faction: Armageddon, and Mortal
+            Kombat VITA. At Novant Health I inherited Aurora as a first-pass
             design system — a previous design ported over, with none of the
             structure underneath it — and rebuilt it head to toe into true
             Figma components on re-architected foundations, taking page

@@ -24,7 +24,7 @@ at Discover, before the acquisition).
 
 > I'm a designer who writes production code and an engineer who paints his own assets. For 25 years I've worked the seam between design and development, which means teams stop losing things in translation when I'm in the room.
 >
-> I've shipped UI for Mortal Kombat (2011), Mortal Kombat VITA, Injustice: Gods Among Us, Saints Row 2, and Red Faction: Armageddon. At Novant Health I inherited Aurora as a first-pass design system — a previous design ported over, with none of the structure underneath it — and rebuilt it head to toe into true Figma components on re-architected foundations, taking page assembly from days to under an hour. Earlier, as part of the core platform team building Bonsai at Nutrien Ag Solutions, I authored the system's initial documentation, contributed to component development, and championed its adoption across other design teams. I hold US Patent 10,002,393 for a customer experience insights tool I designed and helped engineer at State Farm.
+> I've shipped UI for Mortal Kombat (2011), Injustice: Gods Among Us, Saints Row 2, Red Faction: Armageddon, and Mortal Kombat VITA. At Novant Health I inherited Aurora as a first-pass design system — a previous design ported over, with none of the structure underneath it — and rebuilt it head to toe into true Figma components on re-architected foundations, taking page assembly from days to under an hour. Earlier, as part of the core platform team building Bonsai at Nutrien Ag Solutions, I authored the system's initial documentation, contributed to component development, and championed its adoption across other design teams. I hold US Patent 10,002,393 for a customer experience insights tool I designed and helped engineer at State Farm.
 >
 > At Discover, I led design for the Action agent servicing platform, migrated the team's design system from Sketch to Figma, and produced narrative presentations on our agent servicing and IVR/messaging systems, editing call-recording audio, hand-animating sequences in After Effects, and building the layouts in Figma, working directly with senior product managers and directors to shape how they told their stories. When Capital One acquired Discover the Action work came with it, and I moved into a Principal Product Owner role, where I built a 101-case automated testing suite, validated production migration events, and coordinated data integrity work across engineering teams.
 >
@@ -36,7 +36,9 @@ Changes from the current version:
 
 1. Added **Mortal Kombat VITA** to the title list — it was four titles, and
    everything else (resume, case study, the site's "5 shipped game titles"
-   stat) says five.
+   stat) says five. Listed **last** on purpose: Derik's own read is that it
+   factually counts but was a small release nobody remembers, so it shouldn't
+   take the reader's attention ahead of the titles that land.
 2. Aurora sentence rewritten — no longer "architected from scratch."
 3. "Most recently at Capital One…" split into **Discover** then **Capital
    One**, with the acquisition named as the bridge.
@@ -91,7 +93,24 @@ design lead's established framework") claim neither.
 
 **Bullet 4 — optional, currently only on the resume and the site:**
 
-> Converted grower and sales-consultant research into a 14-day weather and field workability tool that reached an 87.5% task success rate in user studies
+> Converted grower and sales-consultant research into a working prototype for a 14-day weather and field workability tool that reached an 87.5% task success rate in user studies and shipped as a product
+
+---
+
+## 3b. Experience → the two acquisitions, if you touch these entries
+
+Derik confirmed **Legal Day 1 was May 2025** for Capital One's acquisition of
+Discover, so the site now names that date and the boundary sits there. On
+LinkedIn the two roles are already correctly split by employer — just make
+sure the Discover role ends **Apr 2025** and Capital One begins **May 2025**,
+matching the site (the resume currently has both a month early, which is what
+creates a gap there).
+
+Same shape applies to Agrible → Nutrien: Agrible through **Aug 2018**, Nutrien
+Ag Solutions from Aug 2018. Derik's note that "there wasn't a clean break, I
+was still doing Agrible things" is true and worth saying in the body copy —
+but the employer dates should still split, because that's what employment
+records show and it matches how the Capital One transition is told.
 
 Note ZeroHeight will now appear under both Nutrien and Novant. That's correct,
 not a copy error: at Nutrien he built a custom site and later ported *into*

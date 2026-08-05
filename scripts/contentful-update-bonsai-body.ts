@@ -49,7 +49,11 @@ const summary =
 const bodyParagraphs = [
   "I co-led the inception and architecture of the Bonsai Design System as part of Nutrien Ag Solutions' core platform team, shaping component direction through user research and design feedback, contributing to component builds, and championing the system's adoption across other design teams to drive alignment on shared UI standards.",
   "I also designed and built the system's documentation site myself — the front-end code, the responsive layout, and the navigation, not only the content inside it. nutrien.design was where Bonsai lived alongside the brand and handbook material, and where designers and engineers actually went to use the system. As Bonsai matured I ported the content into ZeroHeight.",
-  "I translated user research into a 14-day weather and field workability tool as well, achieving 87.5% user success in studies — trafficability status for every field in a grower's operation, two weeks out.",
+  // "Prototype" and "tool" were both half-right and the site and resume each
+  // had one of them. Derik: he built the prototype, it tested well, and it
+  // was turned into a shipped product. Both halves stated here so neither
+  // document has to pick.
+  "I turned grower and sales-consultant research into a working prototype for a 14-day weather and field workability tool as well — trafficability status for every field in an operation, two weeks out. It reached 87.5% task success in user studies and went on to ship as a product.",
   "I came to this work through an acquisition rather than a job change: Nutrien bought Agrible, where I'd been a front-end developer, and I carried on with that product team at Nutrien Ag Solutions before moving into UX design and onto the platform team building Bonsai. The production React/Redux case study covers that earlier chapter.",
 ];
 

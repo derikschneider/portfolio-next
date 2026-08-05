@@ -171,7 +171,7 @@ export default async function CaseStudyPage({
 
       {prev && next && (
         <RevealGroup className="relative">
-          <HalfCircle className="-top-2 left-1/2 -translate-x-1/2" />
+          <HalfCircle className="-top-2 right-[37px]" />
           <div className="hairline mb-8" data-reveal="line" />
           <nav aria-label="More case studies" className="flex items-stretch justify-between gap-4">
             {/* The direction label blinks and scrambles once; the destination

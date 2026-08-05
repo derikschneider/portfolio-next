@@ -226,7 +226,10 @@ function Lightbox({
             {current.caption}
           </Dialog.Description>
 
-          <div className="flex items-center justify-between px-4 py-4 sm:px-8">
+          {/* Inset matches the prev/next arrows below (left-2 / sm:left-4) so
+              the close button sits the same distance from the window edge
+              rather than the wider px-4/sm:px-8 it used to carry. */}
+          <div className="flex items-center justify-between px-2 py-2 sm:px-4 sm:py-4">
             <span className="font-mono text-sm tracking-wide text-fg-60">
               {gallery.studio}{" "}
               <span className="text-fg-50">
@@ -237,7 +240,9 @@ function Lightbox({
                 the crosshair itself stays red — only the outline goes yellow
                 on hover. Square corners to match them too. */}
             <Dialog.Close className="cursor-pointer rounded-none border border-border p-2 text-accent-red transition-colors hover:border-primary">
-              <CrosshairCloseIcon />
+              {/* size-5 / sm:size-6 matches the arrow icons, so all three
+                  lightbox controls render as identically sized boxes. */}
+              <CrosshairCloseIcon className="size-5 sm:size-6" />
               <span className="sr-only">Close</span>
             </Dialog.Close>
           </div>

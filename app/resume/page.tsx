@@ -40,7 +40,7 @@ export default function ResumePage() {
         description="25 years, one throughline: the seam between design and development. Flagship stops link to a full case study."
         actions={
           <Hoverable>
-            <Button asChild variant="outline">
+            <Button asChild size="lg">
               <a href="/resume/derik-schneider-resume.pdf" download>
                 <Download />
                 <span data-reveal="text" data-reveal-size="fine">

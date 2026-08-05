@@ -57,15 +57,17 @@ export default async function CaseStudyPage({
     <div className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col gap-10 px-6 py-16">
       <RevealGroup immediate className="relative flex flex-col gap-8">
         <Triangle className="top-0 right-0" />
-        <Link
-          href="/work"
-          className="flex w-fit items-center gap-1.5 font-mono text-sm tracking-wide text-fg-50 uppercase hover:text-primary"
-        >
-          <ArrowLeft className="size-4" />
-          <span data-reveal="text" data-reveal-size="fine">
-            All work
-          </span>
-        </Link>
+        <Hoverable>
+          <Link
+            href="/work"
+            className="flex w-fit items-center gap-1.5 font-mono text-sm tracking-wide text-fg-50 uppercase hover:text-primary"
+          >
+            <ArrowLeft className="size-4" />
+            <span data-reveal="text" data-reveal-size="fine">
+              All work
+            </span>
+          </Link>
+        </Hoverable>
 
         <div className="flex flex-col gap-3">
           <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] tracking-[0.06em] uppercase">
@@ -168,14 +170,22 @@ export default async function CaseStudyPage({
           <HalfCircle className="-top-2 left-1/2 -translate-x-1/2" />
           <div className="hairline mb-8" data-reveal="line" />
           <nav aria-label="More case studies" className="flex items-stretch justify-between gap-4">
-            <Hoverable>
+            {/* The direction label blinks and scrambles once; the destination
+                title scrambles and keeps cycling. Selectors are explicit
+                because a bare <Hoverable> targets only the first
+                [data-reveal="text"], which would leave the title inert. */}
+            <Hoverable
+              blinkSelector='[data-slot="cs-dir"]'
+              scrambleOnceSelector='[data-slot="cs-dir"]'
+              scrambleSelector='[data-slot="cs-name"]'
+            >
               <Link
                 href={`/work/${prev.slug}`}
                 className="group flex flex-1 flex-col items-start gap-1.5 py-2 transition-colors"
               >
                 <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
                   <ArrowLeft className="size-4" />
-                  <span data-reveal="text" data-reveal-size="fine">
+                  <span data-slot="cs-dir" data-reveal="text" data-reveal-size="fine">
                     Previous
                   </span>
                 </span>
@@ -189,13 +199,17 @@ export default async function CaseStudyPage({
                 </span>
               </Link>
             </Hoverable>
-            <Hoverable>
+            <Hoverable
+              blinkSelector='[data-slot="cs-dir"]'
+              scrambleOnceSelector='[data-slot="cs-dir"]'
+              scrambleSelector='[data-slot="cs-name"]'
+            >
               <Link
                 href={`/work/${next.slug}`}
                 className="group flex flex-1 flex-col items-end gap-1.5 py-2 text-right transition-colors"
               >
                 <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
-                  <span data-reveal="text" data-reveal-size="fine">
+                  <span data-slot="cs-dir" data-reveal="text" data-reveal-size="fine">
                     Next
                   </span>
                   <ArrowRight className="size-4" />

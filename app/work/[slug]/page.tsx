@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Download } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { GameUIGalleries } from "@/components/game-ui-galleries";
 import { CaseStudyHighlights } from "@/components/case-study-highlights";
 import { CASE_STUDY_HIGHLIGHTS } from "@/lib/case-study-highlights";
+import { CASE_STUDY_DOWNLOADS } from "@/lib/case-study-downloads";
 import { RevealGroup } from "@/components/reveal/reveal-group";
 import { Hoverable } from "@/components/reveal/hoverable";
 import { Triangle, HalfCircle } from "@/components/field/shapes";
@@ -44,6 +46,7 @@ export default async function CaseStudyPage({
   if (!cs) notFound();
 
   const highlights = CASE_STUDY_HIGHLIGHTS[slug];
+  const downloads = CASE_STUDY_DOWNLOADS[slug];
 
   const currentIndex = allCaseStudies.findIndex((c) => c.slug === slug);
   const hasSiblings = allCaseStudies.length > 1 && currentIndex !== -1;
@@ -104,6 +107,25 @@ export default async function CaseStudyPage({
             ))}
           </div>
         </div>
+
+        {/* Same treatment as the Resume page's Download PDF button, including
+            the pt-1 wrapper FieldHeader uses for its `actions` slot. */}
+        {downloads && downloads.length > 0 && (
+          <div className="flex flex-wrap gap-3 pt-1">
+            {downloads.map((file) => (
+              <Hoverable key={file.href}>
+                <Button asChild size="lg">
+                  <a href={file.href} download>
+                    <Download />
+                    <span data-reveal="text" data-reveal-size="fine">
+                      {file.label}
+                    </span>
+                  </a>
+                </Button>
+              </Hoverable>
+            ))}
+          </div>
+        )}
 
         <FieldDivider />
       </RevealGroup>

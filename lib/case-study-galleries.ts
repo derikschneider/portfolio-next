@@ -29,22 +29,79 @@ export const stateFarmGallery: StudioGallery[] = [
   },
 ];
 
-// Nutrien Ag Solutions gallery removed 2026-07-29 per Derik — cut entirely,
-// not replaced. If case-study visuals ever come back for this entry, also
-// flip `hasVisuals` back to true on the nutrien-bonsai Contentful entry
-// (Derik needs to do that directly, CONTENTFUL_MANAGEMENT_TOKEN isn't
-// stored locally) or the page will show the "Screenshots pending"
-// placeholder instead of nothing.
+// Nutrien Ag Solutions was cut entirely on 2026-07-29, then restored
+// 2026-08-05 from _source/portfolio_assets/nutrien with a different set of
+// images and a different shape: two galleries rather than one, so the
+// design-system work and the field-workability product sit side by side in
+// the two-column stack grid (same arrangement as the two studio stacks on
+// the game-UI case study). `hasVisuals` on the Contentful entry was flipped
+// back to true in the same pass.
+export const nutrienBonsaiGalleries: StudioGallery[] = [
+  {
+    id: "bonsai-design-system",
+    studio: "Bonsai Design System",
+    description:
+      "nutrien.design — the system's public home, and the pattern documentation I authored inside it.",
+    images: [
+      {
+        src: "/case-studies/nutrien-bonsai/1-bonsai-nutrien-design-home.webp",
+        alt: "nutrien.design homepage, with Bonsai, Handbook, and Brand entry points",
+        caption: "nutrien.design — the design team's home, Bonsai alongside Handbook and Brand",
+      },
+      {
+        src: "/case-studies/nutrien-bonsai/2-bonsai-home-design-comp.webp",
+        alt: "Full-page design comp for the nutrien.design home page",
+        caption: "Home page design comp — resources, then the five design principles",
+      },
+      {
+        src: "/case-studies/nutrien-bonsai/3-bonsai-drawers-and-modals.webp",
+        alt: "Bonsai documentation page for the Drawers and Modals pattern",
+        caption: "Drawers and Modals — concepts, types, and usage, with the Figma and code kits linked",
+      },
+      {
+        src: "/case-studies/nutrien-bonsai/4-bonsai-data-visualization.webp",
+        alt: "Bonsai documentation page for the Data Visualization pattern",
+        caption: "Data Visualization — chart types, part-to-whole charts, legends, and scale types",
+      },
+    ],
+  },
+  {
+    id: "field-workability",
+    studio: "14-Day Field Workability",
+    description:
+      "The weather and field-workability tool the research turned into: trafficability status across a grower's whole operation, two weeks out.",
+    images: [
+      {
+        src: "/case-studies/nutrien-bonsai/5-field-workability-tool.webp",
+        alt: "Mobile screens showing field status, a field map, and 14-day tractor-time conditions",
+        caption: "Field list, field map, and the 14-day tractor-time forecast",
+      },
+    ],
+  },
+];
 
 // Refreshed 2026-07-29 — Derik reorganized/renumbered these (see
 // public/case-studies/novant-health-aurora/), replacing the previous
 // 3-image set. Order follows the numbered filenames.
+//
+// Retitled 2026-08-05: "Aurora Design System" promised component-library
+// screens that were never archived. The heading now names what's actually
+// here — iconography plus the physician-finder flow — so the page doesn't
+// set up an expectation the images can't meet.
+//
+// TODO (Derik): replacing image 1 with a new cover card. The frame is
+// aspect-4/3 with object-cover, so the current 1920x1049 slide gets ~260px
+// cropped off each side (the N:|Aurora lockup is off-screen in the preview).
+// Author the replacement at 4:3 — 1600x1200 is plenty — export it as
+// 1-novant-health-aurora-iconography-cover.png into that folder, then run
+// `node scripts/to-webp.mjs`, which overwrites the .webp and deletes the
+// .png. Never commit a raw PNG here (next/image optimization is off).
 export const novantGallery: StudioGallery[] = [
   {
     id: "novant-health",
-    studio: "Aurora Design System",
+    studio: "Iconography & Physician Finder",
     description:
-      "Icon research methodology and the physician-finder UX flow from the Aurora rollout.",
+      "Not the component library itself — the icon system I redefined for Aurora, the research behind those marks, and the physician-finder flow built on top of it.",
     images: [
       {
         src: "/case-studies/novant-health-aurora/1-novant-health-aurora-iconography-cover.webp",

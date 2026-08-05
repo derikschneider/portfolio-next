@@ -78,23 +78,55 @@ function SideBySideGallery({
       </div>
       <div className="grid grid-cols-2 gap-3 sm:gap-6">
         {gallery.images.map((image, i) => (
-          <button
+          <SideBySideImage
             key={image.src}
-            type="button"
-            onClick={() => onOpenAt(i)}
-            className="group relative aspect-4/3 cursor-pointer overflow-hidden"
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              sizes="(min-width: 640px) 45vw, 90vw"
-              className="object-cover"
-            />
-          </button>
+            image={image}
+            onOpen={() => onOpenAt(i)}
+            // These galleries sit directly under the case-study header, so
+            // the first one is the LCP element — Next warns without this.
+            priority={i === 0}
+          />
         ))}
       </div>
     </div>
+  );
+}
+
+function SideBySideImage({
+  image,
+  onOpen,
+  priority,
+}: {
+  image: StudioGallery["images"][number];
+  onOpen: () => void;
+  priority?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      // The image's own alt already describes the content, so the label
+      // only has to add what the button does with it.
+      aria-label={`Enlarge image: ${image.alt}`}
+      // No text under these, so the outline-and-dim is the whole hover
+      // affordance. See `[data-preview]` in reveal.css.
+      data-preview
+      // Deliberately no `overflow-hidden` on the button: the frame's outline
+      // is painted outside the frame's own box, so a clipping ancestor would
+      // cut it off. The frame clips its own image instead.
+      className="relative aspect-4/3 cursor-pointer"
+    >
+      <span data-preview-frame className="absolute inset-0 overflow-hidden">
+        <Image
+          src={image.src}
+          alt=""
+          fill
+          sizes="(min-width: 640px) 45vw, 90vw"
+          className="object-cover"
+          priority={priority}
+        />
+      </span>
+    </button>
   );
 }
 
@@ -110,7 +142,9 @@ function GalleryStack({
 
   // Same hover grammar as the case-study rows: the title blinks and scrambles
   // once per hover-in, the description scrambles immediately and then keeps
-  // cycling on its own random interval while the pointer stays.
+  // cycling on its own random interval while the pointer stays. The image
+  // gets the gold outline and dim (CSS, see reveal.css) so the preview
+  // reads as the clickable thing, not just the text under it.
   useHoverFx(ref, {
     scrambleOnceSelector: "h3",
     blinkSelector: "h3",
@@ -122,12 +156,13 @@ function GalleryStack({
       ref={ref}
       type="button"
       onClick={onOpen}
+      data-preview
       className="group flex cursor-pointer flex-col gap-4 text-left"
     >
       {/* One image, level and unadorned — no fanned rear cards, no border, no
           bottom scrim, and no scale/lift on hover. The hover affordance is
           carried entirely by the text flicker below (Derik, 2026-08-05). */}
-      <div className="relative aspect-4/3 w-full overflow-hidden">
+      <div data-preview-frame className="relative aspect-4/3 w-full overflow-hidden">
         <Image
           src={cover.src}
           alt={cover.alt}
@@ -136,10 +171,14 @@ function GalleryStack({
           className="object-cover"
           priority
         />
-        <span className="absolute bottom-2.5 left-2.5 inline-flex items-center gap-1.5 rounded-full border border-border bg-background/80 px-2.5 py-1 font-mono text-xs text-fg-75 backdrop-blur-sm">
-          <Images className="size-3.5" aria-hidden="true" />
-          {gallery.images.length}
-        </span>
+        {/* A "1" badge on a single-image gallery reads as a broken counter —
+            the blink and the viewer label carry the affordance there. */}
+        {gallery.images.length > 1 && (
+          <span className="absolute bottom-2.5 left-2.5 inline-flex items-center gap-1.5 rounded-full border border-border bg-background/80 px-2.5 py-1 font-mono text-xs text-fg-75 backdrop-blur-sm">
+            <Images className="size-3.5" aria-hidden="true" />
+            {gallery.images.length}
+          </span>
+        )}
       </div>
 
       <div className="flex flex-col gap-1">
@@ -154,6 +193,13 @@ function GalleryStack({
           {gallery.description}
         </p>
       </div>
+
+      {/* Appended to the accessible name rather than an aria-label, which
+          would replace the visible title and description entirely. */}
+      <span className="sr-only">
+        — open image viewer,{" "}
+        {gallery.images.length === 1 ? "1 image" : `${gallery.images.length} images`}
+      </span>
     </button>
   );
 }

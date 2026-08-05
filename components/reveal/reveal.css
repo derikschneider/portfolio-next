@@ -111,6 +111,58 @@ html.reveal-ready .shape-accent.revealed {
   animation: reveal-blink 0.2s steps(1, end) 1;
 }
 
+/* Image previews: hovering rings the frame in gold at once and eases the
+   image down to 82% brightness over 0.3s. No flicker and no loop — the rest
+   of the system flashes because a dropout reads as a terminal glitch on
+   text, but on a photograph it reads as the image failing to load.
+
+   The outline has no transition at all — it snaps on and off, stating
+   "clickable" the instant the pointer lands. An earlier version eased it
+   out only, by overriding `transition-duration` to 0s inside the `:hover`
+   rule; that relies on the browser reading transition properties from the
+   after-change style, which is specified behaviour but not something worth
+   depending on for an effect whose whole point is that it's immediate.
+   Only the dim eases.
+
+   `outline` rather than `border` or a ring utility: it's painted outside the
+   border box and takes no part in layout, so a 2px edge appears against the
+   image without nudging it or resizing the frame by a pixel. It starts at
+   `transparent` rather than `0` width so there's a value to ease between —
+   an outline that appears at full width can't transition.
+
+   The frame carries the outline and the <img> carries the dim, which keeps
+   the image-count badge sitting inside that frame at full brightness, and
+   keeps its `backdrop-blur` from being reparented by a `filter` on an
+   ancestor (a filtered element becomes the backdrop root).
+
+   Driven by CSS `:hover` rather than the JS hover engine, which only fires
+   one-shot effects on mouseenter and has no mouseleave path to ease back
+   out of. Keyed to `[data-preview]` and not a bare `.group:hover`, since
+   Tailwind's `group` marker is used across the app.
+
+   The `transition` here is unlayered, so it replaces the base-layer theme
+   cross-fade on these two elements outright (see app/globals.css). Nothing
+   is lost: the frame draws no background, border, or text of its own, and
+   the image is a bitmap. */
+[data-preview-frame] {
+  outline: 2px solid transparent;
+  /* Explicitly none, not merely absent: without it these elements inherit
+     the base-layer `*` rule's transition, and any future edit that adds a
+     transition here would quietly reintroduce a fade. */
+  transition: none;
+}
+[data-preview-frame] img {
+  transition: filter 0.3s ease;
+}
+[data-preview]:hover [data-preview-frame],
+[data-preview]:focus-visible [data-preview-frame] {
+  outline-color: var(--primary);
+}
+[data-preview]:hover [data-preview-frame] img,
+[data-preview]:focus-visible [data-preview-frame] img {
+  filter: brightness(0.82);
+}
+
 @keyframes cursor-blink {
   50% {
     opacity: 0;
@@ -127,6 +179,9 @@ html.reveal-ready .shape-accent.revealed {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* The preview hover isn't listed here on purpose: it animates outline
+     colour and image brightness, not position or scale, so it isn't the
+     kind of motion this query exists to suppress. */
   .blink {
     animation: none;
   }

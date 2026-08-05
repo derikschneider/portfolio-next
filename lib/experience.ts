@@ -104,7 +104,7 @@ export const experience: Experience[] = [
       "Redesigned registration, admin access, and claims inquiry flows, carrying designs from low-fidelity wireframes to production-ready comps through iterative usability testing.",
   },
   {
-    company: "NetherRealm Studios",
+    company: "Netherrealm Studios",
     title: "User Interface Artist",
     type: "Full-time",
     period: "Oct 2010 – Mar 2012",

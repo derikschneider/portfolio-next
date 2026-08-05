@@ -171,7 +171,7 @@ export const gameUIGalleries: StudioGallery[] = [
   },
   {
     id: "netherrealm",
-    studio: "NetherRealm",
+    studio: "Netherrealm",
     description:
       "Mortal Kombat (2011), Mortal Kombat VITA, Injustice: Gods Among Us, and unreleased Batman: Arkham Lockdown icon work.",
     images: [

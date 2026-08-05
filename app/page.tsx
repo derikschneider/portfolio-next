@@ -27,7 +27,7 @@ const stack = ["Next.js", "TypeScript", "Tailwind", "Contentful", "AWS Amplify",
 // copy on each keeps them distinct: Aurora's efficiency claim is a
 // design-side win (assembling a page in Figma), Action Platform's is a
 // dev-pipeline one (wiring the system into the build).
-//   4. NetherRealm game UI — Mortal Kombat (2011), Injustice
+//   4. Netherrealm game UI — Mortal Kombat (2011), Injustice
 //   5. Volition game UI — Saints Row 2, Red Faction: Armageddon
 // Game UI systems count here because they define a title's branding and
 // interface system wholesale, not just individual screens.

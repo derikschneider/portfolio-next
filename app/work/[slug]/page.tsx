@@ -66,7 +66,7 @@ export default async function CaseStudyPage({
             // own duration — is the fade you actually see. 133ms = 0.4s / 3.
             className="flex w-fit items-center gap-1.5 font-mono text-sm tracking-wide text-fg-50 uppercase transition-colors duration-[133ms] hover:text-primary [&_*]:duration-[133ms]"
           >
-            <ArrowLeft className="size-4" />
+            <ArrowLeft className="size-4" aria-hidden="true" />
             <span data-reveal="text" data-reveal-size="fine">
               All work
             </span>
@@ -200,7 +200,7 @@ export default async function CaseStudyPage({
                 className="group flex flex-1 flex-col items-start gap-1.5 py-2 transition-colors duration-[133ms] [&_*]:duration-[133ms]"
               >
                 <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
-                  <ArrowLeft className="size-4" />
+                  <ArrowLeft className="size-4" aria-hidden="true" />
                   <span data-slot="cs-dir" data-reveal="text" data-reveal-size="fine">
                     Previous
                   </span>
@@ -228,7 +228,7 @@ export default async function CaseStudyPage({
                   <span data-slot="cs-dir" data-reveal="text" data-reveal-size="fine">
                     Next
                   </span>
-                  <ArrowRight className="size-4" />
+                  <ArrowRight className="size-4" aria-hidden="true" />
                 </span>
                 <span
                   data-slot="cs-name"

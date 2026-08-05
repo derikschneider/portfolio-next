@@ -15,7 +15,12 @@ export default function ContactPage() {
         title="Get in touch"
         description="Questions about this site, the stack behind it, or just want to say hello — this goes straight to me."
       />
-      <ContactForm />
+      {/* Matches the 62ch measure FieldHeader gives its description, so the
+          form lines up with the copy above it instead of running the full
+          1180px container width. */}
+      <div className="max-w-[62ch]">
+        <ContactForm />
+      </div>
     </div>
   );
 }

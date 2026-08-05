@@ -117,7 +117,7 @@ export default async function CaseStudyPage({
         <CaseStudyHighlights highlights={highlights} />
       )}
 
-      <RevealGroup className="flex flex-col gap-4">
+      <RevealGroup className="flex max-w-[85ch] flex-col gap-4">
         {cs.body.map((paragraph, i) => {
           const isTodo = paragraph.startsWith("TODO");
           return isTodo ? (

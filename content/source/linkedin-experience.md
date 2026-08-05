@@ -50,6 +50,19 @@ Led integration of the Aurora Design System across web products, working directl
 - Shaped component direction through user research and design feedback, working within a design lead's established framework
 - Championed the system's adoption across other design teams, driving alignment on shared UI standards
 
+> **Correction, 2026-08-05 — these three bullets undersell the role and the
+> site no longer follows them.** A resume audit found Derik's resume and this
+> file describing two different jobs; Derik confirmed the resume is the
+> accurate one. He **co-led the inception and architecture** of Bonsai (there
+> was a design lead above him, but "contributed… within a design lead's
+> established framework" is not what he did), and he **designed and built the
+> system's documentation site himself** — front-end code, responsive layout,
+> and navigation — later porting the content into ZeroHeight. The Bonsai
+> gallery on the case study is that site. Left unedited above because this
+> file is the record of what LinkedIn actually says; replacement bullets are
+> in `linkedin-updates-2026-08-05.md` §3, and **LinkedIn itself still carries
+> the undersell.**
+
 **Nutrien Ag Solutions** — Front End Developer — Full-time — Aug 2018–Apr 2019 — Remote
 - Built the React admin interface for a community sustainability program adopted by Kellogg's, Anheuser-Busch InBev, and Bayer
 - Designed and developed the Weather Story feature end to end, integrating YouTube video into articles through the Ghost API

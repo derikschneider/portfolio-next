@@ -54,8 +54,11 @@ export const experience: Experience[] = [
     type: "Full-time",
     period: "Apr 2019 – Jun 2022",
     location: "Remote",
+    // Reworded 2026-08-05: LinkedIn's "contributed to the early development"
+    // undersold this the way Novant's headline did. Derik co-led inception
+    // and architecture, and built the documentation site itself.
     blurb:
-      "Contributed to the early development of the Bonsai Design System as part of the core platform team.",
+      "Co-led the inception and architecture of the Bonsai Design System, and designed and built its documentation site.",
     caseStudySlug: "nutrien-bonsai",
   },
   {

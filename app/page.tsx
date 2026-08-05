@@ -19,7 +19,8 @@ const stack = ["Next.js", "TypeScript", "Tailwind", "Contentful", "AWS Amplify",
 // which the narrower label was undercounting at 2:
 //   1. Aurora (Novant Health) — an inherited first-pass system rebuilt as
 //      true Figma components on re-architected foundations
-//   2. Bonsai (Nutrien Ag Solutions) — core platform team
+//   2. Bonsai (Nutrien Ag Solutions) — co-led inception and architecture on
+//      the core platform team, and built the system's documentation site
 //   3. Action Platform (Discover → Capital One) — legacy Sketch system
 //      rebuilt as a modern Figma component library
 // 1 and 3 are genuinely separate rebuilds, two employers apart, and the

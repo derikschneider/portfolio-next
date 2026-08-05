@@ -68,7 +68,42 @@ liaison) are accurate — leave them.
 
 ---
 
-## 3. Optional — worth considering, not an error
+## 3. Experience → Nutrien Ag Solutions, UX Designer — replace all three bullets
+
+Added after the resume audit. LinkedIn undersells this role in the same
+direction the Novant one did, and the resume had it right: Derik co-led
+Bonsai's inception and architecture, and designed and built the system's
+documentation site himself — front-end code, not just the content in it. The
+current bullets ("contributed to the early development… working within a
+design lead's established framework") claim neither.
+
+**Bullet 1:**
+
+> Co-led the inception and architecture of the Bonsai Design System as part of Nutrien's core platform team, shaping component direction through user research and design feedback and contributing to component builds
+
+**Bullet 2:**
+
+> Designed and built the system's documentation site solo — front-end code, responsive layout, and navigation — as the place designers and engineers actually went to use Bonsai, later porting the content into ZeroHeight as the system matured
+
+**Bullet 3:**
+
+> Championed the system's adoption across other design teams, driving alignment on shared UI standards
+
+**Bullet 4 — optional, currently only on the resume and the site:**
+
+> Converted grower and sales-consultant research into a 14-day weather and field workability tool that reached an 87.5% task success rate in user studies
+
+Note ZeroHeight will now appear under both Nutrien and Novant. That's correct,
+not a copy error: at Nutrien he built a custom site and later ported *into*
+ZeroHeight; at Novant he documented *in* ZeroHeight and prototyped a custom
+platform to replace it. Opposite directions, two employers, both true. If a
+reader is likely to see it as duplication, the Novant bullet already says
+"then prototyped a custom internal documentation platform to replace it,"
+which distinguishes them.
+
+---
+
+## 4. Optional — worth considering, not an error
 
 The Novant bullet above and the Discover bullet ("Partnered with front-end
 developers to wire the design system into the development pipeline, using

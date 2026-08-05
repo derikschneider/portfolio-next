@@ -117,10 +117,11 @@ export default function AboutPage() {
           {/* Not chunk-reveal-wrapped: contains a nested styled span (the
               patent callout) that a text-reveal wrap would flatten. */}
           <p className="mb-5 text-base leading-[1.75] text-fg-80">
-            Earlier, as part of the core platform team building Bonsai at
-            Nutrien Ag Solutions, I authored the system&apos;s initial
-            documentation, contributed to component development, and
-            championed its adoption across other design teams. I hold{" "}
+            Earlier, on Nutrien Ag Solutions&apos; core platform team, I
+            co-led the inception and architecture of the Bonsai Design System
+            and designed and built its documentation site myself — the
+            front-end code, the responsive layout, and the navigation. I
+            hold{" "}
             <span className="font-mono text-sm text-primary">
               US Patent 10,002,393
             </span>{" "}

@@ -40,18 +40,23 @@ export const nutrienBonsaiGalleries: StudioGallery[] = [
   {
     id: "bonsai-design-system",
     studio: "Bonsai Design System",
+    // Reworded 2026-08-05: "the pattern documentation I authored inside it"
+    // undersold this — Derik designed and built the site itself, front-end
+    // code included. Images 1 and 2 are the evidence (the live site, and his
+    // own full-page comp for it), which is exactly why this claim belongs
+    // next to them.
     description:
-      "nutrien.design — the system's public home, and the pattern documentation I authored inside it.",
+      "nutrien.design — the documentation site I designed and built for the system, and the pattern documentation inside it.",
     images: [
       {
         src: "/case-studies/nutrien-bonsai/1-bonsai-nutrien-design-home.webp",
         alt: "nutrien.design homepage, with Bonsai, Handbook, and Brand entry points",
-        caption: "nutrien.design — the design team's home, Bonsai alongside Handbook and Brand",
+        caption: "nutrien.design live — Bonsai alongside the Handbook and Brand material",
       },
       {
         src: "/case-studies/nutrien-bonsai/2-bonsai-home-design-comp.webp",
         alt: "Full-page design comp for the nutrien.design home page",
-        caption: "Home page design comp — resources, then the five design principles",
+        caption: "My home page design comp — resources, then the five design principles",
       },
       {
         src: "/case-studies/nutrien-bonsai/3-bonsai-drawers-and-modals.webp",

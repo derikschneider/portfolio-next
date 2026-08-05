@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MobileNav } from "@/components/mobile-nav";
 import { RevealGroup } from "@/components/reveal/reveal-group";
+import { CrosshairOpen } from "@/components/field/shapes";
 import { useHoverFx } from "@/components/reveal/use-hover-fx";
 import { collectRevealItems, prefersReducedMotion, runRevealGroup } from "@/components/reveal/reveal-engine";
 
@@ -65,7 +66,12 @@ function Wordmark() {
     }
   }, [pathname, isHome]);
 
-  if (isHome) return null;
+  // On home the hero already carries the name, so the brand slot shows the
+  // red registration mark instead of the wordmark. Moving to a child page
+  // swaps the mark out for the wordmark (and back again on return).
+  if (isHome) {
+    return <CrosshairOpen inline aria-hidden="true" />;
+  }
 
   return (
     <Link
@@ -79,7 +85,7 @@ function Wordmark() {
           one) — narrow/touch viewports showing "DS" below don't lose
           anything meaningful by not being the hover target. */}
       <span data-reveal="text" data-reveal-size="fine" className="hidden md:inline">
-        D·SCHNEIDER
+        DERIK SCHNEIDER
       </span>
       <span data-reveal="text" data-reveal-size="fine" className="md:hidden">
         DS

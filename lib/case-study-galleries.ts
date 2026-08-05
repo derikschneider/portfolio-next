@@ -98,18 +98,24 @@ export const nutrienBonsaiGalleries: StudioGallery[] = [
 // of the aspect-4/3 preview frame (the old 1920x1049 slide lost ~260px per
 // side to object-cover). Derik authored a proper 1600x1200 cover in its
 // place, same filename, so no src changes were needed here.
+//
+// Cover pulled out of `images` entirely, same day, second revision: it's a
+// title/cover graphic, not a real content shot, so Derik doesn't want it
+// navigable as a lightbox slide. `cover` (StudioGallery, game-ui-galleries.ts)
+// is what the card thumbnail renders; the carousel now opens straight into
+// the 4 real images.
 export const novantGallery: StudioGallery[] = [
   {
     id: "novant-health",
     studio: "Iconography & Physician Finder",
     description:
       "Not the component library itself — the icon system I redefined for Aurora, the research behind those marks, and the physician-finder flow built on top of it.",
+    cover: {
+      src: "/case-studies/novant-health-aurora/1-novant-health-aurora-iconography-cover.webp",
+      alt: "Aurora icon system, cover",
+      caption: "Aurora icon system — cover",
+    },
     images: [
-      {
-        src: "/case-studies/novant-health-aurora/1-novant-health-aurora-iconography-cover.webp",
-        alt: "Aurora icon system, cover",
-        caption: "Aurora icon system — cover",
-      },
       {
         src: "/case-studies/novant-health-aurora/2-iconography-process-c.webp",
         alt: "Aurora icon system design process",

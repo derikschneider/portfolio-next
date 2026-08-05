@@ -21,6 +21,11 @@ export type StudioGallery = {
   // "sideBySide" — images shown directly, no preview card; still opens the
   // same Lightbox. Use for small, fully-known image sets (see State Farm).
   layout?: "stack" | "sideBySide";
+  // Card thumbnail only — omit to fall back to images[0] (the default for
+  // every other gallery). Set this when the cover shouldn't also appear as
+  // a lightbox slide (Aurora, 2026-08-05): a title/cover graphic that isn't
+  // one of the real content shots.
+  cover?: GalleryImage;
   images: GalleryImage[];
 };
 

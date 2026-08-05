@@ -137,7 +137,7 @@ function GalleryStack({
   gallery: StudioGallery;
   onOpen: () => void;
 }) {
-  const [cover] = gallery.images;
+  const cover = gallery.cover ?? gallery.images[0];
   const ref = useRef<HTMLButtonElement>(null);
 
   // Same hover grammar as the case-study rows: the title blinks and scrambles

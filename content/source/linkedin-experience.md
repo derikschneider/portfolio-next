@@ -24,6 +24,14 @@ This resolved the open questions from `linkedin-about.md`:
 
 ---
 
+> **Correction, 2026-08-05 — the site no longer uses these two dates.** Derik
+> chose his resume's role dates: Discover ends **Mar 2025**, Capital One
+> begins **Apr 2025**. The Apr/May pair below is the acquisition's Legal Day 1
+> boundary, which is a month later than the org move — both are real, they
+> just measure different things. The site carries both and explains the
+> relationship; LinkedIn still has only the Legal Day 1 pair and should move
+> to Mar/Apr. See `linkedin-updates-2026-08-05.md` §3b.
+
 **Capital One** — Principal Product Owner, Action Platform UI — Full-time — May 2025–Present — Remote
 Owned product quality and cross-functional delivery for Capital One's core agent servicing platform during high-scale account migration waves.
 - Designed and deployed an automated testing suite of 101 test cases in two months, covering fraud workflows, dynamic timeline suppression, and agent permissions, cutting manual regression testing and automating compliance reporting

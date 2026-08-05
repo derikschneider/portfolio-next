@@ -18,7 +18,11 @@ export const experience: Experience[] = [
     company: "Capital One",
     title: "Principal Product Owner, Action Platform UI",
     type: "Full-time",
-    period: "May 2025 – Present",
+    // Apr 2025, per Derik 2026-08-05 and his resume — this is when the ROLE
+    // changed. The acquisition's Legal Day 1 was the following month, May
+    // 2025; the case study body says so explicitly so the two dates don't
+    // read as a contradiction. Don't "correct" either one to match the other.
+    period: "Apr 2025 – Present",
     location: "Remote",
     blurb:
       "Owned product quality and cross-functional delivery for Capital One's core agent servicing platform during high-scale account migration waves.",
@@ -28,7 +32,7 @@ export const experience: Experience[] = [
     company: "Discover",
     title: "Lead UX Designer, Action Design Team",
     type: "Full-time",
-    period: "Jan 2024 – Apr 2025",
+    period: "Jan 2024 – Mar 2025",
     location: "Remote",
     blurb:
       "Translated complex servicing requirements into responsive interfaces and rebuilt the team's design infrastructure.",

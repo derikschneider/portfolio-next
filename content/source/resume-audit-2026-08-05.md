@@ -87,9 +87,10 @@ smoothed over.
 
 | | Discover → Capital One | Agrible → Nutrien |
 |---|---|---|
-| Boundary | **Legal Day 1, May 2025** | Acquisition closed Aug 2018 |
-| Site | Discover Jan 2024–Apr 2025, Capital One May 2025–present | Agrible Mar 2015–Aug 2018, Nutrien Aug 2018–Apr 2019 |
-| Resume needs | Split the two employers | Name both on one line |
+| Role boundary | **Apr 2025** (what the site and resume use) | Aug 2018 |
+| Legal close | Legal Day 1, **May 2025** — named in the body, not used as the date boundary | Aug 2018 |
+| Site | Discover Jan 2024–Mar 2025, Capital One Apr 2025–present | Agrible Mar 2015–Aug 2018, Nutrien Aug 2018–Apr 2019 |
+| Resume needs | Split the two employers (dates already correct) | Name both on one line |
 
 **On the Agrible side Derik's note was "I did join Nutrien in 2018, but I was
 still doing Agrible things — there wasn't a clean break, it could swing either
@@ -100,12 +101,14 @@ transition — which is the consistency that matters most. The "no clean break"
 part is already carried in the case study body, which says he carried on with
 the same product team after the acquisition.
 
-**On the site there is no Capital One gap** — `lib/experience.ts` runs
-Discover Jan 2024–Apr 2025 straight into Capital One May 2025–Present. The gap
-is in this resume only, created by finding #3 below. What the site gained
-today is the *reason* the boundary sits in May: Legal Day 1 is now named in
-the case study body and period, so the resume and LinkedIn have one fixed date
-to agree with instead of each rounding it differently.
+**There is no gap in either document.** The site runs Discover Jan 2024–Mar
+2025 straight into Capital One Apr 2025–Present, contiguous, matching the
+resume. The apparent gap was an artifact of the site and resume using
+different boundaries, now settled in the resume's favour (see #3).
+
+Legal Day 1 is still named — in the case study body, as the explanation for
+why the role date and the legal date differ by a month, rather than as the
+date boundary itself.
 
 ---
 
@@ -134,17 +137,31 @@ Confirmed by Derik 2026-08-05: he started at Discover, Capital One bought
 them, and Legal Day 1 was in May — so May is the correct cut-off, and both
 roles keep their own employer name.
 
-### 3. Both dates on that transition are a month off
+### 3. The one-month date difference — RESOLVED, resume wins
 
-| | Resume | Actual |
+Originally filed as "the resume is a month off on both sides." Derik's ruling
+2026-08-05: **the site moves to the resume's dates, not the other way round.**
+
+| | Resume / site (now) | LinkedIn (still) |
 |---|---|---|
-| Discover role ends | Mar 2025 | **Apr 2025** |
-| Capital One role begins | Apr 2025 | **May 2025** |
+| Discover role ends | **Mar 2025** | Apr 2025 |
+| Capital One role begins | **Apr 2025** | May 2025 |
 
-The resume shifts both boundaries back by one month, which is what creates the
-apparent gap. Fix both; the Principal Product Owner line becomes:
+Both sets are real and they measure different things — the **role** changed in
+April, the **legal entities** merged at Legal Day 1 in May. Org moves rarely
+land exactly on a legal close, so this is ordinary, not an error in either
+document. What's not acceptable is the two dates being split across documents
+with no explanation, which is how it reads today.
 
-> Principal Product Owner, Action Platform UI - Capital One May 2025 - Present
+The site now carries both and says how they relate, in the case study body:
+
+> I moved into a Principal Product Owner role in April 2025, as Capital One's acquisition of Discover closed — Legal Day 1 landed that May — and the Action platform work carried across with me.
+
+**Resume needs no date change.** LinkedIn does — Apr/May there should become
+Mar/Apr to match. That's in `linkedin-updates-2026-08-05.md` §3b.
+
+The gap the resume appeared to have was an artifact of this, not a real
+one — with Mar → Apr the two roles are contiguous.
 
 ### 4. The Agrible → Nutrien acquisition erases eight months of employment
 

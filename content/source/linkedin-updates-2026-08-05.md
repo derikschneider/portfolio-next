@@ -99,12 +99,26 @@ design lead's established framework") claim neither.
 
 ## 3b. Experience → the two acquisitions, if you touch these entries
 
-Derik confirmed **Legal Day 1 was May 2025** for Capital One's acquisition of
-Discover, so the site now names that date and the boundary sits there. On
-LinkedIn the two roles are already correctly split by employer — just make
-sure the Discover role ends **Apr 2025** and Capital One begins **May 2025**,
-matching the site (the resume currently has both a month early, which is what
-creates a gap there).
+**Superseded 2026-08-05 — read this version, not the earlier one.** Derik
+chose his resume's ROLE dates for the site rather than the Legal Day 1
+boundary, so LinkedIn should move to match:
+
+- Lead UX Designer, Action Design Team (Discover): Jan 2024 – **Mar 2025**
+- Principal Product Owner, Action Platform UI (Capital One): **Apr 2025** – Present
+
+Currently LinkedIn has Apr 2025 / May 2025. Both sets are defensible — the
+role changed in April, the legal entities merged at Legal Day 1 in May — but
+they should not be split across documents, or a reader comparing them sees a
+month of drift with no explanation.
+
+The site keeps **both** dates and states the relationship outright ("I moved
+into a Principal Product Owner role in April 2025, as Capital One's
+acquisition of Discover closed — Legal Day 1 landed that May"). That framing
+is worth reusing in the Capital One role description on LinkedIn, since it
+turns a date discrepancy into an explanation.
+
+The two roles are already split by employer on LinkedIn — that part is right
+and doesn't need touching.
 
 Same shape applies to Agrible → Nutrien: Agrible through **Aug 2018**, Nutrien
 Ag Solutions from Aug 2018. Derik's note that "there wasn't a clean break, I

@@ -36,10 +36,16 @@ export const stateFarmGallery: StudioGallery[] = [
 // the two-column stack grid (same arrangement as the two studio stacks on
 // the game-UI case study). `hasVisuals` on the Contentful entry was flipped
 // back to true in the same pass.
+// Both stacks below share lightboxGroup "bonsai" (2026-08-05, Derik's
+// request): each still renders as its own preview card (4-image stack,
+// solo image), but clicking either opens ONE Lightbox spanning all 5
+// images — the design-system stack opens at position 1, the solo field-
+// workability shot opens at position 5, and paging wraps between them.
 export const nutrienBonsaiGalleries: StudioGallery[] = [
   {
     id: "bonsai-design-system",
     studio: "Bonsai Design System",
+    lightboxGroup: "bonsai",
     // Reworded 2026-08-05: "the pattern documentation I authored inside it"
     // undersold this — Derik designed and built the site itself, front-end
     // code included. Images 1 and 2 are the evidence (the live site, and his
@@ -73,6 +79,7 @@ export const nutrienBonsaiGalleries: StudioGallery[] = [
   {
     id: "field-workability",
     studio: "14-Day Field Workability",
+    lightboxGroup: "bonsai",
     description:
       "The weather and field-workability tool the research turned into: trafficability status across a grower's whole operation, two weeks out.",
     images: [

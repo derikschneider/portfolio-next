@@ -1,17 +1,57 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { Dialog } from "radix-ui";
 import { ArrowLeft, ArrowRight, Images } from "lucide-react";
-import type { StudioGallery } from "@/lib/game-ui-galleries";
+import type { GalleryImage, StudioGallery } from "@/lib/game-ui-galleries";
 import { useHoverFx } from "@/components/reveal/use-hover-fx";
 import { CrosshairCloseIcon } from "@/components/field/crosshair-close-icon";
+import { RevealGroup } from "@/components/reveal/reveal-group";
+
+type LightboxImage = GalleryImage & { studio: string };
+
+type LightboxGroup = {
+  images: LightboxImage[];
+  startIndexByGalleryId: Map<StudioGallery["id"], number>;
+};
+
+// Concatenates images in `galleries` array order, grouped by
+// `lightboxGroup` (each gallery falls back to its own id when ungrouped,
+// so it stays a solo one-card-one-lightbox group exactly like before).
+// Records where each source gallery's own images begin in the combined
+// list — that offset is what lets two different preview cards open the
+// same Lightbox at two different starting positions.
+function buildLightboxGroups(galleries: StudioGallery[]): Map<string, LightboxGroup> {
+  const groups = new Map<string, LightboxGroup>();
+  for (const gallery of galleries) {
+    const key = gallery.lightboxGroup ?? gallery.id;
+    let group = groups.get(key);
+    if (!group) {
+      group = { images: [], startIndexByGalleryId: new Map() };
+      groups.set(key, group);
+    }
+    group.startIndexByGalleryId.set(gallery.id, group.images.length);
+    for (const image of gallery.images) {
+      group.images.push({ ...image, studio: gallery.studio });
+    }
+  }
+  return groups;
+}
 
 export function GameUIGalleries({ galleries }: { galleries: StudioGallery[] }) {
-  const [openId, setOpenId] = useState<StudioGallery["id"] | null>(null);
+  const [openGroupKey, setOpenGroupKey] = useState<string | null>(null);
   const [index, setIndex] = useState(0);
-  const active = galleries.find((gallery) => gallery.id === openId) ?? null;
+
+  const groups = useMemo(() => buildLightboxGroups(galleries), [galleries]);
+  const activeGroup = openGroupKey ? (groups.get(openGroupKey) ?? null) : null;
+
+  const openGallery = (gallery: StudioGallery, imageIndexInGallery = 0) => {
+    const key = gallery.lightboxGroup ?? gallery.id;
+    const group = groups.get(key);
+    setOpenGroupKey(key);
+    setIndex((group?.startIndexByGalleryId.get(gallery.id) ?? 0) + imageIndexInGallery);
+  };
 
   const stackGalleries = galleries.filter((gallery) => gallery.layout !== "sideBySide");
   const sideBySideGalleries = galleries.filter((gallery) => gallery.layout === "sideBySide");
@@ -22,14 +62,7 @@ export function GameUIGalleries({ galleries }: { galleries: StudioGallery[] }) {
         {stackGalleries.length > 0 && (
           <div className="grid grid-cols-2 gap-3 sm:gap-6">
             {stackGalleries.map((gallery) => (
-              <GalleryStack
-                key={gallery.id}
-                gallery={gallery}
-                onOpen={() => {
-                  setOpenId(gallery.id);
-                  setIndex(0);
-                }}
-              />
+              <GalleryStack key={gallery.id} gallery={gallery} onOpen={() => openGallery(gallery)} />
             ))}
           </div>
         )}
@@ -38,20 +71,17 @@ export function GameUIGalleries({ galleries }: { galleries: StudioGallery[] }) {
           <SideBySideGallery
             key={gallery.id}
             gallery={gallery}
-            onOpenAt={(imageIndex) => {
-              setOpenId(gallery.id);
-              setIndex(imageIndex);
-            }}
+            onOpenAt={(imageIndex) => openGallery(gallery, imageIndex)}
           />
         ))}
       </div>
 
-      {active && (
+      {activeGroup && (
         <Lightbox
-          gallery={active}
+          images={activeGroup.images}
           index={index}
           onIndexChange={setIndex}
-          onClose={() => setOpenId(null)}
+          onClose={() => setOpenGroupKey(null)}
         />
       )}
     </>
@@ -205,18 +235,18 @@ function GalleryStack({
 }
 
 function Lightbox({
-  gallery,
+  images,
   index,
   onIndexChange,
   onClose,
 }: {
-  gallery: StudioGallery;
+  images: LightboxImage[];
   index: number;
   onIndexChange: (index: number) => void;
   onClose: () => void;
 }) {
-  const total = gallery.images.length;
-  const current = gallery.images[index];
+  const total = images.length;
+  const current = images[index];
 
   const thumbStripRef = useRef<HTMLDivElement>(null);
   const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -266,7 +296,7 @@ function Lightbox({
         <Dialog.Overlay className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm" />
         <Dialog.Content className="fixed inset-0 z-50 flex flex-col outline-none">
           <Dialog.Title className="sr-only">
-            {gallery.studio} gallery
+            {current.studio} gallery
           </Dialog.Title>
           <Dialog.Description className="sr-only">
             {current.caption}
@@ -276,12 +306,25 @@ function Lightbox({
               the close button sits the same distance from the window edge
               rather than the wider px-4/sm:px-8 it used to carry. */}
           <div className="flex items-center justify-between px-2 py-2 sm:px-4 sm:py-4">
-            <span className="font-mono text-sm tracking-wide text-fg-60">
-              {gallery.studio}{" "}
-              <span className="text-fg-50">
+            {/* Keyed by the current image so it fully remounts (not just
+                re-renders) on every navigation — wrapTextReveal() mutates the
+                DOM outside React's tracking, so without a fresh mount here a
+                later index change would leave the chunk-wrapped text frozen
+                on whatever image it first revealed for. Same reasoning as the
+                caption below, and the same key the main <Image> already uses
+                for this exact purpose. */}
+            <RevealGroup
+              key={current.src}
+              immediate
+              className="font-mono text-sm tracking-wide text-fg-60"
+            >
+              <span data-reveal="text" data-reveal-size="fine">
+                {current.studio}
+              </span>{" "}
+              <span className="text-fg-50" data-reveal="text" data-reveal-size="fine">
                 — {index + 1} / {total}
               </span>
-            </span>
+            </RevealGroup>
             {/* Same border/hover treatment as the prev/next arrows below, but
                 the crosshair itself stays red — only the outline goes yellow
                 on hover. Square corners to match them too. */}
@@ -329,16 +372,22 @@ function Lightbox({
             )}
           </div>
 
-          <p className="px-4 pb-3 text-center font-mono text-xs text-fg-60 sm:text-sm">
-            {current.caption}
-          </p>
+          <RevealGroup
+            key={current.src}
+            immediate
+            className="px-4 pb-3 text-center font-mono text-xs text-fg-60 sm:text-sm"
+          >
+            <span data-reveal="text" data-reveal-size="fine">
+              {current.caption}
+            </span>
+          </RevealGroup>
 
           {total > 1 && (
             <div
               ref={thumbStripRef}
               className="scrollbar-hide flex gap-2 overflow-x-auto px-2 pb-6"
             >
-              {gallery.images.map((image, i) => (
+              {images.map((image, i) => (
                 <button
                   key={image.src}
                   ref={(el) => {

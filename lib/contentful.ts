@@ -44,6 +44,9 @@ interface CaseStudySkeleton extends EntrySkeletonType {
     patentLabel?: EntryFieldTypes.Symbol;
     patentUrl?: EntryFieldTypes.Symbol;
     patentPdfPath?: EntryFieldTypes.Symbol;
+    problem?: EntryFieldTypes.Text;
+    approach?: EntryFieldTypes.Text;
+    outcome?: EntryFieldTypes.Text;
   };
 }
 
@@ -66,6 +69,9 @@ type CaseStudyEntryFields = {
   patentLabel?: string;
   patentUrl?: string;
   patentPdfPath?: string;
+  problem?: string;
+  approach?: string;
+  outcome?: string;
 };
 
 function toCaseStudy(fields: CaseStudyEntryFields): CaseStudy {
@@ -91,6 +97,9 @@ function toCaseStudy(fields: CaseStudyEntryFields): CaseStudy {
         }
       : undefined,
     galleries: CASE_STUDY_GALLERIES[fields.slug],
+    problem: fields.problem ? fields.problem.split(/\n\n+/) : undefined,
+    approach: fields.approach ? fields.approach.split(/\n\n+/) : undefined,
+    outcome: fields.outcome ? fields.outcome.split(/\n\n+/) : undefined,
   };
 }
 

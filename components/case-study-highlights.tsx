@@ -20,7 +20,14 @@ export function CaseStudyHighlights({
       {highlights.map(({ value, label, detail }) => (
         <div
           key={label}
-          className="flex flex-col gap-3 rounded-md border border-border p-6 sm:p-7"
+          // Diagonal stripe, same treatment as the Work index's figures-only
+          // evidence block (components/case-study-index-row.tsx) — reads as
+          // "evidence" rather than a generic stat card.
+          className="flex flex-col gap-3 border border-border p-6 sm:p-7"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(135deg, color-mix(in oklab, var(--primary) 5%, transparent) 0 7px, transparent 7px 15px)",
+          }}
         >
           <span
             data-reveal="text"

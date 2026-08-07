@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { FieldHeader } from "@/components/field/field-header";
-import { CaseStudyList } from "@/components/case-study-list";
+import { LogList } from "@/components/field/log-list";
+import { CaseStudyIndexRow } from "@/components/case-study-index-row";
 import { getCaseStudies } from "@/lib/contentful";
 
 export const metadata: Metadata = {
@@ -18,10 +19,15 @@ export default async function WorkPage() {
       <FieldHeader
         eyebrow="Work //"
         title="Six case studies"
-        description="Platform engineering, design systems, and shipped game UI, in reverse-chronological order. Most underlying work is under NDA — these are description-only unless noted."
+        description="Platform engineering, design systems, and shipped game UI, in reverse-chronological order. Four carry real screenshots below; two are under NDA and carry figures instead. Both are the point: what shipped, and what it did."
         divider={false}
       />
-      <CaseStudyList items={caseStudies} registrationMark />
+      <LogList
+        items={caseStudies}
+        registrationMark
+        keyFn={(cs) => cs.slug}
+        renderItem={(cs, i) => <CaseStudyIndexRow cs={cs} index={i} />}
+      />
     </div>
   );
 }

@@ -9,9 +9,9 @@ import { Button } from "@/components/ui/button";
 import { Parallelogram } from "@/components/field/shapes";
 
 export const metadata: Metadata = {
-  title: "About — Derik Schneider",
+  title: "About, Derik Schneider",
   description:
-    "Designer who writes production code, engineer who paints his own assets — 25 years working the seam between design and development.",
+    "Designer who writes production code, engineer who paints his own assets, 25 years working the seam between design and development.",
 };
 
 // Set to false to drop the portrait entirely. The banner collapses to a
@@ -127,8 +127,8 @@ export default function AboutPage() {
             I&apos;ve shipped UI for Mortal Kombat (2011), Injustice: Gods
             Among Us, Saints Row 2, Red Faction: Armageddon, and Mortal
             Kombat VITA. At Novant Health I inherited Aurora as a first-pass
-            design system — a previous design ported over, with none of the
-            structure underneath it — and rebuilt it head to toe into true
+            design system, a previous design ported over, with none of the
+            structure underneath it, and rebuilt it head to toe into true
             Figma components on re-architected foundations, taking page
             assembly from days to under an hour.
           </p>
@@ -138,8 +138,8 @@ export default function AboutPage() {
             Earlier, on Nutrien Ag Solutions&apos; core platform team, I
             contributed to the early development of the Bonsai Design System,
             authoring initial system documentation and assisting on component
-            builds, and designed and built its documentation site myself —
-            the front-end code, the responsive layout, and the navigation. I
+            builds, and designed and built its documentation site myself,
+            including the front-end code, the responsive layout, and the navigation. I
             hold{" "}
             <span className="font-mono text-sm text-primary">
               US Patent 10,002,393
@@ -154,7 +154,7 @@ export default function AboutPage() {
             At Discover, I led design for the Action agent servicing platform,
             migrated the team&apos;s design system from Sketch to Figma, and
             produced narrative presentations on our agent servicing and
-            IVR/messaging systems — editing call-recording audio,
+            IVR/messaging systems, editing call-recording audio,
             hand-animating sequences in After Effects, and building the
             layouts in Figma.
           </p>

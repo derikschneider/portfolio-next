@@ -12,18 +12,18 @@ export const stateFarmGallery: StudioGallery[] = [
     id: "state-farm",
     studio: "CX Testing Environment",
     description:
-      "The testing environment behind the patented CX tooling — journey configuration and prototype playback.",
+      "The testing environment behind the patented CX tooling, journey configuration and prototype playback.",
     layout: "sideBySide",
     images: [
       {
         src: "/case-studies/state-farm/prototype-viewer.webp",
         alt: "State Farm prototype viewer, recreated example",
-        caption: "Prototype viewer — end-to-end journey playback (recreated example)",
+        caption: "Prototype viewer, end-to-end journey playback (recreated example)",
       },
       {
         src: "/case-studies/state-farm/prototype-stitcher.webp",
         alt: "State Farm prototype stitcher tool, recreated example",
-        caption: "Prototype stitcher — journey and URL configuration (recreated example)",
+        caption: "Prototype stitcher, journey and URL configuration (recreated example)",
       },
     ],
   },
@@ -46,27 +46,27 @@ export const nutrienBonsaiGalleries: StudioGallery[] = [
     // own full-page comp for it), which is exactly why this claim belongs
     // next to them.
     description:
-      "nutrien.design — the documentation site I designed and built for the system, and the pattern documentation inside it.",
+      "nutrien.design, the documentation site I designed and built for the system, and the pattern documentation inside it.",
     images: [
       {
         src: "/case-studies/nutrien-bonsai/1-bonsai-nutrien-design-home.webp",
         alt: "nutrien.design homepage, with Bonsai, Handbook, and Brand entry points",
-        caption: "nutrien.design live — Bonsai alongside the Handbook and Brand material",
+        caption: "nutrien.design live, Bonsai alongside the Handbook and Brand material",
       },
       {
         src: "/case-studies/nutrien-bonsai/2-bonsai-home-design-comp.webp",
         alt: "Full-page design comp for the nutrien.design home page",
-        caption: "My home page design comp — resources, then the five design principles",
+        caption: "My home page design comp, resources, then the five design principles",
       },
       {
         src: "/case-studies/nutrien-bonsai/3-bonsai-drawers-and-modals.webp",
         alt: "Bonsai documentation page for the Drawers and Modals pattern",
-        caption: "Drawers and Modals — concepts, types, and usage, with the Figma and code kits linked",
+        caption: "Drawers and Modals, concepts, types, and usage, with the Figma and code kits linked",
       },
       {
         src: "/case-studies/nutrien-bonsai/4-bonsai-data-visualization.webp",
         alt: "Bonsai documentation page for the Data Visualization pattern",
-        caption: "Data Visualization — chart types, part-to-whole charts, legends, and scale types",
+        caption: "Data Visualization, chart types, part-to-whole charts, legends, and scale types",
       },
     ],
   },
@@ -109,32 +109,32 @@ export const novantGallery: StudioGallery[] = [
     id: "novant-health",
     studio: "Iconography & Physician Finder",
     description:
-      "Not the component library itself — the icon system I redefined for Aurora, the research behind those marks, and the physician-finder flow built on top of it.",
+      "Not the component library itself, the icon system I redefined for Aurora, the research behind those marks, and the physician-finder flow built on top of it.",
     cover: {
       src: "/case-studies/novant-health-aurora/1-novant-health-aurora-iconography-cover.webp",
       alt: "Aurora icon system, cover",
-      caption: "Aurora icon system — cover",
+      caption: "Aurora icon system, cover",
     },
     images: [
       {
         src: "/case-studies/novant-health-aurora/2-iconography-process-c.webp",
         alt: "Aurora icon system design process",
-        caption: "Aurora icon system — design process",
+        caption: "Aurora icon system, design process",
       },
       {
         src: "/case-studies/novant-health-aurora/3-icon-research-board.webp",
         alt: "Aurora icon design research board, Urgent Care icon",
-        caption: "Icon design research — recognition, info scent, aesthetics testing",
+        caption: "Icon design research, recognition, info scent, aesthetics testing",
       },
       {
         src: "/case-studies/novant-health-aurora/4-physician-finder-initial-wireframe.webp",
         alt: "Physician Finder feature, initial wireframe flow",
-        caption: "Physician Finder — initial wireframe flow",
+        caption: "Physician Finder, initial wireframe flow",
       },
       {
         src: "/case-studies/novant-health-aurora/5-physician-finder-refined-flow.webp",
         alt: "Physician Finder feature, refined booking flow",
-        caption: "Physician Finder — refined booking flow",
+        caption: "Physician Finder, refined booking flow",
       },
     ],
   },

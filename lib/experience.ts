@@ -184,6 +184,6 @@ export const experience: Experience[] = [
     period: "Oct 1999 – May 2000",
     location: "Wilmington, Delaware",
     blurb:
-      "Led my first design team at 22, directing three designers through the development of touchscreen kiosk interfaces — building a UX practice from scratch before \"UX\" was a common job title.",
+      "Led my first design team at 22, directing three designers through the development of touchscreen kiosk interfaces, building a UX practice from scratch before \"UX\" was a common job title.",
   },
 ];

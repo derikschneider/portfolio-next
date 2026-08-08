@@ -4,7 +4,7 @@ import { CaseStudyList } from "@/components/case-study-list";
 import { getCaseStudies } from "@/lib/contentful";
 
 export const metadata: Metadata = {
-  title: "Work — Derik Schneider",
+  title: "Work, Derik Schneider",
   description: "Case studies from Derik Schneider's career history.",
 };
 
@@ -18,7 +18,7 @@ export default async function WorkPage() {
       <FieldHeader
         eyebrow="Work //"
         title="Six case studies"
-        description="Platform engineering, design systems, and shipped game UI, in reverse-chronological order. Most underlying work is under NDA — these are description-only unless noted."
+        description="Platform engineering, design systems, and shipped game UI, in reverse-chronological order. Most underlying work is under NDA, so these are description-only unless noted."
         divider={false}
       />
       <CaseStudyList items={caseStudies} registrationMark />

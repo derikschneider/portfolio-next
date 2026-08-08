@@ -197,7 +197,7 @@ function GalleryStack({
       {/* Appended to the accessible name rather than an aria-label, which
           would replace the visible title and description entirely. */}
       <span className="sr-only">
-        — open image viewer,{" "}
+        , open image viewer,{" "}
         {gallery.images.length === 1 ? "1 image" : `${gallery.images.length} images`}
       </span>
     </button>
@@ -279,7 +279,7 @@ function Lightbox({
             <span className="font-mono text-sm tracking-wide text-fg-60">
               {gallery.studio}{" "}
               <span className="text-fg-50">
-                — {index + 1} / {total}
+                {index + 1} / {total}
               </span>
             </span>
             {/* Same border/hover treatment as the prev/next arrows below, but

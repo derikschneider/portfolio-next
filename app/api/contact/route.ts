@@ -32,7 +32,7 @@ function isRateLimited(ip: string): boolean {
 export async function POST(request: Request) {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   if (isRateLimited(ip)) {
-    return NextResponse.json({ error: "Too many requests — please try again later." }, { status: 429 });
+    return NextResponse.json({ error: "Too many requests, please try again later." }, { status: 429 });
   }
 
   const body = await request.json().catch(() => null);
@@ -85,7 +85,7 @@ export async function POST(request: Request) {
   // claiming a message was sent when there's nowhere for it to go.
   if (!fromEmail || !toEmail) {
     return NextResponse.json(
-      { error: "The contact form isn't connected to email delivery yet — please check back soon." },
+      { error: "The contact form isn't connected to email delivery yet, please check back soon." },
       { status: 503 }
     );
   }

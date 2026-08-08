@@ -18,7 +18,7 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["300", "400", "500", "700"],
 });
 
-const title = "Derik Schneider — Work Samples";
+const title = "Derik Schneider, Work Samples";
 const description =
   "Next.js/TypeScript/Tailwind work-sample site demonstrating full-stack engineering, design systems, and CI/CD to AWS.";
 

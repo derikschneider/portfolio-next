@@ -31,7 +31,7 @@ export async function generateMetadata({
   const cs = await getCaseStudy(slug);
   if (!cs) return {};
   return {
-    title: `${cs.title} — Derik Schneider`,
+    title: `${cs.title}, Derik Schneider`,
     description: cs.summary,
   };
 }
@@ -135,7 +135,7 @@ export default async function CaseStudyPage({
       ) : (
         cs.hasVisuals && (
           <div className="rounded-md border border-dashed border-border p-8 text-center font-mono text-sm text-muted-foreground">
-            Screenshots pending — placeholder for shipped game UI captures.
+            Screenshots pending, placeholder for shipped game UI captures.
           </div>
         )
       )}

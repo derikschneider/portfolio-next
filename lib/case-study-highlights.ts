@@ -29,7 +29,7 @@ export const CASE_STUDY_HIGHLIGHTS: Record<string, CaseStudyHighlight[]> = {
       value: "101",
       label: "Automated test cases",
       detail:
-        "Designed and deployed in two months, covering fraud workflows, dynamic timeline suppression, and agent permissions — replacing manual regression passes and automating compliance reporting.",
+        "Designed and deployed in two months, covering fraud workflows, dynamic timeline suppression, and agent permissions, replacing manual regression passes and automating compliance reporting.",
     },
     {
       value: "Zero",
@@ -41,7 +41,7 @@ export const CASE_STUDY_HIGHLIGHTS: Record<string, CaseStudyHighlight[]> = {
       value: "Days → minutes",
       label: "Page layout time",
       detail:
-        "Cut by partnering with front-end developers to wire the design system into the development pipeline — tokens, grids, and SVG standards.",
+        "Cut by partnering with front-end developers to wire the design system into the development pipeline, including tokens, grids, and SVG standards.",
     },
     {
       value: "Sketch → Figma",
@@ -61,7 +61,7 @@ export const CASE_STUDY_HIGHLIGHTS: Record<string, CaseStudyHighlight[]> = {
       value: "4 years",
       label: "React & Redux in production",
       detail:
-        "Shipping continuously from March 2015 through Agrible's growth and its acquisition by Nutrien — I stayed with the codebase rather than handing it off.",
+        "Shipping continuously from March 2015 through Agrible's growth and its acquisition by Nutrien, I stayed with the codebase rather than handing it off.",
     },
     {
       value: "End to end",

@@ -7,7 +7,7 @@ import { Hoverable } from "@/components/reveal/hoverable";
 import { ContactForm } from "@/components/contact-form";
 
 export const metadata: Metadata = {
-  title: "Page not found — Derik Schneider",
+  title: "Page not found, Derik Schneider",
 };
 
 const destinations = [
@@ -68,7 +68,7 @@ export default function NotFound() {
             Send a message
           </h2>
           <p className="max-w-[60ch] text-sm leading-relaxed text-fg-80">
-            Looking for something specific, or just want to say hello — this goes straight to me.
+            Looking for something specific, or just want to say hello? This goes straight to me.
           </p>
         </div>
         <ContactForm />

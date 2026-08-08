@@ -3,7 +3,7 @@ import { FieldHeader } from "@/components/field/field-header";
 import { ContactForm } from "@/components/contact-form";
 
 export const metadata: Metadata = {
-  title: "Contact — Derik Schneider",
+  title: "Contact, Derik Schneider",
   description: "Get in touch with Derik Schneider.",
 };
 
@@ -13,7 +13,7 @@ export default function ContactPage() {
       <FieldHeader
         eyebrow="Contact //"
         title="Get in touch"
-        description="Questions about this site, the stack behind it, or just want to say hello — this goes straight to me."
+        description="Questions about this site, the stack behind it, or just want to say hello? This goes straight to me."
       />
       {/* Matches the 62ch measure FieldHeader gives its description, so the
           form lines up with the copy above it instead of running the full

@@ -48,7 +48,7 @@ export default async function Home() {
         <Triangle className="top-1 right-0" />
 
         <p data-reveal="text" className="font-mono text-[11px] tracking-[0.14em] text-primary uppercase">
-          Internal move — Lead Full Stack Engineer
+          Internal move: Lead Full Stack Engineer
         </p>
 
         <h1 className="mt-6 font-display text-6xl leading-[0.92] font-black tracking-[-0.02em] text-foreground uppercase sm:text-7xl lg:text-8xl">
@@ -65,7 +65,7 @@ export default async function Home() {
         <p data-reveal="text" className="mt-6 max-w-[46ch] text-lg leading-relaxed text-fg-80">
           Principal Product Owner, Action Platform UI at Capital One. This
           site is a work sample built specifically for the Lead Full Stack
-          Engineer posting — every piece of the stack below is real, running
+          Engineer posting: every piece of the stack below is real, running
           in production on this domain.
         </p>
 

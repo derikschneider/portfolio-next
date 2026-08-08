@@ -46,7 +46,7 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <p className="rounded-md border border-dashed border-border p-6 text-center font-mono text-sm text-fg-60">
-        Message sent — thanks for reaching out. I&apos;ll get back to you soon.
+        Message sent, thanks for reaching out. I&apos;ll get back to you soon.
       </p>
     );
   }

@@ -11,7 +11,7 @@ import { Parallelogram } from "@/components/field/shapes";
 import { experience } from "@/lib/experience";
 
 export const metadata: Metadata = {
-  title: "Resume — Derik Schneider",
+  title: "Resume, Derik Schneider",
   description: "Work history and skills.",
 };
 

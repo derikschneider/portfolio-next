@@ -4,7 +4,7 @@ import { ImageResponse } from "next/og";
 // anything not verified on Amplify's WEB_COMPUTE adapter (see Key
 // decisions in CLAUDE.md), and next/og's ImageResponse works fine on the
 // default Node.js runtime, so there's no reason to opt into edge here.
-export const alt = "Derik Schneider — Front-End Engineer & Product Designer";
+export const alt = "Derik Schneider, Front-End Engineer & Product Designer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -69,7 +69,7 @@ export default async function OpengraphImage() {
           }}
         >
           <div style={{ width: 10, height: 10, background: "#e0a940", borderRadius: 999 }} />
-          Internal move — Lead Full Stack Engineer
+          Internal move: Lead Full Stack Engineer
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>

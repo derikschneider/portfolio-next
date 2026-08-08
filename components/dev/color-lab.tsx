@@ -91,7 +91,7 @@ export function ColorLab() {
             </button>
           </div>
           <p className="mb-3 text-[10px] text-foreground/35">
-            Hue is locked between themes — drag either wheel&apos;s ring or
+            Hue is locked between themes, drag either wheel&apos;s ring or
             the H slider and both update. Saturation/brightness stay
             independent.
           </p>
@@ -119,7 +119,7 @@ export function ColorLab() {
             Reset to defaults
           </button>
           <p className="mt-2 text-[10px] text-foreground/35">
-            Viewing: {resolvedTheme}. Values persist in this browser only —
+            Viewing: {resolvedTheme}. Values persist in this browser only,
             read the H/S/B numbers out and tell Claude when you land on
             something, so they can go into globals.css by hand.
           </p>

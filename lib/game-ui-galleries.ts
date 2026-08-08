@@ -27,6 +27,14 @@ export type StudioGallery = {
   // one of the real content shots.
   cover?: GalleryImage;
   images: GalleryImage[];
+  // Galleries sharing the same lightboxGroup open into ONE continuous,
+  // navigable Lightbox (concatenated in the order they appear in the
+  // exporting array), even though each still renders as its own separate
+  // preview card. The starting index is wherever that specific card's own
+  // images begin in the combined list — see buildLightboxGroups() in
+  // game-ui-galleries.tsx. Omit for a gallery that should stay self-
+  // contained (the default, and current behavior for everything but Bonsai).
+  lightboxGroup?: string;
 };
 
 // Reorganized 2026-07-29 — Derik cleaned up/renamed the source folders into

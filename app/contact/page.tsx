@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { FieldHeader } from "@/components/field/field-header";
 import { ContactForm } from "@/components/contact-form";
+import { TransmissionSpec } from "@/components/transmission-spec";
 
 export const metadata: Metadata = {
   title: "Contact, Derik Schneider",
@@ -13,13 +14,16 @@ export default function ContactPage() {
       <FieldHeader
         eyebrow="Contact //"
         title="Get in touch"
-        description="Questions about this site, the stack behind it, or just want to say hello? This goes straight to me."
+        description="This form sends a real email. No third-party widget, no mailto, no inbox I forget to check."
       />
-      {/* Matches the 62ch measure FieldHeader gives its description, so the
-          form lines up with the copy above it instead of running the full
-          1180px container width. */}
-      <div className="max-w-[62ch]">
-        <ContactForm />
+      <div className="grid grid-cols-1 gap-x-[72px] gap-y-10 lg:grid-cols-[1fr_400px] lg:items-start">
+        {/* Matches the 62ch measure FieldHeader gives its description, so the
+            form lines up with the copy above it instead of running the full
+            column width. */}
+        <div className="max-w-[62ch]">
+          <ContactForm />
+        </div>
+        <TransmissionSpec />
       </div>
     </div>
   );

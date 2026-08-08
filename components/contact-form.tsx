@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,9 +10,29 @@ import { useHoverFx } from "@/components/reveal/use-hover-fx";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
+const PROMPT_CHIPS = [
+  { label: "About the role", opener: "I'd like to talk about the Lead Full Stack Engineer role." },
+  { label: "About the stack", opener: "I'm curious about the stack behind this site." },
+  { label: "Just saying hello", opener: "Just wanted to say hello." },
+];
+
+function PromptChip({ label, onClick }: { label: string; onClick: () => void }) {
+  const ref = useRef<HTMLButtonElement>(null);
+  useHoverFx(ref);
+
+  return (
+    <button ref={ref} type="button" onClick={onClick} className="cursor-pointer">
+      <Badge variant="outline" data-reveal="text" data-reveal-size="fine">
+        {label}
+      </Badge>
+    </button>
+  );
+}
+
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [message, setMessage] = useState("");
   const submitRef = useRef<HTMLButtonElement>(null);
   useHoverFx(submitRef);
 
@@ -37,6 +58,7 @@ export function ContactForm() {
       }
       setStatus("success");
       form.reset();
+      setMessage("");
     } catch {
       setErrorMessage("Something went wrong. Please try again.");
       setStatus("error");
@@ -92,12 +114,19 @@ export function ContactForm() {
         <Label htmlFor="message" className="font-mono text-xs tracking-widest text-fg-50 uppercase">
           Message
         </Label>
+        <div className="flex flex-wrap gap-2 pb-1">
+          {PROMPT_CHIPS.map((chip) => (
+            <PromptChip key={chip.label} label={chip.label} onClick={() => setMessage(chip.opener)} />
+          ))}
+        </div>
         <Textarea
           id="message"
           name="message"
           required
           rows={5}
           maxLength={5000}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           className="rounded-none border-0 border-b border-input bg-white px-2.5 focus-visible:border-primary focus-visible:ring-0 dark:bg-input/30"
         />
       </div>

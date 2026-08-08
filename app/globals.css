@@ -148,11 +148,11 @@
 
 .dark {
   --background: #0b0d29;
-  --foreground: #c7cbd3;
+  --foreground: #efefef;
   --card: #121535;
-  --card-foreground: #c7cbd3;
+  --card-foreground: #efefef;
   --popover: #121535;
-  --popover-foreground: #c7cbd3;
+  --popover-foreground: #efefef;
 
   --primary-h: 41;
   --primary-s: 75;
@@ -167,7 +167,7 @@
   --on-accent: #0b0d29;
 
   --secondary: #121535;
-  --secondary-foreground: #c7cbd3;
+  --secondary-foreground: #efefef;
   --muted: #12142f;
   --muted-foreground: #868b9c;
   --accent: var(--primary);
@@ -178,15 +178,15 @@
   --ring: var(--primary);
   --chart-1: var(--primary);
   --chart-2: #868b9c;
-  --chart-3: #c7cbd3;
+  --chart-3: #efefef;
   --chart-4: #121535;
   --chart-5: #12142f;
   --sidebar: #0e1030;
-  --sidebar-foreground: #c7cbd3;
+  --sidebar-foreground: #efefef;
   --sidebar-primary: var(--primary);
   --sidebar-primary-foreground: var(--primary-foreground);
   --sidebar-accent: #121535;
-  --sidebar-accent-foreground: #c7cbd3;
+  --sidebar-accent-foreground: #efefef;
   --sidebar-border: rgba(199, 203, 211, 0.16);
   --sidebar-ring: var(--primary);
 }
@@ -226,18 +226,20 @@
    background showing through) and visibly drifts out of sync with
    fully-opaque text. Mixing toward var(--background) instead produces
    a single solid, opaque color that transitions cleanly on its own. */
+
+/* NOTE FROM DERIK - DONT TOUCH THESE TEXT FG NUMBERS!!! */
 @layer utilities {
   .text-fg-50 {
-    color: color-mix(in oklab, var(--foreground) 50%, var(--background));
+    color: color-mix(in oklab, var(--foreground) 85%, var(--background));
   }
   .text-fg-60 {
-    color: color-mix(in oklab, var(--foreground) 60%, var(--background));
+    color: color-mix(in oklab, var(--foreground) 88%, var(--background));
   }
   .text-fg-75 {
-    color: color-mix(in oklab, var(--foreground) 75%, var(--background));
+    color: color-mix(in oklab, var(--foreground) 90%, var(--background));
   }
   .text-fg-80 {
-    color: color-mix(in oklab, var(--foreground) 80%, var(--background));
+    color: color-mix(in oklab, var(--foreground) 95%, var(--background));
   }
   .scrollbar-hide {
     scrollbar-width: none;

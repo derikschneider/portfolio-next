@@ -29,11 +29,14 @@ function NavLink({
   href,
   direction,
   company,
+  index,
   side,
 }: {
   href: string;
   direction: "Previous" | "Next";
   company: string;
+  /** Sibling's 1-based position among all case studies, e.g. 6 -> "· 06". */
+  index: number;
   side: "start" | "end";
 }) {
   const ref = useRef<HTMLAnchorElement>(null);
@@ -60,7 +63,7 @@ function NavLink({
       <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.06em] text-fg-50 uppercase group-hover:text-primary">
         {isPrev && <ArrowLeft className="size-4" aria-hidden="true" />}
         <span data-slot="cs-dir" data-reveal="text" data-reveal-size="fine">
-          {direction}
+          {direction} · {String(index).padStart(2, "0")}
         </span>
         {!isPrev && <ArrowRight className="size-4" aria-hidden="true" />}
       </span>
@@ -80,8 +83,8 @@ export function CaseStudyNav({
   prev,
   next,
 }: {
-  prev: { slug: string; company: string };
-  next: { slug: string; company: string };
+  prev: { slug: string; company: string; index: number };
+  next: { slug: string; company: string; index: number };
 }) {
   return (
     <nav
@@ -92,12 +95,14 @@ export function CaseStudyNav({
         href={`/work/${prev.slug}`}
         direction="Previous"
         company={prev.company}
+        index={prev.index}
         side="start"
       />
       <NavLink
         href={`/work/${next.slug}`}
         direction="Next"
         company={next.company}
+        index={next.index}
         side="end"
       />
     </nav>

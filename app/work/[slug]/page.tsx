@@ -202,6 +202,12 @@ export default async function CaseStudyPage({
             <FieldDivider />
           </RevealGroup>
 
+          {/* Images stay at the top of the content column regardless of which
+              body template renders below (Derik, 2026-08-08): screenshots are
+              the evidence a visitor scans for first, not a payoff to bury at
+              the end of the Outcome movement. */}
+          {galleries}
+
           {/* 4f. Three movements, when Contentful has been migrated for this
               entry — falls back to the flat `body` prose otherwise. */}
           {cs.problem && cs.problem.length > 0 ? (
@@ -239,7 +245,6 @@ export default async function CaseStudyPage({
               <RevealGroup className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-[13ch_1fr]">
                 <MovementLabel n="03" title="Outcome" />
                 <div className="flex max-w-[68ch] flex-col gap-6">
-                  {galleries}
                   {cs.outcome?.map((p, i) => (
                     <p key={i} data-reveal="text" className="text-[16.5px] leading-[1.75] text-fg-80">
                       {p}
@@ -251,7 +256,6 @@ export default async function CaseStudyPage({
             </>
           ) : (
             <>
-              {galleries}
               {highlights && highlights.length > 0 && <CaseStudyHighlights highlights={highlights} />}
               <RevealGroup className="flex max-w-[85ch] flex-col gap-4">
                 {cs.body.map((paragraph, i) => (

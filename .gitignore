@@ -37,6 +37,12 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# Machine-local agent overrides
+.claude/settings.local.json
+.codex/*.local.toml
+.agents/.local/
 
 # vercel
 .vercel
